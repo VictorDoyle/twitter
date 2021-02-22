@@ -1,0 +1,19 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "twitter clone social media app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorDoyle/twitter.git"
+  },
+  "author": "victor doyle , sean madzelonka, dan neveloff, clay watkins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VictorDoyle/twitter/issues"
+  },
+  "homepage": "https://github.com/VictorDoyle/twitter#readme"
+}
