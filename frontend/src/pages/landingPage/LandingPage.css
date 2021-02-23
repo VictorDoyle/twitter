@@ -42,7 +42,7 @@ h4 {
 }
 
 .LandingPageLink {
-  color: white !important;
+  color: rgb(110, 118, 125) !important;
 }
 
 .LandingPageLogin {
@@ -51,16 +51,20 @@ h4 {
 
 .LandingButtonSign {
   margin: 5% 0 0 0 !important;
-  border-radius: 30px !important;
+  border-radius: 9999px !important;
 }
 
 .LandingButtonLog {
   margin: 5% 0 0 0 !important;
-  border-radius: 30px !important;
+  border-radius: 9999px !important;
 }
 
 .modal-content {
   background-color: black !important;
+}
+
+.modalButton {
+  float: right;
 }
 
 .modal-open .LandingPageContainer {

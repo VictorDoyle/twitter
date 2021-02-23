@@ -24,14 +24,14 @@ const LandingPage = () => {
         styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
       >
         <Row className="LandingPageRow">
-          <Col className="LandingPageLeft">
+          <Col className="LandingPageLeft" xs={12} md={6}>
             <Container>
               <h4>Follow your interests</h4>
               <h4>Follow your interests</h4>
               <h4>Follow your interests</h4>
             </Container>
           </Col>
-          <Col className="LandingPageRight">
+          <Col className="LandingPageRight" xs={12} md={6}>
             <Container className="LandingPageLogin">
               <p>Twitter Logo</p>
               <h2>See what's Happening in the world right now</h2>
@@ -68,13 +68,25 @@ const LandingPage = () => {
         </Navbar>
       </Container>
       <Modal show={show} onHide={handleClose} className="LandingModal" centered>
-        <Modal.Header closeButton>
-          <Button variant="secondary" onClick={handleClose}>
-            Next
-          </Button>
+        <Modal.Header>
+          <Container>
+            <Row>
+              <Col xs={6} md={4}></Col>
+              <Col xs={6} md={4}></Col>
+              <Col xs={6} md={4}>
+                <Button
+                  variant="primary"
+                  className="modalButton"
+                  onClick={handleClose}
+                >
+                  Next
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         </Modal.Header>
         <Modal.Body>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Hello World</Modal.Title>
         </Modal.Body>
         <Modal.Footer>
           Woohoo, you're reading this text in a modal!
