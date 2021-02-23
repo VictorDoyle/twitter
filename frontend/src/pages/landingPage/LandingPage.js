@@ -67,7 +67,7 @@ const LandingPage = () => {
           </Nav>
         </Navbar>
       </Container>
-      <Modal show={show} onHide={handleClose} className="LandingModal">
+      <Modal show={show} onHide={handleClose} className="LandingModal" centered>
         <Modal.Header closeButton>
           <Button variant="secondary" onClick={handleClose}>
             Next

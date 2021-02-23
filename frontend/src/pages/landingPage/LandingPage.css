@@ -68,11 +68,13 @@ h4 {
   -moz-filter: blur(1px);
   -o-filter: blur(1px);
   -ms-filter: blur(1px);
-  filter: blur(1px);
+  filter: blur(1px) /* grayscale(90%) */;
+  height: 100vh;
 }
 
 .modal-open .LandingPageRight {
   background-color: grey;
+  height: 100vh;
 }
 
 .modal-open .LandingPageNav {
