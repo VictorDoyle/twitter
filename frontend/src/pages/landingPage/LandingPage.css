@@ -1,0 +1,33 @@
+.LandingPageContainer {
+  /* background-image: url("./images/LandingImage.jpg"); */
+  background-color: rgba(29, 161, 242, 1);
+  position: absolute;
+  z-index: -1;
+}
+
+.LandingPageRow {
+  width: 100vw;
+  position: flex;
+}
+
+.LandingPageLeft {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LandingPageRight {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LandingPageNav {
+  background-color: black;
+}
+
+.LandingPageLink {
+  color: white !important;
+}
