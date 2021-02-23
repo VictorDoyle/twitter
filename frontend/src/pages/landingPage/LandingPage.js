@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Navbar,
+  Nav,
+  Button,
+  Modal,
+} from "react-bootstrap";
 import "./LandingPage.css";
 
 const LandingPage = () => {
   const [state, setState] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <Container
@@ -14,14 +26,27 @@ const LandingPage = () => {
         <Row className="LandingPageRow">
           <Col className="LandingPageLeft">
             <Container>
-              <h2>Follow your interests</h2>
-              <h2>Follow your interests</h2>
-              <h2>Follow your interests</h2>
+              <h4>Follow your interests</h4>
+              <h4>Follow your interests</h4>
+              <h4>Follow your interests</h4>
             </Container>
           </Col>
           <Col className="LandingPageRight">
-            <Container>
+            <Container className="LandingPageLogin">
+              <p>Twitter Logo</p>
               <h2>See what's Happening in the world right now</h2>
+              <Button className="LandingButtonSign" block onClick={handleShow}>
+                Sign up
+              </Button>
+              <LinkContainer to="/login">
+                <Button
+                  className="LandingButtonLog"
+                  variant="outline-primary"
+                  block
+                >
+                  Log in
+                </Button>
+              </LinkContainer>
             </Container>
           </Col>
         </Row>
@@ -42,6 +67,19 @@ const LandingPage = () => {
           </Nav>
         </Navbar>
       </Container>
+      <Modal show={show} onHide={handleClose} className="LandingModal">
+        <Modal.Header closeButton>
+          <Button variant="secondary" onClick={handleClose}>
+            Next
+          </Button>
+        </Modal.Header>
+        <Modal.Body>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Body>
+        <Modal.Footer>
+          Woohoo, you're reading this text in a modal!
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

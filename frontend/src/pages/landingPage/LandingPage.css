@@ -6,6 +6,10 @@ h2 {
   text-align: center;
 }
 
+h4 {
+  text-align: center;
+}
+
 .LandingPageContainer {
   background-image: url(https://seeklogo.com/images/T/twitter-2012-positive-logo-916EDF1309-seeklogo.com.png);
   background-color: rgba(29, 161, 242, 1);
@@ -39,4 +43,38 @@ h2 {
 
 .LandingPageLink {
   color: white !important;
+}
+
+.LandingPageLogin {
+  padding: 10% !important;
+}
+
+.LandingButtonSign {
+  margin: 5% 0 0 0 !important;
+  border-radius: 30px !important;
+}
+
+.LandingButtonLog {
+  margin: 5% 0 0 0 !important;
+  border-radius: 30px !important;
+}
+
+.modal-content {
+  background-color: black !important;
+}
+
+.modal-open .LandingPageContainer {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
+
+.modal-open .LandingPageRight {
+  background-color: grey;
+}
+
+.modal-open .LandingPageNav {
+  background-color: grey;
 }
