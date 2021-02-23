@@ -1,7 +1,16 @@
+* {
+  color: white;
+}
+
+h2 {
+  text-align: center;
+}
+
 .LandingPageContainer {
-  /* background-image: url("./images/LandingImage.jpg"); */
+  background-image: url(https://seeklogo.com/images/T/twitter-2012-positive-logo-916EDF1309-seeklogo.com.png);
   background-color: rgba(29, 161, 242, 1);
   position: absolute;
+  background-size: contain;
   z-index: -1;
 }
 

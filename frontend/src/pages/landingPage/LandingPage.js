@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import "./LandingPage.css";
 
@@ -6,7 +7,10 @@ const LandingPage = () => {
   const [state, setState] = useState("");
   return (
     <>
-      <Container className="LandingPageContainer">
+      <Container
+        className="LandingPageContainer"
+        styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
+      >
         <Row className="LandingPageRow">
           <Col className="LandingPageLeft">
             <Container>
