@@ -1,0 +1,11 @@
+.tweet-title {
+  display: inline;
+  padding: 5px;
+}
+.username {
+  display: inline;
+  padding-right: 5px;
+}
+.image-icon {
+  margin-top: 20px;
+}

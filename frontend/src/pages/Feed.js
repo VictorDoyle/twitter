@@ -1,4 +1,5 @@
 import NavBar from '../components/NavBar/NavBar'
+import Tweets from '../components/Tweets/Tweets'
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,8 +11,8 @@ function Feed() {
         <Container>
         <Row>
         <Col><NavBar /></Col>
-        <Col><section>2</section></Col>
-        <Col><section>3</section></Col>
+        <Col md={6}><Tweets /></Col>
+        <Col><section>WHATS HAPPENING</section></Col>
         </Row>
         </Container>
         
