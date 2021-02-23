@@ -1,6 +1,6 @@
-import './App.css';
-import Feed from './pages/Feed';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import Feed from "./pages/Feed";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
