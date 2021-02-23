@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import {
-  Container,
-  Row,
-  Col,
-  Navbar,
-  Nav,
-  Button,
-  Modal,
-} from "react-bootstrap";
+import Modal from "../../components/LandingPage/Modal";
+import { Container, Row, Col, Navbar, Nav, Button } from "react-bootstrap";
 import "./LandingPage.css";
 
 const LandingPage = () => {
@@ -67,8 +60,11 @@ const LandingPage = () => {
           </Nav>
         </Navbar>
       </Container>
-      <Modal show={show} onHide={handleClose} className="LandingModal" centered>
-        <Modal.Header>
+
+      <Modal
+        show={show}
+        handleClose={handleShow}
+        header={
           <Container>
             <Row>
               <Col xs={6} md={4}></Col>
@@ -84,14 +80,10 @@ const LandingPage = () => {
               </Col>
             </Row>
           </Container>
-        </Modal.Header>
-        <Modal.Body>
-          <Modal.Title>Hello World</Modal.Title>
-        </Modal.Body>
-        <Modal.Footer>
-          Woohoo, you're reading this text in a modal!
-        </Modal.Footer>
-      </Modal>
+        }
+        body="hello World"
+        footer="Woohoo"
+      />
     </>
   );
 };
