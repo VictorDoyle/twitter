@@ -23,6 +23,7 @@ model User {
   bio String
   email String @unique
   password String
+  // add DOB + Phone number as User Schema Req 
 
   // data relations with external models
   tweets Tweet[]
