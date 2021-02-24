@@ -4,6 +4,7 @@ h1 {
 
 .loginContainer {
   width: 45% !important;
+  text-align: center;
 }
 .loginButton {
   border-radius: 9999px !important;
