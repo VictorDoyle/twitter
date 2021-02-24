@@ -1,88 +1,65 @@
 import React, { useState } from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import Modal from "../../components/LandingPage/Modal";
-import { Container, Row, Col, Navbar, Nav, Button } from "react-bootstrap";
+import Modal from "../../components/Modal";
+import LandingPageLeft from "../../components/LandingPage/LandingPageLeft";
+import LandingPageRight from "../../components/LandingPage/LandingPageRight";
+import LandingNavbar from "../../components/LandingPage/LandingNavbar";
+import ModalHeader from "../../components/LandingPage/LandingModalHeader";
+import ModalBody from "../../components/LandingPage/LandingModalBody";
+import { Container, Row } from "react-bootstrap";
+
 import "./LandingPage.css";
 
 const LandingPage = () => {
   const [state, setState] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [birthYear, setBirthYear] = useState("");
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = (e) => {
+    e.preventDefault();
+    setShow(false);
+    setDateOfBirth(month, day, birthYear);
+    submitHandler();
+  };
   const handleShow = () => setShow(true);
+
+  const submitHandler = () => {
+    console.log("Hello for now");
+  };
+
   return (
     <>
       <Container
         className="LandingPageContainer"
-        styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
+        // styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
       >
         <Row className="LandingPageRow">
-          <Col className="LandingPageLeft" xs={12} md={6}>
-            <Container>
-              <h4>Follow your interests</h4>
-              <h4>Follow your interests</h4>
-              <h4>Follow your interests</h4>
-            </Container>
-          </Col>
-          <Col className="LandingPageRight" xs={12} md={6}>
-            <Container className="LandingPageLogin">
-              <p>Twitter Logo</p>
-              <h2>See what's Happening in the world right now</h2>
-              <Button className="LandingButtonSign" block onClick={handleShow}>
-                Sign up
-              </Button>
-              <LinkContainer to="/login">
-                <Button
-                  className="LandingButtonLog"
-                  variant="outline-primary"
-                  block
-                >
-                  Log in
-                </Button>
-              </LinkContainer>
-            </Container>
-          </Col>
+          <LandingPageLeft />
+          <LandingPageRight handleShow={handleShow} />
         </Row>
-        <Navbar fixed="bottom" className="LandingPageNav">
-          <Nav>
-            <Nav.Link href="#features" className="LandingPageLink">
-              Features
-            </Nav.Link>
-            <Nav.Link href="#features" className="LandingPageLink">
-              Features
-            </Nav.Link>
-            <Nav.Link href="#features" className="LandingPageLink">
-              Features
-            </Nav.Link>
-            <Nav.Link href="#features" className="LandingPageLink">
-              Features
-            </Nav.Link>
-          </Nav>
-        </Navbar>
+        <LandingNavbar />
       </Container>
-
       <Modal
         show={show}
         handleClose={handleShow}
-        header={
-          <Container>
-            <Row>
-              <Col xs={6} md={4}></Col>
-              <Col xs={6} md={4}></Col>
-              <Col xs={6} md={4}>
-                <Button
-                  variant="primary"
-                  className="modalButton"
-                  onClick={handleClose}
-                >
-                  Next
-                </Button>
-              </Col>
-            </Row>
-          </Container>
+        contentClassName="LandingModalContent"
+        header={<ModalHeader handleClose={handleClose} />}
+        body={
+          <ModalBody
+            submitHandler={submitHandler}
+            name={(e) => setName(e.target.value)}
+            phone={(e) => setPhone(e.target.value)}
+            day={(e) => setDay(e.target.value)}
+            month={(e) => setMonth(e.target.value)}
+            birthYear={(e) => setBirthYear(e.target.value)}
+          />
         }
-        body="hello World"
-        footer="Woohoo"
+        footer=""
+        className="LandingModal"
       />
     </>
   );

@@ -1,7 +1,6 @@
-import LandingPage from "./pages/landingPage/LandingPage";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Feed from "./pages/Feed";
+import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Routes from "./config/routes";
 
 import "./App.css";
 
@@ -9,8 +8,7 @@ function App() {
   return (
     <Router>
       <>
-        <LandingPage />
-    <Feed />
+        <Routes />
       </>
     </Router>
   );

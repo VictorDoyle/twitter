@@ -1,0 +1,10 @@
+h1 {
+  color: black;
+}
+
+.loginContainer {
+  width: 45% !important;
+}
+.loginButton {
+  border-radius: 9999px !important;
+}
