@@ -6,12 +6,12 @@ body {
   margin-top: 0;
 }
 
-h2 {
+LandingTextRight {
   text-align: center;
   color: white;
 }
 
-h4 {
+.LandingTextLeft {
   text-align: left;
   color: white;
   margin: 7% 0 !important;
