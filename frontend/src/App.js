@@ -9,8 +9,8 @@ function App() {
   return (
     <Router>
       <>
-        <LandingPage />
-        {/* <Feed /> */}
+        <Route path="/feed" component={Feed} />
+        <Route path="/" component={LandingPage} exact />
       </>
     </Router>
   );

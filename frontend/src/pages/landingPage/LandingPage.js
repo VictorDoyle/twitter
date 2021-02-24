@@ -51,8 +51,8 @@ const LandingPage = () => {
         </Row>
         <Navbar fixed="bottom" className="LandingPageNav">
           <Nav>
-            <Nav.Link href="#features" className="LandingPageLink">
-              Features
+            <Nav.Link href="/feed" className="LandingPageLink">
+              Feed
             </Nav.Link>
             <Nav.Link href="#features" className="LandingPageLink">
               Features
@@ -66,7 +66,6 @@ const LandingPage = () => {
           </Nav>
         </Navbar>
       </Container>
-      {/* modal */}
       <Modal
         show={show}
         handleClose={handleShow}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
 // Really should get a npm package for date or ask about making dates in javascript
-
+// TODO Need state
 const LandingModalBody = () => {
   const months = [
     "january",
