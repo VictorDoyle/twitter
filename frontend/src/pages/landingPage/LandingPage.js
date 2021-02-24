@@ -4,6 +4,14 @@ import Modal from "../../components/Modal";
 import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
 import { Container, Row, Col, Navbar, Nav, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faSearch,
+  faUserFriends,
+  faComment,
+} from "@fortawesome/free-solid-svg-icons";
+
 import "./LandingPage.css";
 
 const LandingPage = () => {
@@ -24,15 +32,24 @@ const LandingPage = () => {
       >
         <Row className="LandingPageRow">
           <Col className="LandingPageLeft" xs={12} md={6}>
-            <Container>
-              <h4>Follow your interests</h4>
-              <h4>Follow your interests</h4>
-              <h4>Follow your interests</h4>
+            <Container className="LandingLeftContainer">
+              <h4>
+                <FontAwesomeIcon icon={faSearch} />
+                Follow your interests
+              </h4>
+              <h4>
+                <FontAwesomeIcon icon={faUserFriends} />
+                Hear what people are talking about.
+              </h4>
+              <h4>
+                <FontAwesomeIcon icon={faComment} />
+                Join the conversation.
+              </h4>
             </Container>
           </Col>
           <Col className="LandingPageRight" xs={12} md={6}>
             <Container className="LandingPageLogin">
-              <p>Twitter Logo</p>
+              <FontAwesomeIcon icon={faTwitter} size="2x" />
               <h2>See what's Happening in the world right now</h2>
               <Button className="LandingButtonSign" block onClick={handleShow}>
                 Sign up
