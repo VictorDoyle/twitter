@@ -13,6 +13,7 @@ const LandingPage = () => {
   const [state, setState] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
@@ -21,6 +22,7 @@ const LandingPage = () => {
   const handleClose = (e) => {
     e.preventDefault();
     setShow(false);
+    setDateOfBirth(month, day, birthYear);
     submitHandler();
   };
   const handleShow = () => setShow(true);

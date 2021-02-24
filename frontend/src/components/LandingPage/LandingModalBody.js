@@ -1,7 +1,6 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
-// Really should get a npm package for date or ask about making dates in javascript
-// TODO Need state
+//TODO Really should get a npm package for date or ask about making dates in javascript
 const LandingModalBody = ({
   submitHandler,
   name,
