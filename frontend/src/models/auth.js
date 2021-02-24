@@ -1,10 +1,10 @@
-const url = `http://localhost:4000/api/v1`
+const url = `http://localhost:4000/api/`
 
 
 class AuthModel {
     static register = (data) => {
       console.log(data)
-        return fetch(`${API}/register`, {
+        return axios(`${url}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -17,7 +17,7 @@ class AuthModel {
     
 
     static login = (data) => {
-        return fetch(`${API}/login`, {
+        return fetch(`${url}/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -27,7 +27,7 @@ class AuthModel {
       };
 
     static verify = () => {
-        return fetch(`${API}/users/verify`, {
+        return fetch(`${url}/users/verify`, {
           method: "GET",
           headers: {
             authorization: `Bearer ${localStorage.uid}`,
