@@ -1,6 +1,7 @@
-import NavBar from "../components/NavBar/NavBar";
-import Tweets from "../components/Tweets/Tweets";
-import WhatsHappening from "../components/WhatsHappening/WhatsHappening";
+import NavBar from "../../components/NavBar/NavBar";
+import Tweets from "../../components/Tweets/Tweets";
+import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
+import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -19,6 +20,7 @@ function Feed() {
           </Col>
           <Col className="col">
             <WhatsHappening />
+            <WhoToFollow />
           </Col>
         </Row>
       </Container>
