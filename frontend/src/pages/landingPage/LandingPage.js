@@ -34,9 +34,11 @@ const LandingPage = () => {
       <Modal
         show={show}
         handleClose={handleShow}
+        contentClassName="LandingModalContent"
         header={<ModalHeader handleClose={handleClose} />}
         body={<ModalBody />}
         footer=""
+        className="LandingModal"
       />
     </>
   );
