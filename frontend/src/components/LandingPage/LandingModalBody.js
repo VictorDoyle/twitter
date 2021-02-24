@@ -19,19 +19,38 @@ const LandingModalBody = () => {
   ];
 
   const year = new Date().getFullYear();
-  const years = Array.from(new Array(50), (val, index) => index - year);
-  const days = Array.from(Array(31 + 1).keys());
+  const years = Array.from(new Array(50), (val, index) =>
+    Math.abs(index - year),
+  );
+  const days = Array.from(Array(31).keys());
+
+  // belongs in main module
+  const submitHandler = () => {
+    console.log("Hello for now");
+  };
   return (
     <>
       <h3>Create your account</h3>
-      <Form>
-        <Form.Control type="name" placeholder="Name" />
-        <Form.Control type="phone" placeholder="Phone" />
+      <Form onSubmit={submitHandler}>
+        <Form.Control
+          type="name"
+          placeholder="Name"
+          // onChange={(e) => setName(e.target.value)}
+        />
+        <Form.Control
+          type="phone"
+          placeholder="Phone"
+          // onChange={(e) => setPhone(e.target.value)}
+        />
         <p>Maybe Email?</p>
         <h6>Date of birth</h6>
         <Form.Row>
           <Col xs={6}>
-            <Form.Control as="select" type="month">
+            <Form.Control
+              as="select"
+              type="month"
+              // onChange={(e) => setMonth(e.target.value)}
+            >
               {months.map((x, i) => (
                 <option key={`x${i}`} value={x}>
                   {x}
@@ -40,16 +59,24 @@ const LandingModalBody = () => {
             </Form.Control>
           </Col>
           <Col>
-            <Form.Control as="select" type="day">
+            <Form.Control
+              as="select"
+              type="day"
+              // onChange={(e) => setDay(e.target.value)}
+            >
               {days.map((d, i) => (
-                <option key={`d${i}`} value={d}>
-                  {d}
+                <option key={`d${i}`} value={d + 1}>
+                  {d + 1}
                 </option>
               ))}
             </Form.Control>
           </Col>
           <Col>
-            <Form.Control as="select" type="year">
+            <Form.Control
+              as="select"
+              type="year"
+              // onChange={(e) => setYear(e.target.value)}
+            >
               {years.map((y, i) => (
                 <option key={`y${i}`} value={y}>
                   {y}

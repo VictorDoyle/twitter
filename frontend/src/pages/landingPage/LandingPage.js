@@ -23,7 +23,7 @@ const LandingPage = () => {
     <>
       <Container
         className="LandingPageContainer"
-        styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
+        // styles={{ backgroundImage: `url("/images/LandingImage.png");` }}
       >
         <Row className="LandingPageRow">
           <LandingPageLeft />
