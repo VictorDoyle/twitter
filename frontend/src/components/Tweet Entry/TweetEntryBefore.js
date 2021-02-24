@@ -8,6 +8,7 @@ import {
   faUserCircle,
   faPhotoVideo,
   faPollH,
+  faSmile,
 } from "@fortawesome/free-solid-svg-icons";
 import { faShareSquare, faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -66,7 +67,7 @@ function TweetEntryBefore({ handleState }) {
                   <Card.Link className="text-muted" href="#">
                     <FontAwesomeIcon
                       className="image-icon"
-                      icon={faShareSquare}
+                      icon={faSmile}
                       size="1x"
                     />
                   </Card.Link>

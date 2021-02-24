@@ -15,6 +15,7 @@ import {
   faHeart,
   faShareSquare,
   faImage,
+  faSmile,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TweetEntry.css";
@@ -80,7 +81,7 @@ function TweetEntry({ submitHandler }) {
                     <Card.Link className="text-muted" href="#">
                       <FontAwesomeIcon
                         className="image-icon"
-                        icon={faShareSquare}
+                        icon={faSmile}
                         size="1x"
                       />
                     </Card.Link>
