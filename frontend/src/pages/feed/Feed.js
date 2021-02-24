@@ -7,6 +7,7 @@ import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
+
 import "./Feed.css";
 import React, { useState } from "react";
 
