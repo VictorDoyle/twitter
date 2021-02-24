@@ -1,8 +1,9 @@
 import express from "express";
 import prisma from "@prisma/client";
 import cors from "cors";
-
-
+/* routes */
+import {register, login, logout} from './controllers/auth.js'
+import userRoutes from './controllers/users.js'
 
 /* Instanced Modules */
 const app = express();
@@ -19,6 +20,12 @@ app.use(express.json());
 app.use(cors())
 
 
+/* routes */
+app.use('/api/users', userRoutes);
+app.use('/api/register', register);
+app.use('/api/login', login);
+/* FIXME: */
+app.use('/api/logout', logout);
 
 
 app.get("/", function (request, response) {
