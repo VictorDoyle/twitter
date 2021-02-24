@@ -9,6 +9,7 @@ function App() {
   return (
     <Router>
       <>
+        {/* change to desired route to hit */}
         <Route path="/feed" component={Feed} />
         <Route path="/" component={LandingPage} exact />
       </>
