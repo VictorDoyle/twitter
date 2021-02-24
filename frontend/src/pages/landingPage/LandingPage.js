@@ -11,13 +11,23 @@ import "./LandingPage.css";
 
 const LandingPage = () => {
   const [state, setState] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [birthYear, setBirthYear] = useState("");
   const [show, setShow] = useState(false);
 
   const handleClose = (e) => {
     e.preventDefault();
     setShow(false);
+    submitHandler();
   };
   const handleShow = () => setShow(true);
+
+  const submitHandler = () => {
+    console.log("Hello for now");
+  };
 
   return (
     <>
@@ -36,7 +46,16 @@ const LandingPage = () => {
         handleClose={handleShow}
         contentClassName="LandingModalContent"
         header={<ModalHeader handleClose={handleClose} />}
-        body={<ModalBody />}
+        body={
+          <ModalBody
+            submitHandler={submitHandler}
+            name={(e) => setName(e.target.value)}
+            phone={(e) => setPhone(e.target.value)}
+            day={(e) => setDay(e.target.value)}
+            month={(e) => setMonth(e.target.value)}
+            birthYear={(e) => setBirthYear(e.target.value)}
+          />
+        }
         footer=""
         className="LandingModal"
       />
