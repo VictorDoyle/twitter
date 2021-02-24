@@ -1,12 +1,4 @@
-/* * {
-  color: white;
-} */
-
-body {
-  margin-top: 0;
-}
-
-LandingTextRight {
+.LandingTextRight {
   text-align: center;
   color: white;
 }

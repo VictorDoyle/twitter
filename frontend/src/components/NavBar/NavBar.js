@@ -22,7 +22,7 @@ import "./NavBar.css";
 
 function NavBar() {
   return (
-    <Container>
+    <Container className="navbar-body">
       <Nav.Link id="twitter" eventKey="link-1">
         <Row>
           <Col xs={5}>
