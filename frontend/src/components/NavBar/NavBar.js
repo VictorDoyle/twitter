@@ -22,7 +22,7 @@ import "./NavBar.css";
 
 function NavBar() {
   return (
-    <Container>
+    <Container className="navbar-body">
       <Nav.Link id="twitter" eventKey="link-1">
         <Row>
           <Col xs={5}>
@@ -31,93 +31,93 @@ function NavBar() {
           <Col></Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-2">
+      <Nav.Link className="link" eventKey="link-2">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faHome} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Home</span>
+            <span className="description">Home</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-2">
+      <Nav.Link className="link" eventKey="link-2">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faHashtag} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Explore</span>
+            <span className="description">Explore</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-3">
+      <Nav.Link className="link" eventKey="link-3">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faSearch} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Search</span>
+            <span className="description">Search</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-4">
+      <Nav.Link className="link" eventKey="link-4">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faBell} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Notifications</span>
+            <span className="description">Notifications</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-5">
+      <Nav.Link className="link" eventKey="link-5">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faEnvelope} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Messages</span>
+            <span className="description">Messages</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-6">
+      <Nav.Link className="link" eventKey="link-6">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faBookmark} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Bookmark</span>
+            <span className="description">Bookmark</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-7">
+      <Nav.Link className="link" eventKey="link-7">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faListUl} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Lists</span>
+            <span className="description">Lists</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-8">
+      <Nav.Link className="link" eventKey="link-8">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faAt} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Connect</span>
+            <span className="description">Connect</span>
           </Col>
         </Row>
       </Nav.Link>
-      <Nav.Link class="link" eventKey="link-9">
+      <Nav.Link className="link" eventKey="link-9">
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faUser} size="2x" />
           </Col>
           <Col className="d-none d-lg-block">
-            <span class="description">Profile</span>
+            <span className="description">Profile</span>
           </Col>
         </Row>
       </Nav.Link>
