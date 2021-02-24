@@ -1,0 +1,20 @@
+.WhatsHappeningContainer {
+  margin-left: 30px;
+  background-color: #eff1f2;
+  border-radius: 5%;
+}
+.header {
+  padding: 20px 20px 0px 20px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  display: block;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.topic {
+  padding-bottom: 6px;
+}
