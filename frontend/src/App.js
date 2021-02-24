@@ -10,7 +10,7 @@ function App() {
     <Router>
       <>
         <LandingPage />
-    <Feed />
+        {/* <Feed /> */}
       </>
     </Router>
   );
