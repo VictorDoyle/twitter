@@ -1,0 +1,110 @@
+/* * {
+  color: white;
+} */
+
+body {
+  margin-top: 0;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+}
+
+h4 {
+  text-align: left;
+  color: white;
+  margin: 7% 0 !important;
+}
+
+.LandingPageContainer {
+  background-image: url(https://seeklogo.com/images/T/twitter-2012-positive-logo-916EDF1309-seeklogo.com.png);
+  background-color: rgba(29, 161, 242, 1);
+  position: absolute;
+  margin: 0 auto;
+  background-size: contain;
+  z-index: -1;
+}
+
+.LandingPageRow {
+  width: 100vw;
+  position: flex;
+}
+
+.LandingPageLeft {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LandingLeftContainer {
+  width: 75% !important;
+}
+
+.LandingPageRight {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LandingPageNav {
+  background-color: black;
+}
+
+.LandingPageLink {
+  color: rgb(110, 118, 125) !important;
+}
+
+.LandingPageLogin {
+  padding: 10% !important;
+  color: white !important;
+}
+
+.LandingButtonSign {
+  margin: 5% 0 0 0 !important;
+  border-radius: 9999px !important;
+}
+
+.LandingButtonLog {
+  margin: 5% 0 0 0 !important;
+  border-radius: 9999px !important;
+}
+
+.LandingModalContent {
+  background-color: black !important;
+  color: white;
+}
+
+.modalButton {
+  float: right;
+}
+
+.modal-open .LandingPageContainer {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px) /* grayscale(90%) */;
+  height: 100vh;
+}
+
+.modal-open .LandingPageRight {
+  background-color: grey;
+  height: 100vh;
+}
+
+.modal-open .LandingPageNav {
+  background-color: grey;
+}
+
+.modal-header {
+  border-bottom: 0px !important;
+}
+.modal-header-logo {
+  text-align: center;
+}
+
+.modal-footer {
+  border-top: 0px !important;
+}
