@@ -9,7 +9,9 @@ const LandingPageRight = ({ handleShow }) => {
     <Col className="LandingPageRight" xs={12} md={6}>
       <Container className="LandingPageLogin">
         <FontAwesomeIcon icon={faTwitter} size="2x" />
-        <h2>See what's Happening in the world right now</h2>
+        <h2 className="LandingTextRight">
+          See what's Happening in the world right now
+        </h2>
         <Button className="LandingButtonSign" block onClick={handleShow}>
           Sign up
         </Button>

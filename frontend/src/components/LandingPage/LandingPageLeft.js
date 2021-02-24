@@ -11,15 +11,15 @@ const LandingPageLeft = () => {
   return (
     <Col className="LandingPageLeft" xs={12} md={6}>
       <Container className="LandingLeftContainer">
-        <h4>
+        <h4 className="LandingTextLeft">
           <FontAwesomeIcon icon={faSearch} />
           Follow your interests
         </h4>
-        <h4>
+        <h4 className="LandingTextLeft">
           <FontAwesomeIcon icon={faUserFriends} />
           Hear what people are talking about.
         </h4>
-        <h4>
+        <h4 className="LandingTextLeft">
           <FontAwesomeIcon icon={faComment} />
           Join the conversation.
         </h4>
