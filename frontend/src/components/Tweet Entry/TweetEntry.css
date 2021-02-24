@@ -1,0 +1,17 @@
+.image-icon {
+  margin-top: 20px;
+}
+
+.form-control {
+  border-top: 0px solid !important;
+  border-left: 0px solid !important;
+  border-right: 0px solid !important;
+}
+
+div.col {
+  width: 20%;
+}
+
+div.card-body {
+  padding-bottom: 0px;
+}
