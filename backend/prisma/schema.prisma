@@ -23,7 +23,6 @@ model User {
   // add DOB + Phone number as User Schema Req
   // data relations with external models
   tweets      Tweet[]
-  Comment     Comment[]
 }
 
 model Tweet {
