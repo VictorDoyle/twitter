@@ -23,6 +23,7 @@ app.use(cors());
 /* routes */
 app.use("/api/users", userRoutes);
 app.use("/api/tweets", tweetRoutes);
+app.use("/api/comments", commentRoutes);
 app.use("/api/register", register);
 app.use("/api/login", login);
 /* FIXME: */
