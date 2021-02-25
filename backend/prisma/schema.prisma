@@ -14,16 +14,6 @@ generator client {
 // User Model
 
 model User {
-<<<<<<< HEAD
-  id Int @default(autoincrement()) @id
-  firstname String
-  lastname String?
-  username String? @unique
-  bio String?
-  email String @unique
-  password String
-  dateOfBirth DateTime 
-=======
   id          Int      @id @default(autoincrement())
   firstname   String
   lastname    String?
@@ -34,7 +24,6 @@ model User {
   dateOfBirth DateTime
   // add DOB + Phone number as User Schema Req
 
->>>>>>> origin/submaster
   // data relations with external models
   tweets Tweet[]
 
