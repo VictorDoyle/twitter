@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Tweets.css";
-function Tweets() {
+function Tweets(props) {
   return (
     <Card>
       <Container>
@@ -27,14 +27,13 @@ function Tweets() {
             <Card.Body>
               <Card.Title className="username">Elon Musk</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                @ElonMusk
+                {props.tweet.author}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
               <Card.Text className="text-left">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                {props.tweet.description}
               </Card.Text>
             </Card.Body>
             <Row>

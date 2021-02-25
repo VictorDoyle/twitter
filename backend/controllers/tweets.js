@@ -14,9 +14,6 @@ router.get("/", async function (request, response) {
   const tweets = await db.tweet.findMany({
     include: {
       author: true,
-      description: true,
-      createdAt: true,
-      category: true,
     },
   });
   response.json({ tweets });
@@ -49,7 +46,7 @@ router.post("/", async function (request, response) {
     data: request.body,
   });
 
-  response.json({ message: "The User was created", tweet: createdTweet });
+  response.json({ message: "The Tweet was created", tweet: createdTweet });
 });
 
 /* DELETE ROUTE */
