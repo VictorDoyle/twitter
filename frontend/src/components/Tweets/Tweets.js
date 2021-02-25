@@ -27,13 +27,13 @@ function Tweets(props) {
             <Card.Body>
               <Card.Title className="username">Elon Musk</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {props.tweet.author}
+                {/* {props.tweet.author} */}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
               <Card.Text className="text-left">
-                {props.tweet.description}
+                {/* {props.tweet.description} */}
               </Card.Text>
             </Card.Body>
             <Row>
