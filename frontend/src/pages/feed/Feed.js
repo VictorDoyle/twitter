@@ -31,14 +31,19 @@ function Feed() {
 
   const fetchData = () => {
     tweetModel.all().then((data) => {
-      setTweets(data);
+      setTweets(data.tweets);
     });
   };
 
   let allTweets = tweets.map((tweet, index) => {
-    <Tweets {...tweet} key={tweet.id} />;
+    return (
+      <>
+        <Tweets {...tweet} key={tweet.id} />
+      </>
+    );
   });
-  console.log(allTweets);
+  console.log(tweets);
+
   return (
     <div className="Feed" id="feed-page">
       <Container>
@@ -52,7 +57,7 @@ function Feed() {
             ) : (
               <TweetEntry submitHandler={submitHandler} />
             )}
-            {allTweets}
+            {tweets ? allTweets : <h1>No Tweets</h1>}
           </Col>
           <Col>
             <WhatsHappening />
