@@ -1,8 +1,17 @@
 import NavBar from "../../components/NavBar/NavBar";
 import Tweets from "../../components/Tweets/Tweets";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+/* bootstrap component imports */
+import { Col, Container, Row, Card} from "react-bootstrap";
+/* font awesome imports */
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faRetweet,
+  faHeart,
+  faUserCircle,
+  faComment,
+  faShareSquare,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
