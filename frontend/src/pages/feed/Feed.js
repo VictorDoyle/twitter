@@ -38,9 +38,7 @@ function Feed() {
   let allTweets = tweets.map((tweet, index) => {
     return (
       <>
-        <Tweets {...tweet} key={tweet.id}>
-          Hello
-        </Tweets>
+        <Tweets {...tweet} key={tweet.id} />
       </>
     );
   });
@@ -59,7 +57,7 @@ function Feed() {
             ) : (
               <TweetEntry submitHandler={submitHandler} />
             )}
-            {allTweets}
+            {tweets ? allTweets : <h1>No Tweets</h1>}
           </Col>
           <Col>
             <WhatsHappening />
