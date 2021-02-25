@@ -14,9 +14,6 @@ router.get("/", async function (request, response) {
   const tweets = await db.tweet.findMany({
     include: {
       author: true,
-      description: true,
-      createdAt: true,
-      category: true,
     },
   });
   response.json({ tweets });
