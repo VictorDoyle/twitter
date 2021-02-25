@@ -3,6 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import Feed from "../pages/feed/Feed";
 import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
+import Profile from "../pages/profile/Profile";
+
 
 const Routes = () => {
   return (
@@ -14,6 +16,7 @@ const Routes = () => {
       <Route exact path="/feed" component={Feed} />
 
     {/*   <Route path="/explore" component={Explore} /> */}
+    <Route path="/profile" component={ Profile } />
       {/* 404 ROUTE */}
       {/* <Route component={NotFound} /> */}
     </Switch>

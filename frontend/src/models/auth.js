@@ -1,4 +1,5 @@
 const url = `http://localhost:4000/api/`
+import axios from "axios";
 
 
 class AuthModel {
