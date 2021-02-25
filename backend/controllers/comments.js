@@ -12,10 +12,6 @@ router.get("/", async function (request, response) {
   const comments = await db.comment.findMany({
     include: {
       author: true,
-      content: true,
-      createdAt: true,
-      category: true,
-      tweet: true,
     },
   });
   response.json({ comments });

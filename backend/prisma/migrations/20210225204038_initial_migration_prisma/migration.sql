@@ -2,11 +2,12 @@
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "firstname" TEXT NOT NULL,
-    "lastname" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
-    "bio" TEXT NOT NULL,
+    "lastname" TEXT,
+    "username" TEXT,
+    "bio" TEXT,
     "email" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "password" TEXT,
+    "dateOfBirth" TIMESTAMP(3) NOT NULL,
 
     PRIMARY KEY ("id")
 );

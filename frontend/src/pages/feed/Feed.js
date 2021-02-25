@@ -7,12 +7,14 @@ import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
+import tweetModel from "../../models/tweet";
 
 import "./Feed.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Feed() {
   const [input, setInput] = useState(false);
+  const [tweets, setTweets] = useState([]);
 
   const submitHandler = () => {
     console.log("Hello for now");
@@ -22,6 +24,21 @@ function Feed() {
     console.log("handlestate");
     setInput(true);
   };
+
+  useEffect(function () {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    tweetModel.all().then((data) => {
+      setTweets(data);
+    });
+  };
+
+  let allTweets = tweets.map((tweet, index) => {
+    <Tweets {...tweet} key={tweet.id} />;
+  });
+  console.log(allTweets);
   return (
     <div className="Feed" id="feed-page">
       <Container>
@@ -35,8 +52,7 @@ function Feed() {
             ) : (
               <TweetEntry submitHandler={submitHandler} />
             )}
-
-            <Tweets />
+            {allTweets}
           </Col>
           <Col>
             <WhatsHappening />
