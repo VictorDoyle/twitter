@@ -24,7 +24,7 @@ router.get("/", async function (request, response) {
 
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
-  const tweet = await db.user.findUnique({
+  const tweet = await db.tweet.findUnique({
     where: {
       id: Number(request.params.id),
     },
@@ -49,7 +49,7 @@ router.post("/", async function (request, response) {
     data: request.body,
   });
 
-  response.json({ message: "The User was created", tweet: createdTweet });
+  response.json({ message: "The Tweet was created", tweet: createdTweet });
 });
 
 /* DELETE ROUTE */
