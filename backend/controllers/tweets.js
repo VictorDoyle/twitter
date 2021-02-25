@@ -12,8 +12,14 @@ const db = new prisma.PrismaClient({
 /* INDEX FOR ALL TWEETS */
 router.get("/", async function (request, response) {
   const tweets = await db.tweet.findMany({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
     include: {
       author: true,
+      comments: true,
     },
   });
   response.json({ tweets });
