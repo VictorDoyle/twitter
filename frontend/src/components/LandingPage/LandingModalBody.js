@@ -3,8 +3,8 @@ import { Col, Form } from "react-bootstrap";
 //TODO Really should get a npm package for date or ask about making dates in javascript
 const LandingModalBody = ({
   submitHandler,
-  name,
-  phone,
+  firstname,
+  email,
   day,
   month,
   birthYear,
@@ -34,8 +34,12 @@ const LandingModalBody = ({
     <>
       <h3>Create your account</h3>
       <Form onSubmit={submitHandler}>
-        <Form.Control type="name" placeholder="Name" onChange={name} />
-        <Form.Control type="phone" placeholder="Phone" onChange={phone} />
+        <Form.Control
+          type="firstname"
+          placeholder="Name"
+          onChange={firstname}
+        />
+        <Form.Control type="email" placeholder="Email" onChange={email} />
         <p>Maybe Email?</p>
         <h6>Date of birth</h6>
         <Form.Row>
