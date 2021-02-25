@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Tweets.css";
+
 function Tweets(props) {
   return (
     <Card>
@@ -44,7 +45,7 @@ function Tweets(props) {
                   />
                   {/* TODO Comment counter */}
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    7
+                    {props.comments.length}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
