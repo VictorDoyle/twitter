@@ -29,7 +29,7 @@ class CommentModel {
 
   // accessed delete route of comment
   static delete = (id) => {
-    return axios.delete(`${API}/${id}`).then((res) => res.json());
+    return axios.delete(`${API}/delete/${id}`).then((res) => res.json());
   };
 }
 
