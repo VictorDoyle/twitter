@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Modal from "../../components/Modal";
 import LandingPageLeft from "../../components/LandingPage/LandingPageLeft";
 import LandingPageRight from "../../components/LandingPage/LandingPageRight";
 import LandingNavbar from "../../components/LandingPage/LandingNavbar";
 import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
-import userModel from "../../models/user";
+import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
 
 import "./LandingPage.css";
@@ -18,12 +19,12 @@ const LandingPage = () => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  const [show, setShow] = useState(false);
+  // console.log(firstName);
 
+  const [show, setShow] = useState(false);
   const handleClose = (e) => {
     e.preventDefault();
-    setDateOfBirth(month, day, birthYear);
-    userModel.create({ firstname, email, dateOfBirth });
+    UserModel.create({ firstname: firstname, email: email });
     setShow(false);
     submitHandler();
   };
@@ -55,8 +56,10 @@ const LandingPage = () => {
         body={
           <ModalBody
             submitHandler={submitHandler}
-            firstname={(e) => setName(e.target.value)}
+            firstName={(e) => setName(e.target.value)}
+            firstNameValue={firstname}
             email={(e) => setEmail(e.target.value)}
+            emailValue={email}
             day={(e) => setDay(e.target.value)}
             month={(e) => setMonth(e.target.value)}
             birthYear={(e) => setBirthYear(e.target.value)}
