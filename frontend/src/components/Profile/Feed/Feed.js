@@ -3,7 +3,7 @@ import react, {useEffect, useState, useReducer} from 'react'
 import './Feed.css'
 
 /* vendor modules */
-import { Card, Row, Col, Container, Form } from 'react-bootstrap'
+import { Card, Row, Col, Container, Modal, Button, Form} from 'react-bootstrap'
 import {
     faComment,
     faHeart,
@@ -38,6 +38,10 @@ function Feed  () {
     /* like/unlike functionality */
     const [state, dispatch] = useReducer(likeUnlikeReducer, initialState);
     const { liked } = state
+    /* commenting on a tweet functionality */
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
 
 
@@ -66,19 +70,56 @@ function Feed  () {
               <Card.Text className="text-left"> description here</Card.Text>
             </Card.Body>
             <Row>
+
+                {/* commenting on a tweet Modal */}
               <Col>
                 <Card.Link className="text-muted" href="#">
-                  <FontAwesomeIcon
-                    className="image-icon"
-                    icon={faComment}
-                    size="1x"
-                  />
+                  <FontAwesomeIcon onClick={handleShow} className="image-icon" icon={faComment} size="1x"/>
                   
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
                     {/* {props.comments.length} */}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
+                
+                <Modal show={show} onHide={handleClose} className="modalStyle">
+                    <Modal.Header closeButton className="closeModalButton">
+                    </Modal.Header>
+                        <span className="dividerModal"></span>
+                    <Modal.Body> original tweet content here{/* {tweet.content} */}</Modal.Body>
+                    <Modal.Body> 
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Control as="textarea" placeholder="Add Another Tweet " rows={3} />
+                    </Form.Group>
+                        
+                        
+                        
+                    </Modal.Body>
+                    <Modal.Footer>
+                    {/* TODO: if Form.Input === empty show button style 1 else if Form.Input !=== empty show style 2 */}
+                    <Button variant="primary" className="tweetButton" onClick={handleClose}>
+                        Tweet
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              {/* END OF COMMENTING FUNCTION MODAL */}
+
+
+
               <Col>
                 <Card.Link className="text-muted" href="#">
                   <FontAwesomeIcon
@@ -93,15 +134,14 @@ function Feed  () {
                 </Card.Link>
               </Col>
               <Col>
-                <Card.Link className="text-muted" href="#">
-                    {/* LIKE TWEET FUNCTION */}
 
-                    
+
+                    {/* LIKE TWEET FUNCTION */}
+                <Card.Link className="text-muted" href="#">
       {liked === false ? <FontAwesomeIcon  onClick={() => dispatch({ type: 'LIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="grey"/> 
       : <FontAwesomeIcon onClick={() => dispatch({ type: 'UNLIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="red"/>}
-
-                
                 </Card.Link>
+
               </Col>
               <Col>
                 <Card.Link className="text-muted" href="#">
