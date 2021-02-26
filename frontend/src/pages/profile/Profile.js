@@ -1,20 +1,27 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
+import NavBar from "../../components/NavBar/NavBar";
+import Tweets from "../../components/Tweets/Tweets";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
-import {
-  faComment,
-  faHeart,
-  faShareSquare,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Tweets.css";
 
-function Tweets(props) {
+import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
+import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
+
+import "./Profile.css";
+import React, { useState } from "react";
+
+function Profile() {
   return (
-    <Card>
+    <div className="Feed" id="feed-page">
+      <Container>
+        <Row>
+          <Col>
+            <NavBar />
+          </Col>
+          <Col md={6}>
+        
+
+          <Card>
       <Container>
         <Row>
           <Col xs={2}>
@@ -28,12 +35,14 @@ function Tweets(props) {
             <Card.Body>
               <Card.Title className="username">Elon Musk</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {props.author.username}
+                {/* {props.tweet.author} */}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
-              <Card.Text className="text-left">{props.description}</Card.Text>
+              <Card.Text className="text-left">
+                {/* {props.tweet.description} */}
+              </Card.Text>
             </Card.Body>
             <Row>
               <Col>
@@ -45,7 +54,7 @@ function Tweets(props) {
                   />
                   {/* TODO Comment counter */}
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {props.comments.length}
+                    7
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
@@ -85,7 +94,15 @@ function Tweets(props) {
         </Row>
       </Container>
     </Card>
+          </Col>
+          <Col>
+            <WhatsHappening />
+            <WhoToFollow />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 
-export default Tweets;
+export default Profile;
