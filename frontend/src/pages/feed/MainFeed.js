@@ -10,10 +10,10 @@ import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
 import StickyNav from "../../components/StickyNav/StickyNav";
 
-import "./Feed.css";
+import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
-function Feed() {
+function MainFeed() {
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
 
@@ -71,4 +71,4 @@ function Feed() {
   );
 }
 
-export default Feed;
+export default MainFeed;
