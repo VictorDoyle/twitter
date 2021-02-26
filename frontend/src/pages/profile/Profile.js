@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import Recommendations from "../../components/Profile/RecommendFriends/Recommendations";
 import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
 import Happening from "../../components/Profile/Happening/Happening";
+import Header from "../../components/Profile/Header/Header";
 
 function Profile() {
   return (
@@ -33,80 +34,16 @@ function Profile() {
           </Col>
           <Col md={6}>
         
+          {/* profile header*/}
+          <Header/>
 
-          <Card>
-      <Container>
-        <Row>
-          <Col xs={2}>
-            <FontAwesomeIcon
-              className="image-icon"
-              icon={faUserCircle}
-              size="4x"
-            />
-          </Col>
-          <Col>
-            <Card.Body>
-              <Card.Title className="username">Elon Musk</Card.Title>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {/* {props.author} */}
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                7m
-              </Card.Subtitle>
-              <Card.Text className="text-left">
-                {/* {props.description} */}
-              </Card.Text>
-            </Card.Body>
-            <Row>
-              <Col>
-                <Card.Link className="text-muted" href="#">
-                  <FontAwesomeIcon
-                    className="image-icon"
-                    icon={faComment}
-                    size="1x"
-                  />
-                  
-                  <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    7 
-                  </Card.Subtitle>
-                </Card.Link>
-              </Col>
-              <Col>
-                <Card.Link className="text-muted" href="#">
-                  <FontAwesomeIcon
-                    className="image-icon"
-                    icon={faRetweet}
-                    size="1x"
-                  />
-                  
-                  <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    3
-                  </Card.Subtitle>
-                </Card.Link>
-              </Col>
-              <Col>
-                <Card.Link className="text-muted" href="#">
-                  <FontAwesomeIcon
-                    className="image-icon"
-                    icon={faHeart}
-                    size="1x"
-                  />
-                </Card.Link>
-              </Col>
-              <Col>
-                <Card.Link className="text-muted" href="#">
-                  <FontAwesomeIcon
-                    className="image-icon"
-                    icon={faShareSquare}
-                    size="1x"
-                  />
-                </Card.Link>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </Card>
+          {/* profile subheader nav */}
+
+          {/* profile feed */}
+
+
+
+          
           </Col>
           <Col>
           {/* SECTION: media box */}
