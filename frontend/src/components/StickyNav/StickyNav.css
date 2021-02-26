@@ -1,0 +1,11 @@
+.StickyNavIcon {
+  text-align: right;
+  margin-top: 0px;
+  margin-left: 75%;
+}
+
+.StickyNav {
+  background: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: bold;
+}

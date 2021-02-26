@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
+import { Card, Col, Container, Row, Form } from "react-bootstrap";
 import {
   faUserCircle,
   faRetweet,
