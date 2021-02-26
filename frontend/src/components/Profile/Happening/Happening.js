@@ -45,7 +45,7 @@ function Happening() {
       <Row>
         <span className="divider"></span>
         <Card.Body className="showHappening">
-      <Link to={'/suggestions'}>
+      <Link to={'/explore'}>
         <p >Show More</p>    
       </Link>
         </Card.Body>

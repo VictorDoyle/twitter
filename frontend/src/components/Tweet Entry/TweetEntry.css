@@ -15,3 +15,8 @@ div.col {
 div.card-body {
   padding-bottom: 0px;
 }
+
+.submitbutton {
+  margin-left: 75%;
+  bottom: 10%;
+}

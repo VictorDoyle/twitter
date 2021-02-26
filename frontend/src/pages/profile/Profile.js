@@ -23,6 +23,8 @@ import Recommendations from "../../components/Profile/RecommendFriends/Recommend
 import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
 import Happening from "../../components/Profile/Happening/Happening";
 import Header from "../../components/Profile/Header/Header";
+import Feed from "../../components/Profile/Feed/Feed";
+import FeedNav from "../../components/Profile/FeedNav/FeedNav";
 
 function Profile() {
   return (
@@ -38,8 +40,9 @@ function Profile() {
           <Header/>
 
           {/* profile subheader nav */}
-
+          <FeedNav />
           {/* profile feed */}
+          <Feed />
 
 
 

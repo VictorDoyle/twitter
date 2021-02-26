@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Modal from "../../components/Modal";
 import LandingPageLeft from "../../components/LandingPage/LandingPageLeft";
 import LandingPageRight from "../../components/LandingPage/LandingPageRight";
@@ -11,7 +10,7 @@ import { Container, Row } from "react-bootstrap";
 
 import "./LandingPage.css";
 
-const LandingPage = () => {
+const LandingPage = ({ history }) => {
   const [state, setState] = useState("");
   const [firstname, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,19 +18,31 @@ const LandingPage = () => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  // console.log(firstName);
+  console.log(month);
+  console.log(day);
+  console.log(birthYear);
+
+  useEffect(() => {
+    setDateOfBirth(month, day, birthYear);
+  }, [month, day, birthYear]);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
     e.preventDefault();
-    UserModel.create({ firstname: firstname, email: email });
     setShow(false);
     submitHandler();
   };
   const handleShow = () => setShow(true);
 
   const submitHandler = () => {
-    console.log("Hello for now");
+    console.log(dateOfBirth);
+    UserModel.create({
+      firstname: firstname,
+      email: email,
+      // ANCHOR This isnt working need to get it in a number format
+      dateOfBirth: dateOfBirth,
+    });
+    history.push("/login");
   };
 
   return (
