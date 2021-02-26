@@ -10,18 +10,45 @@ import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
 import StickyNav from "../../components/StickyNav/StickyNav";
 
-import "./Feed.css";
+import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 function Feed() {
   const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
+  const [isBottom, setIsBottom] = useState(false);
+  const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, false);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isBottom) {
+      addTweets();
+    }
+  }, [isBottom]);
+
+  function handleScroll() {
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+    const scrollHeight =
+      (document.documentElement && document.documentElement.scrollHeight) ||
+      document.body.scrollHeight;
+    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      setIsBottom(true);
+    }
+  }
+
   //TODO refactor for authorID = user.id
-  const submitHandler = () => {
+
+  /*   const submitHandler = () => {
     tweetModel.create({ description: description, authorId: user.id });
     submitHandler();
-  };
+  }; */
 
   const handleState = () => {
     console.log("handlestate");
@@ -30,15 +57,34 @@ function Feed() {
 
   useEffect(function () {
     fetchData();
+    setInitial();
   }, []);
 
+  const setInitial = () => {
+    setTweetsToDisplay(tweets.slice(0, 5));
+  };
   const fetchData = () => {
     tweetModel.all().then((data) => {
       setTweets(data.tweets);
     });
   };
 
-  let allTweets = tweets.map((tweet, index) => {
+  const addTweets = () => {
+    if (tweets.length !== 0) {
+      setTweetsToDisplay((prevState) => ({
+        page: prevState.page + 1,
+        tweetsToDisplay: prevState.tweetsToDisplay.concat(
+          tweets.slice(
+            (prevState.page + 1) * 30,
+            (prevState.page + 1) * 30 + 30
+          )
+        ),
+      }));
+      setIsBottom(false);
+    }
+  };
+
+  let allTweets = tweetsToDisplay.map((tweet, index) => {
     return (
       <>
         <Tweets {...tweet} key={tweet.id} />
@@ -60,7 +106,6 @@ function Feed() {
               <TweetEntryBefore handleState={handleState} />
             ) : (
               <TweetEntry
-                submitHandler={submitHandler}
                 description={(e) => setDescription(e.target.value)}
                 descriptionValue={description}
               />
