@@ -1,41 +1,129 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+/* base */
+import React, { useState, useEffect} from "react";
+import "./Recommendations.css";
+import { Link } from 'react-router-dom'
+/* vendor modules */
+import {Card, Col, Container, Row, Button } from "react-bootstrap";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Recommendations.css";
+/* models */
+import UserModel from "../../../models/user";
+/* loader */
+import RecommendationLoader from '../Loaders/RecommendationLoader';
 
 function Recommendations() {
+    const [ recommendations , setRecommendations] = useState([])
+
+    useEffect(function () {
+        fetchData();
+      }, []);
+    
+      const fetchData = () => {
+        UserModel.all().then((data) => {
+          setRecommendations(data.users);
+        });
+      };
+
+
   return (
-    <Container className="FollowContainer">
+    <Container className="recommendationContainer">
       <Row className="header">
         <h5>You Might Like</h5>
       </Row>
       <Row>
         <span className="divider"></span>
       </Row>
+      
       <Row>
-        <Col xs={3}>
+      
+        <Col xs={2}>
           <FontAwesomeIcon
             className="image-icon"
             icon={faUserCircle}
             size="3x"
           />
         </Col>
+       
         <Col>
+        
           <Card.Body>
-            <Card.Title className="userName">Elon Musk</Card.Title>
+            <Card.Title className="userName">Username Here</Card.Title>
             <Card.Subtitle className="mb-2 text-muted userName">
-              @ElonMusk 
+              @TwitterHandle 
             </Card.Subtitle>
           </Card.Body>
+
+          
+    
+          
+          
+
+
+
+
+          {/* TODO: Populate from User DB query */}
+       {/*  { recommendations ? recommendations.map((recommendation, index) => {
+    return (
+      <>
+
+        <Row>
+      <Col xs={1}>
+          <FontAwesomeIcon
+            className="image-icon"
+            icon={faUserCircle}
+            size="3x"
+          />
         </Col>
+
+      <Card.Body {...recommendation} key={user.id}>
+            <Card.Title className="userName">{user.firstname}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted userName">
+              {user.username}
+            </Card.Subtitle>
+          </Card.Body>
+  
+      </Row>
+
+      </>
+    );
+  }) : <RecommendationLoader/> } */}
+        </Col>
+
+     
+
+
+
+      </Row>
+
+      <Row>
+      <Col xs={2}>
+          <FontAwesomeIcon
+            className="image-icon"
+            icon={faUserCircle}
+            size="3x"
+          />
+        </Col>
+
+        <Card.Body>
+            <Card.Title className="userName">Username Here</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted userName">
+              @TwitterHandle 
+            </Card.Subtitle>
+          </Card.Body>
+  
       </Row>
       <Row>
         <span className="divider"></span>
       </Row>
+
+
+
+        <Card.Body className="showMoreUsers">
+      <Link to={'/suggestions'}>
+        <p >Show More</p>    
+      </Link>
+        </Card.Body>
+
     </Container>
   );
 }

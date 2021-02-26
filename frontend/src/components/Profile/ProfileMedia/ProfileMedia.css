@@ -1,0 +1,18 @@
+
+.mediaContainer {
+    margin: 0px 0px 0px 30px;
+    background-color: #eff1f2;
+    width: 35vh;
+    border-radius: 5%;
+}
+
+.imageContainer img {
+    min-width: 100%;
+    max-width: 100%;
+    padding-bottom: 3px;
+
+}
+
+.imageContainer {
+    margin: 1px 0px 0px 0px !important;
+}
