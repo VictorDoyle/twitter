@@ -13,7 +13,9 @@ import StickyNav from "../../components/StickyNav/StickyNav";
 import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
-function Feed() {
+
+function MainFeed() {
+
   const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
@@ -50,6 +52,7 @@ function Feed() {
     submitHandler();
   }; */
 
+
   const handleState = () => {
     console.log("handlestate");
     setInput(true);
@@ -57,17 +60,20 @@ function Feed() {
 
   useEffect(function () {
     fetchData();
+
     setInitial();
   }, []);
 
   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
   };
+
   const fetchData = () => {
     tweetModel.all().then((data) => {
       setTweets(data.tweets);
     });
   };
+
 
   const addTweets = () => {
     if (tweets.length !== 0) {
@@ -85,6 +91,7 @@ function Feed() {
   };
 
   let allTweets = tweetsToDisplay.map((tweet, index) => {
+
     return (
       <>
         <Tweets {...tweet} key={tweet.id} />
@@ -105,10 +112,12 @@ function Feed() {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
+
               <TweetEntry
                 description={(e) => setDescription(e.target.value)}
                 descriptionValue={description}
               />
+
             )}
             {tweets ? allTweets : <h1>No Tweets</h1>}
           </Col>
@@ -122,4 +131,6 @@ function Feed() {
   );
 }
 
-export default Feed;
+
+export default MainFeed;
+
