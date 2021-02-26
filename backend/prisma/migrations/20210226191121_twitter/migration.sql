@@ -7,7 +7,7 @@ CREATE TABLE "User" (
     "bio" TEXT,
     "email" TEXT NOT NULL,
     "password" TEXT,
-    "dateOfBirth" TIMESTAMP(3) NOT NULL,
+    "dateOfBirth" TIMESTAMP(3),
 
     PRIMARY KEY ("id")
 );
