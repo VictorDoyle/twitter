@@ -40,12 +40,12 @@ function Header () {
 
 
     <p className="mb-2 text-muted">
-        <Link to={'/following'} className="followLinks">
+        <Link to={'/following'} className="followLinks text-muted">
         <b> 219 </b> Following
         </Link>
-        <Link to={'/followers'} className="followLinks">
+        <Link to={'/followers'} className="followLinks text-muted">
         <b> 59 </b>Followers
-        </Link>
+        </Link> 
     
     
     </p>
