@@ -35,6 +35,7 @@ function WhoToFollow() {
       </Row>
       <Row>
         <span className="divider"></span>
+        
       </Row>
     </Container>
   );

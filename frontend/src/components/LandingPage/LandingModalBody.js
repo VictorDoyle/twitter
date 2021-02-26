@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Form } from "react-bootstrap";
 //TODO Really should get a npm package for date or ask about making dates in javascript
 const LandingModalBody = ({
   submitHandler,
-  firstname,
+  firstName,
+  firstNameValue,
   email,
+  emailValue,
   day,
   month,
   birthYear,
 }) => {
+  // const [firstName, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [dateOfBirth, setDateOfBirth] = useState("");
+  // const [day, setDay] = useState("");
+  // const [month, setMonth] = useState("");
+  // const [birthYear, setBirthYear] = useState("");
   const months = [
     "january",
     "february",
@@ -37,9 +45,15 @@ const LandingModalBody = ({
         <Form.Control
           type="firstname"
           placeholder="Name"
-          onChange={firstname}
+          value={firstNameValue}
+          onChange={firstName}
         />
-        <Form.Control type="email" placeholder="Email" onChange={email} />
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          value={emailValue}
+          onChange={email}
+        />
         <p>Maybe Email?</p>
         <h6>Date of birth</h6>
         <Form.Row>
