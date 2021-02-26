@@ -14,11 +14,13 @@ import "./Feed.css";
 import React, { useState, useEffect } from "react";
 
 function Feed() {
+  const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
-
+  //TODO refactor for authorID = user.id
   const submitHandler = () => {
-    console.log("Hello for now");
+    tweetModel.create({ description: description, authorId: user.id });
+    submitHandler();
   };
 
   const handleState = () => {
@@ -57,7 +59,11 @@ function Feed() {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-              <TweetEntry submitHandler={submitHandler} />
+              <TweetEntry
+                submitHandler={submitHandler}
+                description={(e) => setDescription(e.target.value)}
+                descriptionValue={description}
+              />
             )}
             {tweets ? allTweets : <h1>No Tweets</h1>}
           </Col>
