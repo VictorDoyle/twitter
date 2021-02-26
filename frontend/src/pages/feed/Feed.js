@@ -8,6 +8,7 @@ import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
+import StickyNav from "../../components/StickyNav/StickyNav";
 
 import "./Feed.css";
 import React, { useState, useEffect } from "react";
@@ -52,6 +53,7 @@ function Feed() {
             <NavBar />
           </Col>
           <Col md={6}>
+            <StickyNav />
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
