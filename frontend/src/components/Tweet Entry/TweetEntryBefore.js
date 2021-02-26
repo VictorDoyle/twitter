@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faShareSquare, faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./TweetEntry.css";
+import "./TweetEntryBefore.css";
 
 function TweetEntryBefore({ handleState }) {
   return (
@@ -21,7 +21,7 @@ function TweetEntryBefore({ handleState }) {
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon
-              className="image-icon"
+              className="image-icon image"
               icon={faUserCircle}
               size="4x"
             />
