@@ -1,6 +1,7 @@
 /* base */
 import React, { useState } from "react";
 import "./Happening.css";
+import { Link } from 'react-router-dom';
 /* vendor modules */
 import { Card, Col, Container, Row} from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
@@ -43,6 +44,11 @@ function Happening() {
       </Row>
       <Row>
         <span className="divider"></span>
+        <Card.Body className="showHappening">
+      <Link to={'/suggestions'}>
+        <p >Show More</p>    
+      </Link>
+        </Card.Body>
       </Row>
       </div>
     </Container>
