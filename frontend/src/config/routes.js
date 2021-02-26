@@ -5,7 +5,6 @@ import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import Profile from "../pages/profile/Profile";
 
-
 const Routes = () => {
   return (
     <Switch>
@@ -15,8 +14,8 @@ const Routes = () => {
       {/* main pages */}
       <Route exact path="/feed" component={MainFeed} />
 
-    {/*   <Route path="/explore" component={Explore} /> */}
-    <Route path="/profile" component={ Profile } />
+      {/*   <Route path="/explore" component={Explore} /> */}
+      <Route path="/profile" component={Profile} />
       {/* 404 ROUTE */}
       {/* <Route component={NotFound} /> */}
     </Switch>

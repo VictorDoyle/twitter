@@ -11,25 +11,19 @@ const LandingModalBody = ({
   month,
   birthYear,
 }) => {
-  // const [firstName, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [dateOfBirth, setDateOfBirth] = useState("");
-  // const [day, setDay] = useState("");
-  // const [month, setMonth] = useState("");
-  // const [birthYear, setBirthYear] = useState("");
   const months = [
-    "january",
-    "february",
-    "march",
-    "april",
-    "may",
-    "june",
-    "july",
-    "august",
-    "september",
-    "october",
-    "november",
-    "december",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const year = new Date().getFullYear();
@@ -42,25 +36,29 @@ const LandingModalBody = ({
     <>
       <h3>Create your account</h3>
       <Form onSubmit={submitHandler}>
-        <Form.Control
-          type="firstname"
-          placeholder="Name"
-          value={firstNameValue}
-          onChange={firstName}
-        />
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          value={emailValue}
-          onChange={email}
-        />
+        <Form.Group controlId="name">
+          <Form.Control
+            type="firstname"
+            placeholder="Name"
+            value={firstNameValue}
+            onChange={firstName}
+          />
+        </Form.Group>
+        <Form.Group controlId="email">
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={emailValue}
+            onChange={email}
+          />
+        </Form.Group>
         <p>Maybe Email?</p>
         <h6>Date of birth</h6>
         <Form.Row>
           <Col xs={6}>
             <Form.Control as="select" type="month" onChange={month}>
               {months.map((x, i) => (
-                <option key={`x${i}`} value={x}>
+                <option key={`x${i}`} value={i + 1}>
                   {x}
                 </option>
               ))}

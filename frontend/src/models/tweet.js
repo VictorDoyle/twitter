@@ -24,15 +24,12 @@ class tweetModel {
   };
 
   static create = (data) => {
-    return axios
-      .post(`${url}`, {
-        // options
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-      .then((res) => res.data);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    return axios.post(url, data, config);
   };
 
   static delete = (id) => {
