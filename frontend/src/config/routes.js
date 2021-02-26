@@ -1,10 +1,10 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Feed from "../pages/feed/Feed";
+import Feed from "../pages/feed/MainFeed";
 import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import Profile from "../pages/profile/Profile";
-
+import CommentShow from "../pages/commentShow/CommentShow";
 
 const Routes = () => {
   return (
@@ -14,9 +14,10 @@ const Routes = () => {
       <Route path="/login" component={LoginPage} />
       {/* main pages */}
       <Route exact path="/feed" component={Feed} />
+      <Route path="/profile/tweet/:id" component={CommentShow} />
 
-    {/*   <Route path="/explore" component={Explore} /> */}
-    <Route path="/profile" component={ Profile } />
+      {/*   <Route path="/explore" component={Explore} /> */}
+      <Route path="/profile" component={Profile} />
       {/* 404 ROUTE */}
       {/* <Route component={NotFound} /> */}
     </Switch>
