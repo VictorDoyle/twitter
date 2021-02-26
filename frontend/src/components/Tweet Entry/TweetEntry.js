@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Col, Container, Row, Form } from "react-bootstrap";
+import { Card, Col, Container, Row, Form, Button } from "react-bootstrap";
 import {
   faUserCircle,
   faRetweet,
@@ -16,7 +16,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TweetEntry.css";
 
-function TweetEntry({ submitHandler }) {
+function TweetEntry({ submitHandler, description, descriptionValue }) {
   return (
     <Form onSubmit={submitHandler}>
       <Card>
@@ -35,8 +35,11 @@ function TweetEntry({ submitHandler }) {
                   <Form.Label></Form.Label>
                   <Form.Control
                     as="textarea"
+                    type="description"
                     rows={2.5}
                     placeholder="What's Happening?"
+                    value={descriptionValue}
+                    onChange={description}
                   />
                 </Form.Group>
               </Card.Body>
@@ -86,6 +89,9 @@ function TweetEntry({ submitHandler }) {
               </Col>
             </Col>
           </Row>
+          <Button variant="primary" type="submit">
+            Primary
+          </Button>{" "}
         </Container>
       </Card>
     </Form>
