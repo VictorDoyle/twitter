@@ -1,3 +1,14 @@
-.userName {
-    padding-left: 1px;
+.showMoreUsers {
+    padding: 1px 1px 1px 1px !important;
+}
+
+.showMoreUsers a {
+   text-decoration: none;
+}
+
+.recommendationContainer {
+    margin: 20px 0px 0px 30px;
+    background-color: #eff1f2;
+    width: 35vh;
+    border-radius: 5%;
 }

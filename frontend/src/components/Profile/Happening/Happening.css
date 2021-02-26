@@ -1,0 +1,15 @@
+.happeningContainer {
+    margin: 20px 0px 0px 30px;
+    background-color: #eff1f2;
+    width: 35vh;
+    border-radius: 5%;
+}
+
+.eventDetail {
+    font-size: 13px;
+    margin: 0px 0px 0px 0px !important;
+}
+
+.eventTweetNum {
+    margin: 0px 0px 10px 0px !important;
+}

@@ -20,6 +20,8 @@ import Tweets from "../../components/Tweets/Tweets";
 import "./Profile.css";
 import React, { useState } from "react";
 import Recommendations from "../../components/Profile/RecommendFriends/Recommendations";
+import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
+import Happening from "../../components/Profile/Happening/Happening";
 
 function Profile() {
   return (
@@ -46,13 +48,13 @@ function Profile() {
             <Card.Body>
               <Card.Title className="username">Elon Musk</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {/* {props.tweet.author} */}
+                {/* {props.author} */}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
               <Card.Text className="text-left">
-                {/* {props.tweet.description} */}
+                {/* {props.description} */}
               </Card.Text>
             </Card.Body>
             <Row>
@@ -63,9 +65,9 @@ function Profile() {
                     icon={faComment}
                     size="1x"
                   />
-                  {/* TODO Comment counter */}
+                  
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    7
+                    7 
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
@@ -76,7 +78,7 @@ function Profile() {
                     icon={faRetweet}
                     size="1x"
                   />
-                  {/* TODO Retweet Counter */}
+                  
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
                     3
                   </Card.Subtitle>
@@ -107,9 +109,12 @@ function Profile() {
     </Card>
           </Col>
           <Col>
+          {/* SECTION: media box */}
+            <ProfileMedia />
           {/* Recommended Follows */}
-            <WhatsHappening />
             <Recommendations />
+            {/* What's Happening Section */}
+            <Happening />
           </Col>
         </Row>
       </Container>
