@@ -14,6 +14,7 @@ import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 
+
 function MainFeed() {
 
   const [description, setDescription] = useState("");
@@ -68,6 +69,7 @@ function MainFeed() {
     setTweetsToDisplay(tweets.slice(0, 5));
   };
 
+
   const fetchData = () => {
     tweetModel.all().then((data) => {
       setTweets(data.tweets);
@@ -92,6 +94,7 @@ function MainFeed() {
 
   let allTweets = tweetsToDisplay.map((tweet, index) => {
 
+
     return (
       <>
         <Tweets {...tweet} key={tweet.id} />
@@ -113,10 +116,12 @@ function MainFeed() {
               <TweetEntryBefore handleState={handleState} />
             ) : (
 
+
               <TweetEntry
                 description={(e) => setDescription(e.target.value)}
                 descriptionValue={description}
               />
+
 
             )}
             {tweets ? allTweets : <h1>No Tweets</h1>}
@@ -133,4 +138,5 @@ function MainFeed() {
 
 
 export default MainFeed;
+
 
