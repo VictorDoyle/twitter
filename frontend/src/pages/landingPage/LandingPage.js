@@ -11,7 +11,7 @@ import { Container, Row } from "react-bootstrap";
 
 import "./LandingPage.css";
 
-const LandingPage = () => {
+const LandingPage = ({ history }) => {
   const [state, setState] = useState("");
   const [firstname, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +27,7 @@ const LandingPage = () => {
     UserModel.create({ firstname: firstname, email: email });
     setShow(false);
     submitHandler();
+    history.push("/login");
   };
   const handleShow = () => setShow(true);
 
