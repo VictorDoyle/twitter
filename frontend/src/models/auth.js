@@ -14,14 +14,12 @@ class AuthModel {
   };
 
   static login = (data) => {
-    console.log(data);
-    return fetch(`${url}/login`, {
-      method: "POST",
+    const config = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
-    }).then((response) => response.json());
+    };
+    return axios.post(`${url}/login`, data, config).then((res) => res.data);
   };
 
   static verify = () => {
