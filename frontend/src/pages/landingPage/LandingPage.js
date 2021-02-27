@@ -11,10 +11,8 @@ import { Container, Row } from "react-bootstrap";
 import "./LandingPage.css";
 
 const LandingPage = ({ history }) => {
-  const [state, setState] = useState("");
   const [firstname, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [day, setDay] = useState("");
@@ -22,15 +20,7 @@ const LandingPage = ({ history }) => {
   const [birthYear, setBirthYear] = useState("");
 
   useEffect(() => {
-    const options1 = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    };
     let date = new Date(Date.UTC(birthYear, month - 1, day, 14, 0, 0));
-    // const dateTimeFormat = new Intl.DateTimeFormat("en-US", options1).format(
-    //   date,
-    // );
     setDateOfBirth(date);
   }, [month, day, birthYear]);
   console.log(dateOfBirth);
@@ -48,7 +38,6 @@ const LandingPage = ({ history }) => {
       firstname: firstname,
       email: email,
       password: password,
-      // ANCHOR This isnt working need to get it in a number format
       dateOfBirth: dateOfBirth,
     });
     history.push("/login");
