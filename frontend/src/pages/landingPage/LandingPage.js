@@ -13,18 +13,17 @@ import "./LandingPage.css";
 const LandingPage = ({ history }) => {
   const [state, setState] = useState("");
   const [firstname, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  console.log(month);
-  console.log(day);
-  console.log(birthYear);
 
-  useEffect(() => {
-    setDateOfBirth(month, day, birthYear);
-  }, [month, day, birthYear]);
+  // useEffect(() => {
+  //   setDateOfBirth(month, day, birthYear);
+  // }, [month, day, birthYear]);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
@@ -35,12 +34,12 @@ const LandingPage = ({ history }) => {
   const handleShow = () => setShow(true);
 
   const submitHandler = () => {
-    console.log(dateOfBirth);
     UserModel.create({
       firstname: firstname,
       email: email,
+      password: password,
       // ANCHOR This isnt working need to get it in a number format
-      dateOfBirth: dateOfBirth,
+      // dateOfBirth: dateOfBirth,
     });
     history.push("/login");
   };
@@ -68,12 +67,11 @@ const LandingPage = ({ history }) => {
           <ModalBody
             submitHandler={submitHandler}
             firstName={(e) => setName(e.target.value)}
-            firstNameValue={firstname}
             email={(e) => setEmail(e.target.value)}
-            emailValue={email}
             day={(e) => setDay(e.target.value)}
             month={(e) => setMonth(e.target.value)}
             birthYear={(e) => setBirthYear(e.target.value)}
+            password={(e) => setPassword(e.target.value)}
           />
         }
         footer=""

@@ -19,7 +19,7 @@ function Feed() {
   const [tweets, setTweets] = useState([]);
   //TODO refactor for authorID = user.id
   const submitHandler = () => {
-    tweetModel.create({ description: description, authorId: user.id });
+    // tweetModel.create({ description: description, authorId: user.id });
     submitHandler();
   };
 
