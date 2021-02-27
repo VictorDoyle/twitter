@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import cors from "cors";
 import prisma from "@prisma/client";
-import jwt from "jsonwebtoken";
+import generateToken from "../utils/generateToken.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -48,52 +48,32 @@ const register = async (request, response) => {
 };
 
 // POST Login Route
+/**
+ * @desc AUTH USER & TOKEN
+ * @route POST API/LOGIN
+ * @access PUBLIC
+ */
 const login = async (request, response) => {
+  const { email, password } = request.body;
   try {
     const foundUser = await db.user.findUnique({
-      where: { email: request.body.email },
+      where: { email },
     });
+    const isMatch = await bcrypt.compare(password, foundUser.password);
 
-    console.log(foundUser);
-
-    if (!foundUser) {
+    if (!foundUser || !isMatch) {
       return response.json({ message: "Email or Password incorrect" });
     }
-
-    const match = await bcrypt.compare(
-      request.body.password,
-      foundUser.password,
-    );
-
-    if (!match) {
-      return response.json({ message: "Email or Password incorrect" });
-    }
-
-    const isMatch = await bcrypt.compare(
-      request.body.password,
-      foundUser.password,
-    );
 
     if (isMatch) {
-      //TODO create a json web token
-      const signedJwt = await jwt.sign(
-        {
-          id: foundUser.id,
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "1d",
-        },
-      );
-
-      return response.status(200).json({
+      response.status(200).json({
         status: 200,
         message: "Success",
         user: foundUser,
         username: foundUser.username,
         profile: foundUser.profile,
         id: foundUser.id,
-        signedJwt,
+        token: generateToken(foundUser.id),
       });
     } else {
       return response.status(400).json({
