@@ -6,7 +6,6 @@ dotenv.config();
 
 const protect = async (req, res, next) => {
   let token;
-  // console.log(req.headers);
   console.log(req.body);
   if (
     req.headers.authorization &&

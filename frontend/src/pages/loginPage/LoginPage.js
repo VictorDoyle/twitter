@@ -15,12 +15,8 @@ const LoginPage = ({ history }) => {
       console.log(email, password);
       localStorage.setItem("uid", json.token);
       if (json.status === 200) {
-        // AuthModel.verify().then((data) => {
         setUser(json);
-        // OrderModel.getMyOrder().then((json) => {
-        //   setCartOrder(json);
         history.push("/feed");
-        // });
       } else {
         history.push("/");
       }

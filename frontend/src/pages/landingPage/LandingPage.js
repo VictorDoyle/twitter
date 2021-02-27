@@ -21,9 +21,19 @@ const LandingPage = ({ history }) => {
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
 
-  // useEffect(() => {
-  //   setDateOfBirth(month, day, birthYear);
-  // }, [month, day, birthYear]);
+  useEffect(() => {
+    const options1 = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    };
+    let date = new Date(Date.UTC(birthYear, month, day));
+    // const dateTimeFormat = new Intl.DateTimeFormat("en-US", options1).format(
+    //   date,
+    // );
+    setDateOfBirth(date);
+  }, [month, day, birthYear]);
+  console.log(dateOfBirth);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
@@ -39,7 +49,7 @@ const LandingPage = ({ history }) => {
       email: email,
       password: password,
       // ANCHOR This isnt working need to get it in a number format
-      // dateOfBirth: dateOfBirth,
+      dateOfBirth: dateOfBirth,
     });
     history.push("/login");
   };
