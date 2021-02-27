@@ -27,7 +27,7 @@ const LandingPage = ({ history }) => {
       month: "numeric",
       day: "numeric",
     };
-    let date = new Date(Date.UTC(birthYear, month, day));
+    let date = new Date(Date.UTC(birthYear, month - 1, day, 14, 0, 0));
     // const dateTimeFormat = new Intl.DateTimeFormat("en-US", options1).format(
     //   date,
     // );
