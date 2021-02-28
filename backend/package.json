@@ -6,6 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "nodemon run server.js",
+    "server": "nodemon run server.js",
+    "client": "npm start --prefix ../frontend",
+    "dev": "concurrently \"npm run server \" \"npm run client \"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -10,6 +10,8 @@ const LandingModalBody = ({
   day,
   month,
   birthYear,
+  password,
+  passwordValue,
 }) => {
   const months = [
     "January",
@@ -50,6 +52,14 @@ const LandingModalBody = ({
             placeholder="Email"
             value={emailValue}
             onChange={email}
+          />
+        </Form.Group>
+        <Form.Group controlId="password">
+          <Form.Control
+            type="password"
+            placeholder="password"
+            value={passwordValue}
+            onChange={password}
           />
         </Form.Group>
         <p>Maybe Email?</p>
