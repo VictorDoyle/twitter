@@ -14,6 +14,7 @@ const LoginPage = ({ history }) => {
     AuthModel.login({ email, password }).then((json) => {
       localStorage.setItem("uid", json.token);
       if (json.status === 200) {
+        console.log(json)
         setUser(json);
         history.push("/feed");
       } else {

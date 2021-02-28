@@ -20,7 +20,9 @@ const LandingPage = ({ history }) => {
   const [birthYear, setBirthYear] = useState("");
 
   useEffect(() => {
-    let date = new Date(Date.UTC(birthYear, month - 1, day, 14, 0, 0));
+    /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
+    /* FIXME: PST -- Date.UTC(birthYear, month, day, 19, 0, 0)) */
+    let date = new Date(Date.UTC(birthYear, month, day, 19, 0, 0));
     setDateOfBirth(date);
   }, [month, day, birthYear]);
   // ANCHOR
