@@ -23,6 +23,7 @@ const LandingPage = ({ history }) => {
     let date = new Date(Date.UTC(birthYear, month - 1, day, 14, 0, 0));
     setDateOfBirth(date);
   }, [month, day, birthYear]);
+  // ANCHOR
   console.log(dateOfBirth);
 
   const [show, setShow] = useState(false);

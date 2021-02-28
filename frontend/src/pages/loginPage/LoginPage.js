@@ -12,7 +12,6 @@ const LoginPage = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     AuthModel.login({ email, password }).then((json) => {
-      console.log(email, password);
       localStorage.setItem("uid", json.token);
       if (json.status === 200) {
         setUser(json);
