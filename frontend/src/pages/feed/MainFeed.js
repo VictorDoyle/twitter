@@ -1,3 +1,5 @@
+import { userState } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
 import NavBar from "../../components/NavBar/NavBar";
 import Tweets from "../../components/Tweets/Tweets";
 import Col from "react-bootstrap/Col";
@@ -15,6 +17,9 @@ import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 function MainFeed() {
+
+  const user = useRecoilState(userState);
+
   const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
@@ -47,10 +52,14 @@ function MainFeed() {
 
   //TODO refactor for authorID = user.id
 
+
   /*   const submitHandler = () => {
     tweetModel.create({ description: description, authorId: user.id });
     submitHandler();
   }; */
+
+
+
 
   const handleState = () => {
     console.log("handlestate");
@@ -63,7 +72,9 @@ function MainFeed() {
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
+
   }; */
+
 
   const fetchData = () => {
     tweetModel.all().then((data) => {
@@ -78,8 +89,8 @@ function MainFeed() {
         tweetsToDisplay: prevState.tweetsToDisplay.concat(
           tweets.slice(
             (prevState.page + 1) * 30,
-            (prevState.page + 1) * 30 + 30
-          )
+            (prevState.page + 1) * 30 + 30,
+          ),
         ),
       }));
       setIsBottom(false);
@@ -108,6 +119,7 @@ function MainFeed() {
               <TweetEntryBefore handleState={handleState} />
             ) : (
               <TweetEntry
+                submitHandler={submitHandler}
                 description={(e) => setDescription(e.target.value)}
                 descriptionValue={description}
               />
