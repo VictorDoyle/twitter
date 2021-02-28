@@ -11,7 +11,7 @@ class UserModel {
           authorization: `Bearer ${localStorage.uid}`,
         },
       })
-      .then((res) => res.json());
+      .then((res) => res.data());
   };
 
   // accessed current user via Id+login

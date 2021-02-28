@@ -13,7 +13,7 @@ const db = new prisma.PrismaClient({
 router.get("/", async function (request, response) {
   const users = await db.user.findMany({
     include: {
-      username: true,
+      /* username: true, */
       tweets: {
         select: {
           description: true,

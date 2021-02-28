@@ -61,9 +61,12 @@ function MainFeed() {
 
   useEffect(function () {
     fetchData();
-
-    setInitial();
   }, []);
+
+  useEffect(function () {
+    console.log("hello")
+    setInitial();
+  }, [tweets]);
 
   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
@@ -125,6 +128,7 @@ function MainFeed() {
 
             )}
             {tweets ? allTweets : <h1>No Tweets</h1>}
+            
           </Col>
           <Col>
             <WhatsHappening />
