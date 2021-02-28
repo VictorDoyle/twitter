@@ -42,7 +42,7 @@ class UserModel {
         "Content-Type": "application/json",
       },
     };
-    return axios.post(url, data, config);
+    return axios.post(`http://localhost:4000/api/register`, data, config);
   };
 
   // update-Edit user

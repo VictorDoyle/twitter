@@ -11,20 +11,20 @@ import { Container, Row } from "react-bootstrap";
 import "./LandingPage.css";
 
 const LandingPage = ({ history }) => {
-  const [state, setState] = useState("");
   const [firstname, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  console.log(month);
-  console.log(day);
-  console.log(birthYear);
 
   useEffect(() => {
-    setDateOfBirth(month, day, birthYear);
+    let date = new Date(Date.UTC(birthYear, month - 1, day, 14, 0, 0));
+    setDateOfBirth(date);
   }, [month, day, birthYear]);
+  // ANCHOR
+  console.log(dateOfBirth);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
@@ -35,11 +35,10 @@ const LandingPage = ({ history }) => {
   const handleShow = () => setShow(true);
 
   const submitHandler = () => {
-    console.log(dateOfBirth);
     UserModel.create({
       firstname: firstname,
       email: email,
-      // ANCHOR This isnt working need to get it in a number format
+      password: password,
       dateOfBirth: dateOfBirth,
     });
     history.push("/login");
@@ -68,12 +67,11 @@ const LandingPage = ({ history }) => {
           <ModalBody
             submitHandler={submitHandler}
             firstName={(e) => setName(e.target.value)}
-            firstNameValue={firstname}
             email={(e) => setEmail(e.target.value)}
-            emailValue={email}
             day={(e) => setDay(e.target.value)}
             month={(e) => setMonth(e.target.value)}
             birthYear={(e) => setBirthYear(e.target.value)}
+            password={(e) => setPassword(e.target.value)}
           />
         }
         footer=""
