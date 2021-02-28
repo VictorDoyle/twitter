@@ -47,7 +47,7 @@ function MainFeed() {
   }
 
   //TODO refactor for authorID = user.id
-
+  console.log(user);
   const submitHandler = () => {
     // currently pulling in more information so this is what is needed for id
     tweetModel.create({ description: description, authorId: user[0].id });
