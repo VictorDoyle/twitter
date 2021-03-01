@@ -14,6 +14,8 @@ const LoginPage = ({ history }) => {
     AuthModel.login({ email, password }).then((json) => {
       localStorage.setItem("uid", json.token);
       if (json.status === 200) {
+        // FIXME may need selector to get just user
+        console.log(json.user, "login");
         setUser(json);
         history.push("/feed");
       } else {
