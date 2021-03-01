@@ -18,7 +18,32 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./NavBar.css";
 
-const NavBarItem = ({ icon, route, name }) => {
+function NavBar() {
+  return (
+    <Container className="navbar-body">
+      <Nav.Link id="twitter" eventKey="link-1">
+        <Row>
+          <Col xs={5}>
+            <FontAwesomeIcon icon={faTwitter} size="2x" />
+          </Col>
+        </Row>
+      </Nav.Link>
+      <NavBarItem icon={faHome} route="/" name="Home" />
+      <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
+      <NavBarItem icon={faSearch} route="/" name="Search" />
+      <NavBarItem icon={faBell} route="/" name="Notifications" />
+      <NavBarItem icon={faEnvelope} route="/" name="Messages" />
+      <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
+      <NavBarItem icon={faListUl} route="/" name="Lists" />
+      <NavBarItem icon={faAt} route="/" name="Connect" />
+      <NavBarItem icon={faUser} route="/profile" name="Profile" />
+    </Container>
+  );
+}
+
+export default NavBar;
+// Recycled component
+export const NavBarItem = ({ icon, route, name }) => {
   return (
     <LinkContainer to={route}>
       <Nav.Link className="link" eventKey="link-2">
@@ -34,29 +59,3 @@ const NavBarItem = ({ icon, route, name }) => {
     </LinkContainer>
   );
 };
-
-function NavBar() {
-  return (
-    <Container className="navbar-body">
-      <Nav.Link id="twitter" eventKey="link-1">
-        <Row>
-          <Col xs={5}>
-            <FontAwesomeIcon icon={faTwitter} size="2x" />
-          </Col>
-          <Col></Col>
-        </Row>
-      </Nav.Link>
-      <NavBarItem icon={faHome} route="/" name="Home" />
-      <NavBarItem icon={faHashtag} route="/" name="Explore" />
-      <NavBarItem icon={faSearch} route="/" name="Search" />
-      <NavBarItem icon={faBell} route="/" name="Notifications" />
-      <NavBarItem icon={faEnvelope} route="/" name="Messages" />
-      <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
-      <NavBarItem icon={faListUl} route="/" name="Lists" />
-      <NavBarItem icon={faAt} route="/" name="Connect" />
-      <NavBarItem icon={faUser} route="/profile" name="Profile" />
-    </Container>
-  );
-}
-
-export default NavBar;
