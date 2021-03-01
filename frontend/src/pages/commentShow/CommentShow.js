@@ -12,23 +12,25 @@ import StickyNav from "../../components/StickyNav/StickyNav";
 
 import React, { useState, useEffect } from "react";
 
-function CommentShow() {
+function CommentShow({ match }) {
   const [comments, setComments] = useState([]);
   const [tweet, setTweet] = useState([]);
 
   useEffect(function () {
     fetchData();
+    fetchTweet();
   }, []);
 
   const fetchData = () => {
     CommentModel.all().then((data) => {
       setComments(data.comments);
     });
-    tweetModel.showTweet().then((data) => {
+  };
+  const fetchTweet = () => {
+    tweetModel.showTweet(match.params.id).then((data) => {
       setTweet(data.tweet);
     });
   };
-
   let allComments = comments.map((comment, index) => {
     return (
       <>
@@ -37,7 +39,7 @@ function CommentShow() {
     );
   });
   console.log(comments);
-
+  console.log(tweet);
   return (
     <div className="Feed" id="feed-page">
       <Container>
@@ -47,7 +49,8 @@ function CommentShow() {
           </Col>
           <Col md={6}>
             <StickyNav />
-            <TweetShow />
+            {/* <TweetShow tweet={tweet} /> */}
+            {tweet.author ? <TweetShow tweet={tweet} /> : <h1>Loading</h1>}
             {comments ? allComments : <h1>No Comments</h1>}
           </Col>
           <Col>

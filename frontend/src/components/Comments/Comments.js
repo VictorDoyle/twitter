@@ -25,14 +25,17 @@ function Comments(props) {
           </Col>
           <Col>
             <Card.Body>
-              <Card.Title className="username">Elon Musk</Card.Title>
+              <Card.Title className="username">
+                {props.author.firstname}
+                {props.author.lastname}
+              </Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 {props.author.username}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
-              <Card.Text className="text-left">{props.description}</Card.Text>
+              <Card.Text className="text-left">{props.content}</Card.Text>
             </Card.Body>
             <Row>
               <Col>
@@ -44,7 +47,7 @@ function Comments(props) {
                   />
                   {/* TODO Comment counter */}
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {props.comments.length}
+                    {props.length}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
