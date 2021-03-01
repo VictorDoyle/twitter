@@ -24,7 +24,7 @@ function Feed  (props) {
     let allTweets = props.tweets.map((tweet, index) =>{
 
       return <>
-        <TweetCard {...tweet} key={ tweet.id } />
+        <TweetCard {...tweet} key={ tweet.id } user = {props.user}/>
               
       </>
     })

@@ -45,17 +45,19 @@ function TweetCard (props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [description, setComment] = useState("");
+    const [content, setComment] = useState("");
     
     /* submit comment to tweets  via profile*/
     function submitComment(event) {
         event.preventDefault();
-        CommentModel.create({ description, tweetId:props.id}).then(json => {
+        CommentModel.create({ content: content, authorId: props.user[0].id, tweetId:props.id}).then(json => {
           if (json.status === 201) {
             console.log(json, "user commented"); 
           }
         });
       }
+
+     
     
 
     
@@ -100,9 +102,15 @@ function TweetCard (props) {
                     <Modal.Header closeButton className="closeModalButton">
                     </Modal.Header>
                         <span className="dividerModal"></span>
-                        
                         <Card.Body>
+                            
+                        <FontAwesomeIcon
+                        className="image-icon"
+                        icon={faUserCircle}
+                        size="2x"
+                            />
                       <Card.Title className="username">{props.author.firstname}</Card.Title>
+                      
                       <Card.Subtitle className="tweet-title mb-2 text-muted">
                         @{props.author.username}
                       </Card.Subtitle>
@@ -114,8 +122,11 @@ function TweetCard (props) {
                     <Modal.Body className="tweet-title text-muted"> Commenting on @{props.author.firstname}'s Tweet </Modal.Body>
                    
                     <Modal.Body> 
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Control as="textarea" value = { description } onChange={(e) => setComment(e.target.value)}  placeholder="Add Another Tweet " rows={3} />
+                    <Form.Group controlId="exampleForm.ControlTextarea1" >
+                        
+                            
+                       
+                        <Form.Control as="textarea" value = { content } onChange={(e) => setComment(e.target.value)}  placeholder="Add Another Tweet " rows={3} />
                     </Form.Group>
                         
                         
@@ -123,7 +134,7 @@ function TweetCard (props) {
                     </Modal.Body>
                     <Modal.Footer>
                     {/* TODO: if Form.Input === empty show button style 1 else if Form.Input !=== empty show style 2 */}
-                    <Button variant="primary" className="tweetButton" onClick={handleClose , submitComment } >
+                    <Button variant="primary" className="tweetButton" onClick={(event) => {handleClose(); submitComment(event)}} >
                         Tweet
                     </Button>
                     </Modal.Footer>
