@@ -12,32 +12,49 @@ router.get("/", async function (request, response) {
   const likes = await db.like.findMany({
     include: {
       author: true,
-      tweetId: true,
     },
   });
+  console.log(likes)
   response.json({ likes });
 });
 
 /* Single Like by ID */
-router.get("/:id", async function (request, response) {
+/* router.get("/:id", async function (request, response) {
   console.log(request)
   const like = await db.like.findUnique({
     where: {
       id: Number(request.params.id),
     },
     include: {
-      tweets: {
-        select: {
-          description: true,
           author: true,
-          createdAt: true,
-        },
-      },
+          tweet: true,
     },
   });
 
   response.json({ like });
+}); */
+
+
+/* Likes by Author on profile*/
+router.get("/:authorId", async function (request,response){
+  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId)
+  const likesByAuthor = await db.like.findMany({
+      select: {
+          author: true,
+          createdAt: true,
+          /* tweet id */
+          id: true,
+      },
+      where: {
+              // request the data from user query
+              authorId: Number(request.params.authorId)
+              
+          
+      }
+  });
+  response.json({ likesByAuthor });
 });
+
 
 /* Create */
 

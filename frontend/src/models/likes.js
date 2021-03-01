@@ -14,7 +14,7 @@ class likeModel {
       .then((res) => res.data);
   };
 /* show likes */
-  static showLike = (id) => {
+/*   static showLike = (id) => {
     return axios
     .get(`${url}/${id}`, {
       headers: {
@@ -22,12 +22,12 @@ class likeModel {
       },
     })
     .then((res) => res.data);
-  };
+  }; */
 
    // access all posts by by specifc user
   static showByAuthor = (authorId) => {
     return axios
-    .get(`${url}/profile/${authorId}`, {
+    .get(`${url}/${authorId}`, {
       headers: {
         authorization: `Bearer ${localStorage.uid}`
       }
