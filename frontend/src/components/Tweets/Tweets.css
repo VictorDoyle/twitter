@@ -9,3 +9,9 @@
 .image-icon {
   margin-top: 20px;
 }
+
+.elips {
+  display: inline;
+  text-align: right !important;
+  width: 25px;
+}
