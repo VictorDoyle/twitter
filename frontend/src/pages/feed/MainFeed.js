@@ -12,13 +12,13 @@ import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
 import StickyNav from "../../components/StickyNav/StickyNav";
 import Infinite from "../../components/Infinite/Infinite";
+import AuthModel from "../../models/auth";
 
 import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 function MainFeed() {
-  const user = useRecoilState(userState);
-
+  const [user, setUser] = useRecoilState(userState);
   const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
@@ -51,7 +51,9 @@ function MainFeed() {
 
   //TODO refactor for authorID = user.id
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
     tweetModel.create({ description: description, authorId: user[0].id });
   };
@@ -61,9 +63,24 @@ function MainFeed() {
     setInput(true);
   };
 
-  useEffect(function () {
-    fetchData();
-  }, []);
+  useEffect(
+    function () {
+      fetchData();
+      if (!user) {
+        // takes user from storage and sets global again
+        setUser(JSON.parse(localStorage.getItem("userinfo")));
+
+        //   AuthModel.verify().then((json) => {
+        //     localStorage.setItem("uid", json.token);
+        //     console.log(json.user, "login");
+        //     setUser(json);
+        //   });
+        //   console.log(user);
+      }
+    },
+    [user],
+  );
+  console.log(user);
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));

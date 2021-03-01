@@ -22,38 +22,42 @@ router.get("/", async function (request, response) {
     },
   });
   response.json({ users });
-}); /* JWT TOKEN */ /* router.get("/verify", async function(request, response){
-    const user = await db.user.findUnique({
-        where: {
-            id: Number(request.currentUser)
-        },
-        include: {
-            posts: {
-                select: {
-                    title: true,
-                    description: true,
-                    
-                }
-            },
-        },
-    });
-    // json response for testing
-    response.json({user})
-}) */
-
-/* SHOW CURRENT LOGGED IN  ROUTE */ /* UPDATE USER ROUTE */
-
-router.put("/edit", async function (request, response) {
-  console.log(request.body);
-  const updatedUser = await db.user.update({
-    where: {
-      id: Number(request.currentUser),
-    },
-    data: request.body,
-  });
-  // message return on create for testing
-  response.json({ message: "the User has been updated", user: updatedUser });
 });
+
+/* JWT TOKEN */
+
+// router.get("/verify", async function (request, response) {
+//   const user = await db.user.findUnique({
+//     where: {
+//       id: Number(request.user),
+//     },
+//     include: {
+//       posts: {
+//         select: {
+//           title: true,
+//           description: true,
+//         },
+//       },
+//     },
+//   });
+//   // json response for testing
+//   response.json({ user });
+// }); /* UPDATE USER ROUTE */
+
+/* SHOW CURRENT LOGGED IN  ROUTE */ router.put(
+  "/edit",
+  async function (request, response) {
+    console.log(request.body);
+    const updatedUser = await db.user.update({
+      where: {
+        id: Number(request.currentUser),
+      },
+      data: request.body,
+    });
+    // message return on create for testing
+    response.json({ message: "the User has been updated", user: updatedUser });
+  },
+);
 
 /* SHOW ONE USER BY ID ROUTE */
 router.get("/:id", async function (request, response) {
