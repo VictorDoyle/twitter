@@ -50,7 +50,7 @@ function FeedNav  () {
         </Tab.Pane>
 
         <Tab.Pane eventKey="#media">
-        <h1> hello</h1>
+        <h1> add aws or image upload here</h1>
         </Tab.Pane>
 
         <Tab.Pane eventKey="#likes">
