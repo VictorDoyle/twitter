@@ -22,9 +22,7 @@ router.get("/", async function (request, response) {
     },
   });
   response.json({ users });
-}); /* JWT TOKEN */
-
-/* SHOW CURRENT LOGGED IN  ROUTE */ /* router.get("/verify", async function(request, response){
+}); /* JWT TOKEN */ /* router.get("/verify", async function(request, response){
     const user = await db.user.findUnique({
         where: {
             id: Number(request.currentUser)
@@ -43,7 +41,7 @@ router.get("/", async function (request, response) {
     response.json({user})
 }) */
 
-/* UPDATE USER ROUTE */
+/* SHOW CURRENT LOGGED IN  ROUTE */ /* UPDATE USER ROUTE */
 
 router.put("/edit", async function (request, response) {
   console.log(request.body);
