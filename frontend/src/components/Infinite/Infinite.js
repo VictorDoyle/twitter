@@ -74,8 +74,8 @@ const Infinite = () => {
   // };
   const Mapper = () => (
     <>
-      {tweets.tweets.map((tweet, i) => (
-        <Tweets {...tweet} key={i + 1} />
+      {tweets.tweets.map((tweet) => (
+        <Tweets {...tweet} key={tweet.id} />
       ))}
     </>
   );
