@@ -64,6 +64,7 @@ function MainFeed() {
     fetchData();
   }, []);
 
+  console.log(user)
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
 

@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+/* user state import */
+import { userState } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
+/*  */
+import { Link } from 'react-router-dom'
 import Nav from "react-bootstrap/Nav";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -21,6 +26,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./NavBar.css";
 
 function NavBar() {
+  const user = useRecoilState(userState);
   return (
     <Container className="navbar-body">
       <Nav.Link id="twitter" eventKey="link-1">
@@ -32,6 +38,7 @@ function NavBar() {
         </Row>
       </Nav.Link>
       <Nav.Link className="link" eventKey="link-2">
+        <Link to={'/feed'}>
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faHome} size="2x" />
@@ -40,6 +47,7 @@ function NavBar() {
             <span className="description">Home</span>
           </Col>
         </Row>
+        </Link>
       </Nav.Link>
       <Nav.Link className="link" eventKey="link-2">
         <Row>
@@ -111,7 +119,9 @@ function NavBar() {
           </Col>
         </Row>
       </Nav.Link>
+
       <Nav.Link className="link" eventKey="link-9">
+        <Link to ={`/tweets/profile/${user && user[0].id }`}>
         <Row>
           <Col xs={5}>
             <FontAwesomeIcon icon={faUser} size="2x" />
@@ -120,7 +130,9 @@ function NavBar() {
             <span className="description">Profile</span>
           </Col>
         </Row>
+      </Link>
       </Nav.Link>
+
     </Container>
   );
 }

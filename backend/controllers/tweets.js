@@ -45,6 +45,27 @@ router.get("/:id", async function (request, response) {
   response.json({ tweet });
 });
 
+/* show tweet via Author Id */
+router.get("/profile/:authorId", async function (request,response){
+  console.log(request)
+  console.log("REQ PARAMS", request.params.authorId)
+  const tweetsByAuthor = await db.tweet.findMany({
+      select: {
+          description: true,
+          category: true,
+          author: true,
+          comments: true,
+      },
+      where: {
+              // request the data from user query
+              authorId: Number(request.params.authorId)
+              
+          
+      }
+  });
+  response.json({ tweetsByAuthor });
+});
+
 /* CREATE TWEET */
 
 router.post("/", async function (request, response) {

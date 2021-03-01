@@ -21,7 +21,7 @@ const Routes = () => {
 
 
       {/*   <Route path="/explore" component={Explore} /> */}
-      <Route path="/profile" component={Profile} />
+      <Route path="/tweets/profile/:id" component={Profile} />
       {/* 404 ROUTE */}
       {/* <Route component={NotFound} /> */}
     </Switch>
