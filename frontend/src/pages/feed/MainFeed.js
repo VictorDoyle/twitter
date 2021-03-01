@@ -11,24 +11,27 @@ import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
 import StickyNav from "../../components/StickyNav/StickyNav";
+import Infinite from "../../components/Infinite/Infinite";
 
 import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 function MainFeed() {
   const user = useRecoilState(userState);
+
   const [description, setDescription] = useState("");
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
   const [isBottom, setIsBottom] = useState(false);
-  const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
+  const [tweetsToDisplay, setTweetsToDisplay] = useState(tweets.slice(0, 5));
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     window.addEventListener("scroll", handleScroll, false);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, []); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (isBottom) {
       addTweets();
     }
@@ -44,10 +47,9 @@ function MainFeed() {
     if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
       setIsBottom(true);
     }
-  }
+  } */
 
   //TODO refactor for authorID = user.id
-  console.log("im the user", user);
   const submitHandler = () => {
     // currently pulling in more information so this is what is needed for id
     tweetModel.create({ description: description, authorId: user[0].id });
@@ -62,14 +64,10 @@ function MainFeed() {
     fetchData();
   }, []);
 
-  useEffect(function () {
-    console.log("hello")
-    setInitial();
-  }, [tweets]);
-
-  const setInitial = () => {
+  /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
-  };
+
+  }; */
 
   const fetchData = () => {
     tweetModel.all().then((data) => {
@@ -119,8 +117,8 @@ function MainFeed() {
                 descriptionValue={description}
               />
             )}
-            {tweets ? allTweets : <h1>No Tweets</h1>}
-            
+            {/* {tweets ? <Infinite /> : <h1>No Tweets</h1>} */}
+            <Infinite />
           </Col>
           <Col>
             <WhatsHappening />
