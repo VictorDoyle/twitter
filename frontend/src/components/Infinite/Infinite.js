@@ -81,10 +81,10 @@ const Infinite = () => {
   );
 
   const fetchMoreData = () => {
-    // if (tweets.tweets.length >= 20) {
-    //   setTweets({ hasMore: false });
-    //   return;
-    // }
+    if (tweets.tweets.length >= 20) {
+      setTweets({ hasMore: false });
+      return;
+    }
     setTimeout(() => {
       setTweets({
         tweets: tweets.tweets.concat(Array.from({ length: 1 })),
