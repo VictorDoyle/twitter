@@ -11,21 +11,23 @@ const Infinite = () => {
   const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
   const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
   const loader = useRef(null);
-  useEffect(function () {
-    fetchData();
-  }, []);
+  useEffect(
+    function () {
+      const fetchData = () => {
+        tweetModel.all().then((data) => {
+          console.log(data.tweets, "Fetch data");
+          setTweets(data.tweets);
+        });
+        setPostList(currentTweets);
+      };
+      fetchData();
+    },
+    [page],
+  );
 
-  const currentTweets = tweets.slice(0, 5);
+  const currentTweets = tweets.slice(initialState, initialState2);
 
   /* setPostList(currentTweets); */
-
-  const fetchData = () => {
-    tweetModel.all().then((data) => {
-      console.log(data.tweets);
-      setTweets(data.tweets);
-    });
-    setPostList(currentTweets);
-  };
 
   useEffect(() => {
     var options = {
@@ -43,15 +45,15 @@ const Infinite = () => {
 
   console.log(postList);
 
-  useEffect(() => {
-    // here we simulate adding new posts to List
-    // const newList = postList.concat(currentTweets);
-    if (currentTweets) {
-      setPostList(currentTweets);
-      setCurrentIndexStart(initialState + 5);
-      setCurrentIndexEnd(initialState2 + 5);
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   // here we simulate adding new posts to List
+  //   // const newList = postList.concat(currentTweets);
+  //   // if (currentTweets) {
+  //   setPostList(currentTweets);
+  //   setCurrentIndexStart(initialState + 5);
+  //   setCurrentIndexEnd(initialState2 + 5);
+  //   // }
+  // }, [page]);
 
   // here we handle what happens when user scrolls to Load More div
   // in this case we just update page variable
@@ -64,20 +66,21 @@ const Infinite = () => {
     }
   };
 
+  console.log(tweets);
+
   return (
     <>
       <div className="container">
         <div className="loading" ref={loader}>
           {tweets ? (
             <>
-              {" "}
-              {postList.map((tweet, index) => {
+              {postList.map((tweet) => {
                 return (
                   <>
                     <Tweets {...tweet} key={tweet.id} />
                   </>
                 );
-              })}{" "}
+              })}
             </>
           ) : null}
           <h2>Load More</h2>
