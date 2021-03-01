@@ -19,7 +19,7 @@ import tweetModel from '../../models/tweet'
 
 function Profile() {
   const user = useRecoilState(userState);
-  console.log(user[0].id)
+  console.log("this is the current user id", user[0].id)
   const [tweets, setTweets] = useState([]);
 
 
@@ -31,13 +31,12 @@ function Profile() {
   /* get tweets by user id */
   const fetchData = () => {
     tweetModel.showByUser(user[0].id).then((data) => {
-      console.log("this is data", data)
+      console.log("these are tweets fetched by data", data)
       setTweets(data.tweetsByAuthor);
     });
   };
 
-  console.log("user tweets", tweets)
-
+  
   
 
   return (
@@ -55,7 +54,7 @@ function Profile() {
           {/* profile subheader nav */}
           <FeedNav />
           {/* profile feed */}
-          <Feed />
+          <Feed tweets = {tweets}/>
 
 
 

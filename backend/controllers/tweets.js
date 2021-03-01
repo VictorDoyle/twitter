@@ -47,14 +47,16 @@ router.get("/:id", async function (request, response) {
 
 /* show tweet via Author Id */
 router.get("/profile/:authorId", async function (request,response){
-  console.log(request)
-  console.log("REQ PARAMS", request.params.authorId)
+  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId)
   const tweetsByAuthor = await db.tweet.findMany({
       select: {
           description: true,
           category: true,
           author: true,
           comments: true,
+          createdAt: true,
+          /* tweet id */
+          id: true,
       },
       where: {
               // request the data from user query
