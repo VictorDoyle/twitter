@@ -8,7 +8,7 @@ import TweetCard from '../TweetCard/TweetCard';
 
 
 function FeedWithReplies  (props) {
-    const [tweets, setTweets] = useState([]);
+   
 
     let tweetsWithReplies = props.tweets.map((tweet, index) =>{
         if (tweet.comments.length > 0) {

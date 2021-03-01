@@ -57,6 +57,7 @@ router.get("/profile/:authorId", async function (request,response){
           createdAt: true,
           /* tweet id */
           id: true,
+          likes: true,
       },
       where: {
               // request the data from user query

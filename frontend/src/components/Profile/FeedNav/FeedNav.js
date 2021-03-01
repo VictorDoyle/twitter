@@ -2,16 +2,17 @@
 import { userState } from "../../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import react, {useEffect, useState} from 'react'
-import { Nav, Row, Tab, Col, ListGroup } from 'react-bootstrap'
+import { Nav, Tab, Col } from 'react-bootstrap'
 import Feed from '../Feed/Feed'
 import FeedWithReplies from '../Feed/WithReplies'
 import './FeedNav.css'
 import tweetModel from "../../../models/tweet";
+import FeedLikes from "../Feed/Likes";
 
 function FeedNav  () {
     const user = useRecoilState(userState);
     const [tweets, setTweets] = useState([]);
-
+   
 
   /* base */
   useEffect(function () {
@@ -24,7 +25,12 @@ function FeedNav  () {
       console.log("these are tweets fetched by data", data)
       setTweets(data.tweetsByAuthor);
     });
+   
   };
+
+ 
+
+ 
   
 
     return (
@@ -54,7 +60,7 @@ function FeedNav  () {
         </Tab.Pane>
 
         <Tab.Pane eventKey="#likes">
-        <h1> hello</h1>
+        <FeedLikes user = {user} tweets = {tweets} />
         </Tab.Pane>
 
       </Tab.Content>

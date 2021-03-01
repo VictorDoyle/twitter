@@ -20,6 +20,7 @@ router.get("/", async function (request, response) {
 
 /* Single Like by ID */
 router.get("/:id", async function (request, response) {
+  console.log(request)
   const like = await db.like.findUnique({
     where: {
       id: Number(request.params.id),
