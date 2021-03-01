@@ -54,8 +54,8 @@ function Profile() {
           {/* profile subheader nav */}
           <FeedNav />
           {/* profile feed */}
-          <Feed tweets = {tweets} user= { user }/>
-
+         {/*  <Feed tweets = {tweets} user= { user }/>
+ */}
 
 
           

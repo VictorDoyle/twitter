@@ -11,7 +11,7 @@ import {
   } from "@fortawesome/free-regular-svg-icons";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RecommendationLoader from '../Loaders/RecommendationLoader';
+
 import CommentModel from '../../../models/comment';
 
 /* LIKE TWEET FUNCTION */
@@ -119,14 +119,14 @@ function TweetCard (props) {
                       </Card.Subtitle>
                       <Card.Text className="text-left"> {props.description}</Card.Text>
                       </Card.Body>
-                    <Modal.Body className="tweet-title text-muted"> Commenting on @{props.author.firstname}'s Tweet </Modal.Body>
+                    <Modal.Body className="tweet-title text-muted"> Replying To @{props.author.firstname}  {/* TODO: add Link to={'/profile/props.author.id} */}</Modal.Body>
                    
                     <Modal.Body> 
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
                         
                             
                        
-                        <Form.Control as="textarea" value = { content } onChange={(e) => setComment(e.target.value)}  placeholder="Add Another Tweet " rows={3} />
+                        <Form.Control as="textarea" value = { content } onChange={(e) => setComment(e.target.value)}  placeholder="Tweet Your Reply" rows={3} />
                     </Form.Group>
                         
                         
@@ -135,7 +135,7 @@ function TweetCard (props) {
                     <Modal.Footer>
                     {/* TODO: if Form.Input === empty show button style 1 else if Form.Input !=== empty show style 2 */}
                     <Button variant="primary" className="tweetButton" onClick={(event) => {handleClose(); submitComment(event)}} >
-                        Tweet
+                        Reply
                     </Button>
                     </Modal.Footer>
                 </Modal>
