@@ -17,7 +17,6 @@ import "./MainFeed.css";
 import React, { useState, useEffect } from "react";
 
 function MainFeed() {
-
   const user = useRecoilState(userState);
 
   const [description, setDescription] = useState("");
@@ -52,14 +51,10 @@ function MainFeed() {
 
   //TODO refactor for authorID = user.id
 
-
-  /*   const submitHandler = () => {
-    tweetModel.create({ description: description, authorId: user.id });
-    submitHandler();
-  }; */
-
-
-
+  const submitHandler = () => {
+    // currently pulling in more information so this is what is needed for id
+    tweetModel.create({ description: description, authorId: user[0].id });
+  };
 
   const handleState = () => {
     console.log("handlestate");
@@ -74,7 +69,6 @@ function MainFeed() {
     setTweetsToDisplay(tweets.slice(0, 5));
 
   }; */
-
 
   const fetchData = () => {
     tweetModel.all().then((data) => {

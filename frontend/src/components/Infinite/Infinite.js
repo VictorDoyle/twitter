@@ -21,6 +21,7 @@ const Infinite = () => {
 
   const fetchData = () => {
     tweetModel.all().then((data) => {
+      console.log(data.tweets);
       setTweets(data.tweets);
     });
     setPostList(currentTweets);
@@ -46,7 +47,7 @@ const Infinite = () => {
     // here we simulate adding new posts to List
     // const newList = postList.concat(currentTweets);
     if (currentTweets) {
-      setPostList(postList.push(currentTweets));
+      setPostList(currentTweets);
       setCurrentIndexStart(initialState + 5);
       setCurrentIndexEnd(initialState2 + 5);
     }
@@ -63,33 +64,22 @@ const Infinite = () => {
     }
   };
 
-  /*   let allTweets = postList.map((tweet, index) => {
-    return (
-      <>
-        <Tweets {...tweet} key={tweet.id} />
-      </>
-    );
-  }); */
-
-  const displayTweets = () => {
-    tweets ? (
-      postList.map((tweet, index) => {
-        return (
-          <>
-            <Tweets {...tweet} key={tweet.id} />
-          </>
-        );
-      })
-    ) : (
-      <h1>Hello</h1>
-    );
-  };
-
   return (
     <>
       <div className="container">
         <div className="loading" ref={loader}>
-          {displayTweets}
+          {tweets ? (
+            <>
+              {" "}
+              {postList.map((tweet, index) => {
+                return (
+                  <>
+                    <Tweets {...tweet} key={tweet.id} />
+                  </>
+                );
+              })}{" "}
+            </>
+          ) : null}
           <h2>Load More</h2>
         </div>
       </div>
