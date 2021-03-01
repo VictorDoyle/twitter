@@ -15,12 +15,14 @@ class tweetModel {
   };
 
   static showTweet = (id) => {
-    return fetch(`${url}/${id}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.uid}`,
-      },
-    }).then((res) => res.json());
+    return axios
+      .get(`${url}/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          // authorization: `Bearer ${localStorage.uid}`,
+        },
+      })
+      .then((res) => res.data);
   };
 
   static create = (data) => {
