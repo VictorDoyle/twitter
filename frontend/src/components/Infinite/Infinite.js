@@ -11,37 +11,43 @@ const Infinite = () => {
   const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
   const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
   const loader = useRef(null);
-  useEffect(
-    function () {
-      const fetchData = () => {
-        tweetModel.all().then((data) => {
-          console.log(data.tweets, "Fetch data");
-          setTweets(data.tweets);
-        });
-        setPostList(currentTweets);
-      };
-      fetchData();
-    },
-    [page],
-  );
-
   const currentTweets = tweets.slice(initialState, initialState2);
 
-  /* setPostList(currentTweets); */
-
-  useEffect(() => {
-    var options = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 1.0,
+  useEffect(function () {
+    const fetchData = () => {
+      tweetModel.all().then((data) => {
+        console.log(data.tweets, "Fetch data");
+        setTweets(data.tweets);
+      });
+      setPostList(currentTweets);
     };
-    // initialize IntersectionObserver
-    // and attaching to Load More div
-    const observer = new IntersectionObserver(handleObserver, options);
-    if (loader.current) {
-      observer.observe(loader.current);
-    }
+    fetchData();
   }, []);
+
+  const handleObserver = (entities) => {
+    const target = entities[0];
+    setPostList(currentTweets);
+    if (target.isIntersecting) {
+      setPage((page) => page);
+    } else {
+      console.log("Vickies Titties");
+    }
+  };
+
+  // use efeect2
+  var options = {
+    root: null,
+    rootMargin: "20px",
+    threshold: 1.0,
+  };
+  // initialize IntersectionObserver
+  // and attaching to Load More div
+  const observer = new IntersectionObserver(handleObserver, options);
+  if (loader.current) {
+    observer.observe(loader.current);
+  }
+
+  useEffect(() => {}, []);
 
   console.log(postList);
 
@@ -57,14 +63,14 @@ const Infinite = () => {
 
   // here we handle what happens when user scrolls to Load More div
   // in this case we just update page variable
-  const handleObserver = (entities) => {
-    const target = entities[0];
-    if (target.isIntersecting) {
-      setPage((page) => page);
-    } else {
-      console.log("Vickies Titties");
-    }
-  };
+  // const handleObserver = (entities) => {
+  //   const target = entities[0];
+  //   if (target.isIntersecting) {
+  //     setPage((page) => page);
+  //   } else {
+  //     console.log("Vickies Titties");
+  //   }
+  // };
 
   console.log(tweets);
 

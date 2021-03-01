@@ -6,6 +6,7 @@ import { register, login, logout } from "./controllers/auth.js";
 import userRoutes from "./controllers/users.js";
 import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
+// import { protect } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
 const app = express();
