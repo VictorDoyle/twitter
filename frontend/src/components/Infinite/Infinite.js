@@ -24,30 +24,30 @@ const Infinite = () => {
     fetchData();
   }, []);
 
-  const handleObserver = (entities) => {
-    const target = entities[0];
-    setPostList(currentTweets);
-    if (target.isIntersecting) {
-      setPage((page) => page);
-    } else {
-      console.log("Vickies Titties");
+  useEffect(() => {
+    const handleObserver = (entities) => {
+      const target = entities[0];
+      setPostList(currentTweets);
+      if (target.isIntersecting) {
+        setPage((page) => page);
+      } else {
+        console.log("Vickies Titties");
+      }
+    };
+
+    // use efeect2
+    var options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0,
+    };
+    // initialize IntersectionObserver
+    // and attaching to Load More div
+    const observer = new IntersectionObserver(handleObserver, options);
+    if (loader.current) {
+      observer.observe(loader.current);
     }
-  };
-
-  // use efeect2
-  var options = {
-    root: null,
-    rootMargin: "20px",
-    threshold: 1.0,
-  };
-  // initialize IntersectionObserver
-  // and attaching to Load More div
-  const observer = new IntersectionObserver(handleObserver, options);
-  if (loader.current) {
-    observer.observe(loader.current);
-  }
-
-  useEffect(() => {}, []);
+  }, []);
 
   console.log(postList);
 
