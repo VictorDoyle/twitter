@@ -76,7 +76,6 @@ const LandingPage = ({ history }) => {
             password={(e) => setPassword(e.target.value)}
           />
         }
-        footer=""
         className="LandingModal"
       />
     </>

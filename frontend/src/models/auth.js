@@ -22,13 +22,15 @@ class AuthModel {
     return axios.post(`${url}/login`, data, config).then((res) => res.data);
   };
 
-  static verify = () => {
-    return fetch(`${url}/users/verify`, {
-      method: "GET",
+  static verify = (data) => {
+    const config = {
       headers: {
         authorization: `Bearer ${localStorage.uid}`,
       },
-    }).then((response) => response.json());
+    };
+    return axios
+      .get(`${url}/users/verify`, data, config)
+      .then((response) => response.data);
   };
 }
 

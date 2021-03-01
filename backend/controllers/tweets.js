@@ -31,7 +31,9 @@ router.get("/:id", async function (request, response) {
     where: {
       id: Number(request.params.id),
     },
+
     include: {
+      author: true,
       comments: {
         select: {
           content: true,

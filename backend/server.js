@@ -7,6 +7,8 @@ import userRoutes from "./controllers/users.js";
 import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
 import likeRoutes from "./controllers/likes.js";
+// import { protect } from "./middleware/authRequired.js";
+
 /* Instanced Modules */
 const app = express();
 

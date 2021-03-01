@@ -11,7 +11,17 @@ class CommentModel {
           authorization: `Bearer ${localStorage.uid}`,
         },
       })
-      .then((res) => res.json());
+      .then((res) => res.data);
+  };
+
+  static findByTweet = () => {
+    return axios
+      .get(`${url}/:id`, {
+        headers: {
+          authorization: `Bearer ${localStorage.uid}`,
+        },
+      })
+      .then((res) => res.data);
   };
 
   // access create comment route

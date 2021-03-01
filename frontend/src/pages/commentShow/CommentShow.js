@@ -12,32 +12,21 @@ import StickyNav from "../../components/StickyNav/StickyNav";
 
 import React, { useState, useEffect } from "react";
 
-function CommentShow() {
-  const [comments, setComments] = useState([]);
+function CommentShow({ match }) {
   const [tweet, setTweet] = useState([]);
 
   useEffect(function () {
-    fetchData();
+    fetchTweet();
   }, []);
 
-  const fetchData = () => {
-    CommentModel.all().then((data) => {
-      setComments(data.comments);
-    });
-    tweetModel.showTweet().then((data) => {
+  const fetchTweet = () => {
+    tweetModel.showTweet(match.params.id).then((data) => {
+      console.log("second");
       setTweet(data.tweet);
     });
   };
 
-  let allComments = comments.map((comment, index) => {
-    return (
-      <>
-        <Comments {...comment} key={comment.id} />
-      </>
-    );
-  });
-  console.log(comments);
-
+  console.log("tweets", tweet);
   return (
     <div className="Feed" id="feed-page">
       <Container>
@@ -47,8 +36,19 @@ function CommentShow() {
           </Col>
           <Col md={6}>
             <StickyNav />
-            <TweetShow />
-            {comments ? allComments : <h1>No Comments</h1>}
+            {/* <TweetShow tweet={tweet} /> */}
+            {tweet.author ? <TweetShow tweet={tweet} /> : <h1>Loading</h1>}
+            {tweet.comments ? (
+              tweet.comments.map((comment, index) => {
+                return (
+                  <>
+                    <Comments {...comment} key={comment.id} />
+                  </>
+                );
+              })
+            ) : (
+              <h1>No Comments</h1>
+            )}
           </Col>
           <Col>
             <WhatsHappening />

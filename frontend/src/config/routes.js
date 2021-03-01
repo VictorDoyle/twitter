@@ -7,7 +7,6 @@ import Profile from "../pages/profile/Profile";
 
 import CommentShow from "../pages/commentShow/CommentShow";
 
-
 const Routes = () => {
   return (
     <Switch>
@@ -17,8 +16,7 @@ const Routes = () => {
       {/* main pages */}
       <Route exact path="/feed" component={MainFeed} />
 
-      <Route path="/profile/tweet/:id" component={CommentShow} />
-
+      <Route path="/tweets/:id" component={CommentShow} />
 
       {/*   <Route path="/explore" component={Explore} /> */}
       <Route path="/tweets/profile/:id" component={Profile} />
