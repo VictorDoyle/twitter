@@ -55,7 +55,7 @@ function MainFeed() {
     e.preventDefault();
     console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
-    tweetModel.create({ description: description, authorId: user[0].id });
+    tweetModel.create({ description: description, authorId: user.user.id });
   };
 
   const handleState = () => {
@@ -80,7 +80,7 @@ function MainFeed() {
     },
     [user],
   );
-  console.log(user);
+  console.log(user.user.id);
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
