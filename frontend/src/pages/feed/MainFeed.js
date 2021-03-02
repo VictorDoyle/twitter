@@ -80,7 +80,7 @@ function MainFeed() {
     },
     [user],
   );
-  console.log(user.user.id);
+  // console.log(user.user.id);
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
