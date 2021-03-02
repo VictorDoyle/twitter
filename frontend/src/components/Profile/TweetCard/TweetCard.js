@@ -179,9 +179,9 @@ function TweetCard (props) {
 
                     {/* LIKE TWEET FUNCTION */}
                 <Card.Link className="text-muted" href="#">
-      {liked === false ? <FontAwesomeIcon  onClick={(event) => {dispatch({  type: 'LIKE_TWEET'}); handleLike(event)}} className="image-icon" icon={faHeart} size="1x" color="grey"/> 
-      : <FontAwesomeIcon onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red"/>}
-                </Card.Link>
+      {liked === false ? <FontAwesomeIcon  onClick={(event) => {dispatch({  type: 'LIKE_TWEET'}); handleLike(event)}} className="image-icon" icon={faHeart} size="1x" color="grey"> {props.likes.length} </FontAwesomeIcon>
+      : <FontAwesomeIcon onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red">  {props.likes.length}  </FontAwesomeIcon>     }
+                {props.likes.length}</Card.Link>
                 
               </Col>
               <Col>

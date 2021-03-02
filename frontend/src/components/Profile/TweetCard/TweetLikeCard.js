@@ -87,7 +87,7 @@ function TweetLikeCard (props) {
             <Card.Body>
               <Card.Title className="username">{props.tweet.author.firstname}</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                @{props.author.username}
+                @{props.tweet.author.username}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 {/* {tweet.createdAt} */}
