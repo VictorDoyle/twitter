@@ -1,32 +1,44 @@
-
+/* user state import */
+import { userState } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
 /* bootstrap component imports */
-import { Col, Container, Row, Card} from "react-bootstrap";
-/* font awesome imports */
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import {
-  faRetweet,
-  faHeart,
-  faUserCircle,
-  faComment,
-  faShareSquare,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-/* components */
-import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
-import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
-import NavBar from "../../components/NavBar/NavBar";
-import Tweets from "../../components/Tweets/Tweets";
+import { Col, Container, Row} from "react-bootstrap";
 /* base */
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import React, { useState } from "react";
+/* components */
+import NavBar from "../../components/NavBar/NavBar";
 import Recommendations from "../../components/Profile/RecommendFriends/Recommendations";
 import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
 import Happening from "../../components/Profile/Happening/Happening";
 import Header from "../../components/Profile/Header/Header";
 import Feed from "../../components/Profile/Feed/Feed";
 import FeedNav from "../../components/Profile/FeedNav/FeedNav";
+/* models */
+import tweetModel from '../../models/tweet'
 
 function Profile() {
+  const user = useRecoilState(userState);
+  console.log("this is the current user id", user[0].id)
+  const [tweets, setTweets] = useState([]);
+
+
+  /* base */
+  useEffect(function () {
+    fetchData();
+  }, []);
+
+  /* get tweets by user id */
+  const fetchData = () => {
+    tweetModel.showByUser(user[0].id).then((data) => {
+      console.log("these are tweets fetched by data", data)
+      setTweets(data.tweetsByAuthor);
+    });
+  };
+
+  
+  
+
   return (
     <div className="Feed" id="feed-page">
       <Container>
@@ -42,8 +54,8 @@ function Profile() {
           {/* profile subheader nav */}
           <FeedNav />
           {/* profile feed */}
-          <Feed />
-
+         {/*  <Feed tweets = {tweets} user= { user }/>
+ */}
 
 
           

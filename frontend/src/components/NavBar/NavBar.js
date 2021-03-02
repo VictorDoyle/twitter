@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+/* user state import */
+import { userState } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
+/*  */
+import { Link } from 'react-router-dom'
 import { Nav, Col, Container, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
@@ -19,15 +24,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./NavBar.css";
 
 function NavBar() {
+  const user = useRecoilState(userState);
   return (
+    <>
     <Container className="navbar-body">
-      <Nav.Link id="twitter" eventKey="link-1">
-        <Row>
-          <Col xs={5}>
-            <FontAwesomeIcon icon={faTwitter} size="2x" />
-          </Col>
-        </Row>
-      </Nav.Link>
       <NavBarItem icon={faHome} route="/" name="Home" />
       <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
       <NavBarItem icon={faSearch} route="/" name="Search" />
@@ -36,8 +36,12 @@ function NavBar() {
       <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
       <NavBarItem icon={faListUl} route="/" name="Lists" />
       <NavBarItem icon={faAt} route="/" name="Connect" />
-      <NavBarItem icon={faUser} route="/profile" name="Profile" />
+      <NavBarItem icon={faUser} route={`/tweets/profile/${user[0] && user[0].id}`} name="Profile" />
+      
+    
     </Container>
+
+    </>
   );
 }
 
@@ -45,6 +49,7 @@ export default NavBar;
 // Recycled component
 export const NavBarItem = ({ icon, route, name }) => {
   return (
+    <>
     <LinkContainer to={route}>
       <Nav.Link className="link" eventKey="link-2">
         <Row>
@@ -55,7 +60,9 @@ export const NavBarItem = ({ icon, route, name }) => {
             <span className="description">{name}</span>
           </Col>
         </Row>
+      
       </Nav.Link>
     </LinkContainer>
+    </>
   );
 };

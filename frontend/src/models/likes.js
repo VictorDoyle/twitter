@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const url = `http://localhost:4000/api/tweets`;
+const url = `http://localhost:4000/api/likes`;
 
-class tweetModel {
-  // access all tweets
+class likeModel {
+  // access all likes
   static all = () => {
     return axios
       .get(`${url}`, {
@@ -13,8 +13,8 @@ class tweetModel {
       })
       .then((res) => res.data);
   };
-/* show tweet */
-  static showTweet = (id) => {
+/* show likes */
+/*   static showLike = (id) => {
     return axios
     .get(`${url}/${id}`, {
       headers: {
@@ -22,12 +22,12 @@ class tweetModel {
       },
     })
     .then((res) => res.data);
-  };
+  }; */
 
    // access all posts by by specifc user
-  static showByUser = (authorId) => {
+  static showByAuthor = (authorId) => {
     return axios
-    .get(`${url}/profile/${authorId}`, {
+    .get(`${url}/${authorId}`, {
       headers: {
         authorization: `Bearer ${localStorage.uid}`
       }
@@ -35,7 +35,7 @@ class tweetModel {
   .then(res => res.data)
   };
 
-  /* create tweet */
+  /* create like */
   static create = (data) => {
     const config = {
       headers: {
@@ -46,15 +46,15 @@ class tweetModel {
   };
 
   static delete = (id) => {
-    console.log("showing deleted tweet", id);
+    console.log("showing deleted like", id);
     return axios
       .delete(`${url}/delete/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.uid}`,
         },
       })
-      .then((res) => res.data);
+      .then((res) => res.json());
   };
 }
 
-export default tweetModel;
+export default likeModel;
