@@ -28,14 +28,14 @@ function NavBar() {
   return (
     <>
     <Container className="navbar-body">
-      <NavBarItem icon={faHome} route="/" name="Home" />
+      <NavBarItem icon={faHome} route="/feed" name="Home" />
       <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
-      <NavBarItem icon={faSearch} route="/" name="Search" />
+      
       <NavBarItem icon={faBell} route="/" name="Notifications" />
       <NavBarItem icon={faEnvelope} route="/" name="Messages" />
       <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
       <NavBarItem icon={faListUl} route="/" name="Lists" />
-      <NavBarItem icon={faAt} route="/" name="Connect" />
+      
       <NavBarItem icon={faUser} route={`/tweets/profile/${user[0] && user[0].id}`} name="Profile" />
       
     

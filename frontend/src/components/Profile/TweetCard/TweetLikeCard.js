@@ -11,26 +11,33 @@ import {
   } from "@fortawesome/free-regular-svg-icons";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-/* models */
-import CommentModel from '../../../models/comment';
-import LikeModel from '../../../models/likes';
 
+import CommentModel from '../../../models/comment';
 
 /* LIKE TWEET FUNCTION */
 
 function likeUnlikeReducer(state, action) {
     switch (action.type) {
       case 'LIKE_TWEET':
-        console.log("dispatch switch LIKE hit")
+        console.log("liked")
         return {  ...state, liked: true }
       case 'UNLIKE_TWEET':
-        console.log("dispatch switch UNLIKE hit")
+        console.log("unliked")
         return { ...state, liked: false }
       default:
         throw new Error()
     }
   }
 
+            /* ============= FIX ASAP ============= */
+  /* FIXME: add the following for scalability:
+  
+  if (tweet.hasProperty(like === {props.user[0].id}) {
+      liked: true
+  }) else return 
+        liked: false
+  
+  */
   const initialState = {
     liked: false
   };
@@ -38,7 +45,7 @@ function likeUnlikeReducer(state, action) {
 
   
 
-function TweetCard (props) {
+function TweetLikeCard (props) {
      /* like/unlike functionality */
     const [state, dispatch] = useReducer(likeUnlikeReducer, initialState);
     const { liked } = state
@@ -59,23 +66,6 @@ function TweetCard (props) {
         });
       }
 
-    
-    /* handle user liking a tweet */
-
-    function handleLike(event) {
-      event.preventDefault();
-      LikeModel.create({authorId: props.user[0].id, tweetId:props.id }).then(json => {
-          console.log(json, "tweet liked by user"); 
-      });
-    }
-    /* user dislikes a tweet */
-    function handleDislike(event) {
-      event.preventDefault();
-      LikeModel.delete().then(json => {
-          console.log(json, "tweet unliked by user " ); 
-      });
-    }
-
      
     
 
@@ -95,14 +85,14 @@ function TweetCard (props) {
           </Col>
           <Col>
             <Card.Body>
-              <Card.Title className="username">{props.author.firstname}</Card.Title>
+              <Card.Title className="username">{props.tweet.author.firstname}</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 @{props.author.username}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 {/* {tweet.createdAt} */}
               </Card.Subtitle>
-              <Card.Text className="text-left"> {props.description}</Card.Text>
+              <Card.Text className="text-left"> {props.tweet.description}</Card.Text>
             </Card.Body>
             <Row>
 
@@ -112,7 +102,7 @@ function TweetCard (props) {
                   <FontAwesomeIcon onClick={handleShow} className="image-icon" icon={faComment} size="1x"/>
                   
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {props.comments.length}
+                    {/* {props.tweet.comments.length} */} {/* FIXME: import backend comments select */}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
@@ -128,17 +118,17 @@ function TweetCard (props) {
                         icon={faUserCircle}
                         size="2x"
                             />
-                      <Card.Title className="username">{props.author.firstname}</Card.Title>
+                      <Card.Title className="username">{props.tweet.author.firstname}</Card.Title>
                       
                       <Card.Subtitle className="tweet-title mb-2 text-muted">
-                        @{props.author.username}
+                        @{props.tweet.author.username}
                       </Card.Subtitle>
                       <Card.Subtitle className="tweet-title mb-2 text-muted">
                         {/* {tweet.createdAt} */}
                       </Card.Subtitle>
-                      <Card.Text className="text-left"> {props.description}</Card.Text>
+                      <Card.Text className="text-left"> {props.tweet.description}</Card.Text>
                       </Card.Body>
-                    <Modal.Body className="tweet-title text-muted"> Replying To @{props.author.firstname}  {/* TODO: add Link to={'/profile/props.author.id} */}</Modal.Body>
+                    <Modal.Body className="tweet-title text-muted"> Replying To @{props.tweet.author.firstname}  {/* TODO: add Link to={'/profile/props.author.id} */}</Modal.Body>
                    
                     <Modal.Body> 
                     <Form.Group controlId="exampleForm.ControlTextarea1" >
@@ -179,10 +169,10 @@ function TweetCard (props) {
 
                     {/* LIKE TWEET FUNCTION */}
                 <Card.Link className="text-muted" href="#">
-      {liked === false ? <FontAwesomeIcon  onClick={(event) => {dispatch({  type: 'LIKE_TWEET'}); handleLike(event)}} className="image-icon" icon={faHeart} size="1x" color="grey"/> 
-      : <FontAwesomeIcon onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red"/>}
+      {liked === false ? <FontAwesomeIcon  onClick={() => dispatch({ type: 'LIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="grey"/> 
+      : <FontAwesomeIcon onClick={() => dispatch({ type: 'UNLIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="red"/>}
                 </Card.Link>
-                
+
               </Col>
               <Col>
                 <Card.Link className="text-muted" href="#">
@@ -206,4 +196,4 @@ function TweetCard (props) {
 
 }
 
-export default TweetCard
+export default TweetLikeCard
