@@ -6,6 +6,7 @@ import { register, login, logout } from "./controllers/auth.js";
 import userRoutes from "./controllers/users.js";
 import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
+import likeRoutes from "./controllers/likes.js";
 // import { protect } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
@@ -26,6 +27,7 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/tweets", tweetRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/likes", likeRoutes);
 app.use("/api/register", register);
 app.use("/api/login", login);
 /* FIXME: */

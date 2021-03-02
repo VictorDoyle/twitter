@@ -27,6 +27,7 @@ router.get("/", async function (request, response) {
 
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
+  console.log(request)
   const tweet = await db.tweet.findUnique({
     where: {
       id: Number(request.params.id),
@@ -45,6 +46,30 @@ router.get("/:id", async function (request, response) {
   });
 
   response.json({ tweet });
+});
+
+/* show tweet via Author Id */
+router.get("/profile/:authorId", async function (request,response){
+  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId)
+  const tweetsByAuthor = await db.tweet.findMany({
+      select: {
+          description: true,
+          category: true,
+          author: true,
+          comments: true,
+          createdAt: true,
+          /* tweet id */
+          id: true,
+          likes: true,
+      },
+      where: {
+              // request the data from user query
+              authorId: Number(request.params.authorId)
+              
+          
+      }
+  });
+  response.json({ tweetsByAuthor });
 });
 
 /* CREATE TWEET */

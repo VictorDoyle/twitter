@@ -122,7 +122,7 @@ function MainFeed() {
       <Container>
         <Row>
           <Col>
-            <NavBar />
+            <NavBar {...user} />
           </Col>
           <Col md={6}>
             <StickyNav />
