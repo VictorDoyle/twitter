@@ -99,13 +99,14 @@ const Infinite = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container" style={{ padding: 0 }}>
         <div className="loading" ref={loader}>
           {tweets.tweets ? (
             <InfiniteScroll
               dataLength={tweets.tweets.length}
               next={fetchMoreData}
               hasMore={tweets.hasMore}
+              className="scroll"
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
