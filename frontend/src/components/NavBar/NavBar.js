@@ -26,6 +26,7 @@ import "./NavBar.css";
 function NavBar() {
   const user = useRecoilState(userState);
   return (
+    <>
     <Container className="navbar-body">
       <NavBarItem icon={faHome} route="/" name="Home" />
       <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
@@ -35,9 +36,12 @@ function NavBar() {
       <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
       <NavBarItem icon={faListUl} route="/" name="Lists" />
       <NavBarItem icon={faAt} route="/" name="Connect" />
-      <NavBarItem icon={faUser} route={`/tweets/profile/${user.id}`} name="Profile" />
+      <NavBarItem icon={faUser} route={`/tweets/profile/${user[0] && user[0].id}`} name="Profile" />
+      
     
     </Container>
+
+    </>
   );
 }
 
@@ -45,6 +49,7 @@ export default NavBar;
 // Recycled component
 export const NavBarItem = ({ icon, route, name }) => {
   return (
+    <>
     <LinkContainer to={route}>
       <Nav.Link className="link" eventKey="link-2">
         <Row>
@@ -55,7 +60,9 @@ export const NavBarItem = ({ icon, route, name }) => {
             <span className="description">{name}</span>
           </Col>
         </Row>
+      
       </Nav.Link>
     </LinkContainer>
+    </>
   );
 };

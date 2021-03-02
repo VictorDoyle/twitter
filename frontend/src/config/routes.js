@@ -4,7 +4,6 @@ import MainFeed from "../pages/feed/MainFeed";
 import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import Profile from "../pages/profile/Profile";
-
 import CommentShow from "../pages/commentShow/CommentShow";
 
 const Routes = () => {
@@ -16,10 +15,10 @@ const Routes = () => {
       {/* main pages */}
       <Route exact path="/feed" component={MainFeed} />
 
-      <Route path="/tweets/:id" component={CommentShow} />
+      <Route exact path="/tweets/:id" component={CommentShow} />
 
       {/*   <Route path="/explore" component={Explore} /> */}
-      <Route path="/tweets/profile/:id" component={Profile} />
+      <Route exact path="/tweets/profile/:id" component={Profile} />
       {/* 404 ROUTE */}
       {/* <Route component={NotFound} /> */}
     </Switch>

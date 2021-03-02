@@ -27,6 +27,7 @@ router.get("/", async function (request, response) {
 
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
+  console.log(request)
   const tweet = await db.tweet.findUnique({
     where: {
       id: Number(request.params.id),
