@@ -12,6 +12,7 @@ const db = new prisma.PrismaClient({
 /* INDEX FOR ALL TWEETS */
 router.get("/", async function (request, response) {
   const tweets = await db.tweet.findMany({
+    take: 10,
     orderBy: [
       {
         createdAt: "desc",
@@ -22,12 +23,33 @@ router.get("/", async function (request, response) {
       comments: true,
     },
   });
-  response.json({ tweets });
+  const lastPostInResults = tweets[9];
+  const myCursor = lastPostInResults.id;
+  const tweets1 = await db.tweet.findMany({
+    take: 10,
+    skip: 1,
+    cursor: {
+      id: myCursor,
+    },
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+    include: {
+      author: true,
+      comments: true,
+    },
+  });
+  console.log(tweets[2]);
+  console.log(tweets1[2]);
+
+  response.json({ tweets, tweets1 });
 });
 
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
-  console.log(request)
+  console.log(request);
   const tweet = await db.tweet.findUnique({
     where: {
       id: Number(request.params.id),
@@ -49,25 +71,23 @@ router.get("/:id", async function (request, response) {
 });
 
 /* show tweet via Author Id */
-router.get("/profile/:authorId", async function (request,response){
-  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId)
+router.get("/profile/:authorId", async function (request, response) {
+  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId);
   const tweetsByAuthor = await db.tweet.findMany({
-      select: {
-          description: true,
-          category: true,
-          author: true,
-          comments: true,
-          createdAt: true,
-          /* tweet id */
-          id: true,
-          likes: true,
-      },
-      where: {
-              // request the data from user query
-              authorId: Number(request.params.authorId)
-              
-          
-      }
+    select: {
+      description: true,
+      category: true,
+      author: true,
+      comments: true,
+      createdAt: true,
+      /* tweet id */
+      id: true,
+      likes: true,
+    },
+    where: {
+      // request the data from user query
+      authorId: Number(request.params.authorId),
+    },
   });
   response.json({ tweetsByAuthor });
 });
