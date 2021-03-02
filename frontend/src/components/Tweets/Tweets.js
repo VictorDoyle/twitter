@@ -20,7 +20,7 @@ function Tweets(props) {
 
   return (
     <Card>
-      <Container>
+      <Container className="containerTweet">
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon

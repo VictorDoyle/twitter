@@ -4,3 +4,6 @@
 .col {
   flex-wrap: nowrap;
 }
+.scroll {
+  overflow: hidden !important;
+}

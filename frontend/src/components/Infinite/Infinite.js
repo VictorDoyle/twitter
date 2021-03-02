@@ -19,6 +19,7 @@ const Infinite = () => {
       tweetModel.all().then((data) => {
         console.log(data.tweets, "Fetch data");
         setTweets({ tweets: data.tweets, hasMore: true });
+        setPage({ tweets: data.tweets1, hasMore: true });
       });
       // setPostList(currentTweets);
     };
@@ -74,34 +75,38 @@ const Infinite = () => {
   // };
   const Mapper = () => (
     <>
-      {tweets.tweets.map((tweet) => (
-        <Tweets {...tweet} key={tweet.id} />
+      {tweets.tweets.map((tweet, i) => (
+        <Tweets {...tweet} key={i + 1} />
       ))}
     </>
   );
 
   const fetchMoreData = () => {
-    if (tweets.tweets.length >= 20) {
-      setTweets({ hasMore: false });
-      return;
-    }
+    // if (tweets.tweets.length >= 10) {
+    //   setTweets({ hasMore: false });
+    //   return;
+    // }
     setTimeout(() => {
       setTweets({
-        tweets: tweets.tweets.concat(Array.from({ length: 1 })),
+        // not working
+        // tweets: page.tweets.concat(Array.from({ length: 10 })),
+        tweets: tweets.tweets.concat(Array.from({ length: 10 })),
       });
-    }, 5000);
+    }, 500);
   };
-  console.log(tweets);
+  console.log(tweets, "tweets");
+  console.log(page, "page");
 
   return (
     <>
-      <div className="container">
+      <div className="container" style={{ padding: 0 }}>
         <div className="loading" ref={loader}>
           {tweets.tweets ? (
             <InfiniteScroll
               dataLength={tweets.tweets.length}
               next={fetchMoreData}
               hasMore={tweets.hasMore}
+              className="scroll"
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
