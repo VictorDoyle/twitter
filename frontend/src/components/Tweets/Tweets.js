@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import React, { useState, useEffect } from "react";
+import { Card, Col, Container, Row, Nav, NavDropdown } from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import {
   faComment,
@@ -10,9 +7,17 @@ import {
   faShareSquare,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import tweetModel from "../../models/tweet";
 import "./Tweets.css";
 
 function Tweets(props) {
+  function handleDelete(event) {
+    event.preventDefault();
+    tweetModel.delete(props.id).then((data) => {
+      console.log(data, "Tweet Deleted ");
+    });
+  }
+
   return (
     <Card>
       <Container className="containerTweet">
@@ -33,8 +38,27 @@ function Tweets(props) {
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
+              <Card.Subtitle className="tweet-title mb-2 text-muted elips">
+                <NavDropdown title="..." id="nav-dropdown">
+                  <NavDropdown.Item eventKey="4.1" onClick={handleDelete}>
+                    Delete
+                  </NavDropdown.Item>
+                  <NavDropdown.Item eventKey="4.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item eventKey="4.3">
+                    Something else here
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item eventKey="4.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Card.Subtitle>
+
               <Card.Text className="text-left">{props.description}</Card.Text>
             </Card.Body>
+
             <Row>
               <Col>
                 <Card.Link className="text-muted" href="#">

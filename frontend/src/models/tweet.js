@@ -53,7 +53,7 @@ class tweetModel {
           authorization: `Bearer ${localStorage.uid}`,
         },
       })
-      .then((res) => res.json());
+      .then((res) => res.data);
   };
 }
 

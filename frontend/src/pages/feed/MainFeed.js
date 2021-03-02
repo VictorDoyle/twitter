@@ -78,7 +78,7 @@ function MainFeed() {
         //   console.log(user);
       }
     },
-    [user],
+    [user]
   );
   // console.log(user.user.id);
 
@@ -100,8 +100,8 @@ function MainFeed() {
         tweetsToDisplay: prevState.tweetsToDisplay.concat(
           tweets.slice(
             (prevState.page + 1) * 30,
-            (prevState.page + 1) * 30 + 30,
-          ),
+            (prevState.page + 1) * 30 + 30
+          )
         ),
       }));
       setIsBottom(false);
