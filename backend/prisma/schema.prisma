@@ -36,6 +36,7 @@ model Tweet {
   authorId    Int
   // data relations with external models
   comments    Comment[]
+  likes Like[]
 }
 
 model Comment {
@@ -47,4 +48,16 @@ model Comment {
   authorId  Int
   tweet     Tweet    @relation(fields: [tweetId], references: [id])
   tweetId   Int
+}
+
+model Like {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  //value optional - used for testing
+  value Int @default(1) 
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  tweet Tweet @relation(fields: [tweetId], references: [id])
+  tweetId Int
 }

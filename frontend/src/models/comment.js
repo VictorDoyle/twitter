@@ -25,17 +25,17 @@ class CommentModel {
   };
 
   // access create comment route
-  static create = (data) => {
-    return axios
-      .post(`${url}`, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${localStorage.uid}`,
-        },
-        body: JSON.stringify(data),
-      })
-      .then((res) => res.json());
+
+static create = (data) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
+  return axios.post(url, data, config);
+};
+
+
 
   // accessed delete route of comment
   static delete = (id) => {

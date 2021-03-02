@@ -80,7 +80,7 @@ function MainFeed() {
     },
     [user],
   );
-  console.log(user);
+  console.log("this is user", user);
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
@@ -122,7 +122,7 @@ function MainFeed() {
       <Container>
         <Row>
           <Col>
-            <NavBar />
+            <NavBar {...user}/>
           </Col>
           <Col md={6}>
             <StickyNav />

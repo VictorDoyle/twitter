@@ -12,15 +12,14 @@ const db = new prisma.PrismaClient({
 /* INDEX FOR ALL USERS ROUTE */
 router.get("/", async function (request, response) {
   const users = await db.user.findMany({
-    // currently no username its breaking log in
-    // include: {
-    //   username: true,
-    //   tweets: {
-    //     select: {
-    //       description: true,
-    //     },
-    //   },
-    // },
+    include: {
+      /* username: true, */
+      tweets: {
+        select: {
+          description: true,
+        },
+      },
+    },
   });
   response.json({ users });
 });

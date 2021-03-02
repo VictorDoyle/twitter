@@ -68,7 +68,7 @@ const LandingModalBody = ({
           <Col xs={6}>
             <Form.Control as="select" type="month" onChange={month}>
               {months.map((x, i) => (
-                <option key={`x${i}`} value={i + 1}>
+                <option key={`x${i}`} value={i}>
                   {x}
                 </option>
               ))}
