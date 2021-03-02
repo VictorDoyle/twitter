@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Col, Container, Row, Nav, NavDropdown } from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -13,8 +13,8 @@ import "./Tweets.css";
 function Tweets(props) {
   function handleDelete(event) {
     event.preventDefault();
-    tweetModel.delete(props.id).then((json) => {
-      console.log(json, "Tweet Deleted ");
+    tweetModel.delete(props.id).then((data) => {
+      console.log(data, "Tweet Deleted ");
     });
   }
 

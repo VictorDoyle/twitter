@@ -73,7 +73,7 @@ router.delete("/delete/:id", async function (request, response) {
 
   // message return on create for testing
   response.json({
-    message: "the user and their posts have been deleted",
+    message: "the tweet and associated comments have been deleted",
     tweet: deleteTweet,
     comments: deleteAttachedComments,
   });

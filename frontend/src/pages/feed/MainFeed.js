@@ -55,7 +55,7 @@ function MainFeed() {
     e.preventDefault();
     console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
-    tweetModel.create({ description: description, authorId: user[0].id });
+    tweetModel.create({ description: description, authorId: user.user.id });
   };
 
   const handleState = () => {
@@ -78,9 +78,10 @@ function MainFeed() {
         //   console.log(user);
       }
     },
-    [user],
+    [user]
   );
   console.log(user);
+  useEffect(function () {}, [tweets.length]);
 
   /*   const setInitial = () => {
     setTweetsToDisplay(tweets.slice(0, 5));
@@ -100,8 +101,8 @@ function MainFeed() {
         tweetsToDisplay: prevState.tweetsToDisplay.concat(
           tweets.slice(
             (prevState.page + 1) * 30,
-            (prevState.page + 1) * 30 + 30,
-          ),
+            (prevState.page + 1) * 30 + 30
+          )
         ),
       }));
       setIsBottom(false);

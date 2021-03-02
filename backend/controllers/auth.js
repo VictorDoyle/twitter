@@ -55,10 +55,12 @@ const register = async (request, response) => {
  */
 const login = async (request, response) => {
   const { email, password } = request.body;
+
   try {
     const foundUser = await db.user.findUnique({
       where: { email },
     });
+    console.log(foundUser);
     const isMatch = await bcrypt.compare(password, foundUser.password);
 
     if (!foundUser || !isMatch) {
