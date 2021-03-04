@@ -26,53 +26,8 @@ const Infinite = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   const handleObserver = (entities) => {
-  //     const target = entities[0];
-  //     setPostList(currentTweets);
-  //     if (target.isIntersecting) {
-  //       setPage((page) => page);
-  //     } else {
-  //       console.log("Vickies Titties");
-  //     }
-  //   };
-
-  //   // use efeect2
-  //   var options = {
-  //     root: null,
-  //     rootMargin: "20px",
-  //     threshold: 1.0,
-  //   };
-  //   // initialize IntersectionObserver
-  //   // and attaching to Load More div
-  //   const observer = new IntersectionObserver(handleObserver, options);
-  //   if (loader.current) {
-  //     observer.observe(loader.current);
-  //   }
-  // }, []);
-
   console.log(postList);
 
-  // useEffect(() => {
-  //   // here we simulate adding new posts to List
-  //   // const newList = postList.concat(currentTweets);
-  //   // if (currentTweets) {
-  //   setPostList(currentTweets);
-  //   setCurrentIndexStart(initialState + 5);
-  //   setCurrentIndexEnd(initialState2 + 5);
-  //   // }
-  // }, [page]);
-
-  // here we handle what happens when user scrolls to Load More div
-  // in this case we just update page variable
-  // const handleObserver = (entities) => {
-  //   const target = entities[0];
-  //   if (target.isIntersecting) {
-  //     setPage((page) => page);
-  //   } else {
-  //     console.log("Vickies Titties");
-  //   }
-  // };
   const Mapper = () => (
     <>
       {tweets.tweets.map((tweet, i) => (
