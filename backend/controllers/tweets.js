@@ -11,6 +11,7 @@ const db = new prisma.PrismaClient({
 
 /* INDEX FOR ALL TWEETS */
 router.get("/", async function (request, response) {
+  console.log(request.headers);
   const tweets = await db.tweet.findMany({
     take: 10,
     orderBy: [
@@ -23,9 +24,13 @@ router.get("/", async function (request, response) {
       comments: true,
     },
   });
-  let lastPostInResults = tweets[9];
+  response.json({ tweets });
+});
 
-  const myCursor = lastPostInResults.id;
+router.get("/feed", async function (request, response) {
+  const myCursor = Number(request.headers.id);
+  console.log(request.headers.id);
+
   const tweets1 = await db.tweet.findMany({
     take: 10,
     skip: 1,
@@ -42,11 +47,10 @@ router.get("/", async function (request, response) {
       comments: true,
     },
   });
-  console.log(tweets[2]);
-  console.log(tweets1[2]);
-
-  response.json({ tweets, tweets1 });
-  lastPostInResults = tweets1[9];
+  /*   console.log(tweets[2]);
+  console.log(tweets1[2]); */
+  console.log(myCursor, "+++++++++++++++++++++++++");
+  response.json({ tweets1 });
 });
 
 /* SHOW ONE TWEET BY ID */

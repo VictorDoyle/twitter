@@ -4,14 +4,18 @@ import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Infinite = () => {
-  const [postList, setPostList] = useState([]);
   const [moreTweets, setMoreTweets] = useState([]);
   const [tweets, setTweets] = useState([]);
-  let initialState = 0;
-  let initialState2 = 5;
-  const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
-  const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
+  const [lastTweetIndex, setLastTweetIndex] = useState(0);
+  const [lastTweetID, setLastTweetID] = useState();
+
   const loader = useRef(null);
+
+  const getLastTweet = () => {
+    if (tweets.tweets) {
+      setLastTweetIndex(tweets.tweets.length - 1);
+    }
+  };
 
   useEffect(function () {
     const fetchData = () => {
@@ -33,7 +37,10 @@ const Infinite = () => {
   );
 
   const fetchMoreData = () => {
-    tweetModel.all().then((data) => {
+    getLastTweet();
+    setLastTweetID(tweets.tweets[lastTweetIndex].id);
+
+    tweetModel.feed(lastTweetID).then((data) => {
       console.log(data, "data1");
       setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
       /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
@@ -52,7 +59,11 @@ const Infinite = () => {
   };
   console.log(moreTweets.tweets1, "moreTweets");
   console.log(tweets, "tweets");
-
+  if (tweets.tweets) {
+    console.log(tweets.tweets.length - 1, "tweets length");
+  }
+  /* console.log(lastTweetID); */
+  console.log(tweets, tweets.tweets, "--------------");
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
@@ -70,7 +81,6 @@ const Infinite = () => {
                 </p>
               }
             >
-              {console.log(tweets.tweets)}
               <Mapper />
             </InfiniteScroll>
           ) : (
