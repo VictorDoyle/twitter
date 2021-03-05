@@ -5,28 +5,24 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Infinite = () => {
   const [postList, setPostList] = useState([]);
-  const [page, setPage] = useState(1);
+  const [moreTweets, setMoreTweets] = useState([]);
   const [tweets, setTweets] = useState([]);
   let initialState = 0;
   let initialState2 = 5;
   const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
   const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
   const loader = useRef(null);
-  // const currentTweets = tweets.slice(initialState, initialState2);
 
   useEffect(function () {
     const fetchData = () => {
       tweetModel.all().then((data) => {
         console.log(data.tweets, "Fetch data");
         setTweets({ tweets: data.tweets, hasMore: true });
-        setPage({ tweets: data.tweets1, hasMore: true });
       });
-      // setPostList(currentTweets);
     };
     fetchData();
+    console.log("Number 2", tweets);
   }, []);
-
-  console.log(postList);
 
   const Mapper = () => (
     <>
@@ -37,20 +33,25 @@ const Infinite = () => {
   );
 
   const fetchMoreData = () => {
-    // if (tweets.tweets.length >= 10) {
-    //   setTweets({ hasMore: false });
-    //   return;
-    // }
-    setTimeout(() => {
-      setTweets({
-        // not working
-        // tweets: page.tweets.concat(Array.from({ length: 10 })),
-        tweets: tweets.tweets.concat(Array.from({ length: 10 })),
-      });
-    }, 500);
+    tweetModel.all().then((data) => {
+      console.log(data, "data1");
+      setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
+      /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
+      console.log(data.tweets1, "data2");
+    });
+    /*     if (tweets.tweets.length >= 10) {
+      setTweets({ hasMore: false });
+      return;
+    } */
+    console.log(moreTweets.tweets1);
+
+    /* setTweets({
+      tweets: tweets.tweets.concat(moreTweets.tweets1),
+    }); */
+    console.log(tweets, "running");
   };
+  console.log(moreTweets.tweets1, "moreTweets");
   console.log(tweets, "tweets");
-  console.log(page, "page");
 
   return (
     <>
