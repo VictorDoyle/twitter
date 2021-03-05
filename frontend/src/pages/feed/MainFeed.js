@@ -111,7 +111,7 @@ function MainFeed() {
   let allTweets = tweetsToDisplay.map((tweet, index) => {
     return (
       <>
-        <Tweets {...tweet} key={tweet.id} />
+        <Tweets {...tweet} key={tweet.id} fetchData={fetchData} />
       </>
     );
   });

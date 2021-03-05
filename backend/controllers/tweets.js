@@ -15,7 +15,7 @@ router.get("/", async function (request, response) {
     take: 10,
     orderBy: [
       {
-        createdAt: "desc",
+        id: "desc",
       },
     ],
     include: {
@@ -23,7 +23,8 @@ router.get("/", async function (request, response) {
       comments: true,
     },
   });
-  const lastPostInResults = tweets[9];
+  let lastPostInResults = tweets[9];
+
   const myCursor = lastPostInResults.id;
   const tweets1 = await db.tweet.findMany({
     take: 10,
@@ -33,7 +34,7 @@ router.get("/", async function (request, response) {
     },
     orderBy: [
       {
-        createdAt: "desc",
+        id: "desc",
       },
     ],
     include: {
@@ -45,6 +46,7 @@ router.get("/", async function (request, response) {
   console.log(tweets1[2]);
 
   response.json({ tweets, tweets1 });
+  lastPostInResults = tweets1[9];
 });
 
 /* SHOW ONE TWEET BY ID */
