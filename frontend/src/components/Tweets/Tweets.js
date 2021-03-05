@@ -12,10 +12,17 @@ import "./Tweets.css";
 
 function Tweets(props) {
   function handleDelete(event) {
-    event.preventDefault();
     tweetModel.delete(props.id).then((data) => {
       console.log(data, "Tweet Deleted ");
     });
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    handleDelete();
+    {
+      props.fetchData();
+    }
   }
 
   return (
@@ -40,7 +47,7 @@ function Tweets(props) {
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted elips">
                 <NavDropdown title="..." id="nav-dropdown">
-                  <NavDropdown.Item eventKey="4.1" onClick={handleDelete}>
+                  <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
                     Delete
                   </NavDropdown.Item>
                   <NavDropdown.Item eventKey="4.2">
