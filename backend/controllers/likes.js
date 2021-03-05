@@ -12,6 +12,13 @@ router.get("/", async function (request, response) {
   const likes = await db.like.findMany({
     include: {
       author: true,
+      tweet: {
+        select: {
+          description: true,
+          author: true,
+          id: true,
+        },
+      },
     },
   });
   console.log(likes)
@@ -37,7 +44,7 @@ router.get("/", async function (request, response) {
 
 /* Likes by Author on profile*/
 router.get("/:authorId", async function (request,response){
-  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId)
+  console.log("user id to get likes by id ", request.params.authorId)
   const likesByAuthor = await db.like.findMany({
       select: {
           author: true,
