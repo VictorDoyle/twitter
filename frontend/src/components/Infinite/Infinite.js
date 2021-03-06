@@ -2,14 +2,30 @@ import React, { useEffect, useState, useRef } from "react";
 import tweetModel from "../../models/tweet";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useQuery, gql } from "@apollo/client";
+
+const TWEETS_QUERY = gql`
+  query allTweets {
+    Tweet {
+      id
+      description
+    }
+  }
+`;
 
 const Infinite = () => {
   const [moreTweets, setMoreTweets] = useState([]);
   const [tweets, setTweets] = useState([]);
   const [lastTweetIndex, setLastTweetIndex] = useState(0);
   const [lastTweetID, setLastTweetID] = useState();
+  const { loading, error, data } = useQuery(TWEETS_QUERY, {
+    variables: { limit: 10 },
+  });
+  // if (loading) return "Loading...";
+  // if (error) return `Error! ${error.message}`;
+  console.log(data);
 
-  const loader = useRef(null);
+  // const loader = useRef(null);
 
   const getLastTweet = () => {
     if (tweets.tweets) {
