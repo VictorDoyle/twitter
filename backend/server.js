@@ -1,5 +1,8 @@
 import express from "express";
 import prisma from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+import { graphqlHTTP } from "express-graphql";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import cors from "cors";
 /* routes */
 import { register, login, logout } from "./controllers/auth.js";
@@ -36,6 +39,44 @@ app.use("/api/logout", logout);
 app.get("/", function (request, response) {
   response.send("Welcome to SQL");
 });
+
+const typeDefs = `
+  type User {
+    email: String!
+    firstname: String
+  }
+  type Tweet {
+      id: ID!
+      description: String
+    }
+  type Query {
+    allUsers: [User!]!
+    allTweets: [Tweet!]!
+  }
+`;
+
+const resolvers = {
+  Query: {
+    allUsers: () => {
+      return db.user.findMany();
+    },
+    allTweets: () => {
+      return db.tweet.findMany();
+    },
+  },
+};
+export const schema = makeExecutableSchema({
+  resolvers,
+  typeDefs,
+});
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  }),
+);
 
 /* Sever Listener */
 
