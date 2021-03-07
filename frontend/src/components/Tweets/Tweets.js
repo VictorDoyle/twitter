@@ -20,9 +20,6 @@ function Tweets(props) {
   function handleClick(event) {
     event.preventDefault();
     handleDelete();
-    {
-      props.fetchData();
-    }
   }
 
   return (
@@ -76,7 +73,7 @@ function Tweets(props) {
                   />
                   {/* TODO Comment counter */}
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {props.comments.length}
+                    {/* {props.comments.length} */}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
