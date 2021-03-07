@@ -6,68 +6,38 @@ import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
   query TWEETS_QUERY {
-    allUsers {
-      email
-      firstname
-      username
-      dateOfBirth
-      lastname
+    allTweets {
       id
-      bio
-      tweets {
+      description
+      category
+      author {
         id
-        description
-        category
+        firstname
+        lastname
+        username
       }
     }
   }
 `;
 
-const Infinite = () => {
-  const [moreTweets, setMoreTweets] = useState([]);
-  const [tweets, setTweets] = useState([]);
-  const [lastTweetIndex, setLastTweetIndex] = useState(0);
-  const [lastTweetID, setLastTweetID] = useState();
-  // useEffect(function () {
-  //   const fetchData = () => {
-  //     tweetModel.all().then((data) => {
-  //       console.log(data.tweets, "Fetch data");
-  //       setTweets({ tweets: data.tweets, hasMore: true });
-  //     });
-  //   };
-  //   fetchData();
-  //   console.log("Number 2", tweets);
-  // }, []);
-  const { loading, error, data } = useQuery(
-    TWEETS_QUERY,
-    //   {
-    //   variables: { limit: 10 },
-    // }
-  );
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
-  console.log(data);
+const Infinite = (props) => {
+  console.log(props.tweets);
 
   // const loader = useRef(null);
 
-  const getLastTweet = () => {
-    if (tweets.tweets) {
-      setLastTweetIndex(tweets.tweets.length - 1);
-    }
-  };
-
   const Mapper = () => (
     <>
-      {data?.TWEETS_QUERY?.map((tweet) => (
-        <Tweets {...tweet} key {...tweet.id} />
+      {props.tweets.allTweets.map((tweet) => (
+        <>
+          <Tweets {...tweet} key {...tweet.id} />
+          {console.log(tweet)}
+        </>
       ))}
-      {/* {tweets.tweets.map((tweet, i) => (
-        <Tweets {...tweet} key={i + 1} />
-      ))} */}
     </>
   );
 
   const fetchMoreData = () => {
+    console.log("fetching data");
     // getLastTweet();
     // setLastTweetID(tweets.tweets[lastTweetIndex].id);
     // tweetModel.feed(lastTweetID).then((data) => {
@@ -91,11 +61,9 @@ const Infinite = () => {
     <>
       <div className="container" style={{ padding: 0 }}>
         <div className="loading">
-          {tweets.tweets ? (
+          {props.tweets.allTweets ? (
             <InfiniteScroll
-              dataLength={tweets.tweets.length}
-              next={fetchMoreData}
-              hasMore={tweets.hasMore}
+              dataLength={props.tweets.allTweets.length}
               className="scroll"
               loader={<h4>Loading...</h4>}
               endMessage={
@@ -109,18 +77,6 @@ const Infinite = () => {
           ) : (
             <></>
           )}
-
-          {/* {tweets ? (
-            <>
-              {postList.map((tweet) => {
-                return (
-                  <>
-                    <Tweets {...tweet} key={tweet.id} />
-                  </>
-                );
-              })}
-            </>
-          ) : null} */}
           <h2>Load More</h2>
         </div>
       </div>
