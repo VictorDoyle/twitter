@@ -6,19 +6,19 @@ import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
   query TWEETS_QUERY {
-    allUsers {
-      email
-      firstname
-      username
-      dateOfBirth
-      lastname
-      id
-      bio
-      tweets {
+    allTweets {
+      author {
+        username
+        lastname
+        firstname
+        email
         id
-        description
-        category
+        bio
+        dateOfBirth
       }
+      description
+      id
+      category
     }
   }
 `;
