@@ -36,7 +36,7 @@ const Infinite = () => {
   );
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  console.log(JSON.stringify(data));
+  console.log(data);
 
   // const loader = useRef(null);
 
@@ -62,26 +62,20 @@ const Infinite = () => {
       console.log(data, "data1");
       setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
       /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
-      console.log(data.tweets1, "data2");
     });
     /*     if (tweets.tweets.length >= 10) {
       setTweets({ hasMore: false });
       return;
     } */
-    console.log(moreTweets.tweets1);
 
     /* setTweets({
       tweets: tweets.tweets.concat(moreTweets.tweets1),
     }); */
-    console.log(tweets, "running");
   };
-  console.log(moreTweets.tweets1, "moreTweets");
-  console.log(tweets, "tweets");
-  if (tweets.tweets) {
-    console.log(tweets.tweets.length - 1, "tweets length");
-  }
+  // if (tweets.tweets) {
+  //   // console.log(tweets.tweets.length - 1, "tweets length");
+  // }
   /* console.log(lastTweetID); */
-  console.log(tweets, tweets.tweets, "--------------");
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
