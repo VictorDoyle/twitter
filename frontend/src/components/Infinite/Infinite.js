@@ -5,8 +5,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
-  query allTweets {
-    Tweet {
+  query TWEETS_QUERY {
+    allTweets {
       id
       description
     }
@@ -18,21 +18,6 @@ const Infinite = () => {
   const [tweets, setTweets] = useState([]);
   const [lastTweetIndex, setLastTweetIndex] = useState(0);
   const [lastTweetID, setLastTweetID] = useState();
-  const { loading, error, data } = useQuery(TWEETS_QUERY, {
-    variables: { limit: 10 },
-  });
-  // if (loading) return "Loading...";
-  // if (error) return `Error! ${error.message}`;
-  console.log(data);
-
-  // const loader = useRef(null);
-
-  const getLastTweet = () => {
-    if (tweets.tweets) {
-      setLastTweetIndex(tweets.tweets.length - 1);
-    }
-  };
-
   useEffect(function () {
     const fetchData = () => {
       tweetModel.all().then((data) => {
@@ -43,6 +28,23 @@ const Infinite = () => {
     fetchData();
     console.log("Number 2", tweets);
   }, []);
+  const { loading, error, data } = useQuery(
+    TWEETS_QUERY,
+    //   {
+    //   variables: { limit: 10 },
+    // }
+  );
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  console.log(JSON.stringify(data));
+
+  // const loader = useRef(null);
+
+  const getLastTweet = () => {
+    if (tweets.tweets) {
+      setLastTweetIndex(tweets.tweets.length - 1);
+    }
+  };
 
   const Mapper = () => (
     <>
@@ -83,7 +85,7 @@ const Infinite = () => {
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
-        <div className="loading" ref={loader}>
+        <div className="loading">
           {tweets.tweets ? (
             <InfiniteScroll
               dataLength={tweets.tweets.length}

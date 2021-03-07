@@ -1,8 +1,7 @@
 import express from "express";
 import prisma from "@prisma/client";
-// import { PrismaClient } from "@prisma/client";
-import { graphqlHTTP } from "express-graphql";
-import { makeExecutableSchema } from "@graphql-tools/schema";
+import { ApolloServer } from "apollo-server";
+import typeDefs from "./schema.js";
 import cors from "cors";
 /* routes */
 import { register, login, logout } from "./controllers/auth.js";
@@ -40,21 +39,6 @@ app.get("/", function (request, response) {
   response.send("Welcome to SQL");
 });
 
-const typeDefs = `
-  type User {
-    email: String!
-    firstname: String
-  }
-  type Tweet {
-      id: ID!
-      description: String
-    }
-  type Query {
-    allUsers: [User!]!
-    allTweets: [Tweet!]!
-  }
-`;
-
 const resolvers = {
   Query: {
     allUsers: () => {
@@ -65,21 +49,19 @@ const resolvers = {
     },
   },
 };
-export const schema = makeExecutableSchema({
-  resolvers,
-  typeDefs,
-});
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  }),
-);
+const server = new ApolloServer({ resolvers, typeDefs });
+server.listen({ port: PORT }).then(() => {
+  console.log(`
+  Server is running!
+  listening on port ${PORT}
+  http://localhost:4000
+  studio.apollographql.com/dev
+  `);
+});
 
 /* Sever Listener */
 
-app.listen(PORT, function () {
-  console.log(`Server is live on ${PORT}`);
-});
+// app.listen(PORT, function () {
+//   console.log(`Server is live on ${PORT}`);
+// });
