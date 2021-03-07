@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import tweetModel from "../../models/tweet";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 const Infinite = () => {
   const [postList, setPostList] = useState([]);
   const [moreTweets, setMoreTweets] = useState([]);
@@ -12,7 +11,6 @@ const Infinite = () => {
   const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
   const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
   const loader = useRef(null);
-
   useEffect(function () {
     const fetchData = () => {
       tweetModel.all().then((data) => {
@@ -23,7 +21,6 @@ const Infinite = () => {
     fetchData();
     console.log("Number 2", tweets);
   }, []);
-
   const Mapper = () => (
     <>
       {tweets.tweets.map((tweet, i) => (
@@ -31,7 +28,6 @@ const Infinite = () => {
       ))}
     </>
   );
-
   const fetchMoreData = () => {
     tweetModel.all().then((data) => {
       console.log(data, "data1");
@@ -44,7 +40,6 @@ const Infinite = () => {
       return;
     } */
     console.log(moreTweets.tweets1);
-
     /* setTweets({
       tweets: tweets.tweets.concat(moreTweets.tweets1),
     }); */
@@ -52,7 +47,6 @@ const Infinite = () => {
   };
   console.log(moreTweets.tweets1, "moreTweets");
   console.log(tweets, "tweets");
-
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
@@ -76,7 +70,6 @@ const Infinite = () => {
           ) : (
             <></>
           )}
-
           {/* {tweets ? (
             <>
               {postList.map((tweet) => {
@@ -94,5 +87,4 @@ const Infinite = () => {
     </>
   );
 };
-
 export default Infinite;

@@ -24,7 +24,6 @@ router.get("/", async function (request, response) {
     },
   });
   let lastPostInResults = tweets[9];
-
   const myCursor = lastPostInResults.id;
   const tweets1 = await db.tweet.findMany({
     take: 10,
@@ -44,9 +43,28 @@ router.get("/", async function (request, response) {
   });
   console.log(tweets[2]);
   console.log(tweets1[2]);
-
   response.json({ tweets, tweets1 });
   lastPostInResults = tweets1[9];
+});
+/* SHOW ONE TWEET BY ID */
+router.get("/:id", async function (request, response) {
+  console.log(request);
+  const tweet = await db.tweet.findUnique({
+    where: {
+      id: Number(request.params.id),
+    },
+    include: {
+      author: true,
+      comments: {
+        select: {
+          content: true,
+          author: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+  response.json({ tweet });
 });
 
 /* SHOW ONE TWEET BY ID */

@@ -6,9 +6,6 @@ import TweetCard from '../TweetCard/TweetCard';
 
 
 
-
-
-
 function Feed  (props) {
    
     let allTweets = props.tweets.map((tweet, index) =>{
@@ -27,7 +24,6 @@ function Feed  (props) {
 
  {props.tweets ? allTweets : <RecommendationLoader/>}
   
-    
 </>
     )
 }
