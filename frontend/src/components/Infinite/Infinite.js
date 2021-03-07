@@ -18,16 +18,16 @@ const Infinite = () => {
   const [tweets, setTweets] = useState([]);
   const [lastTweetIndex, setLastTweetIndex] = useState(0);
   const [lastTweetID, setLastTweetID] = useState();
-  useEffect(function () {
-    const fetchData = () => {
-      tweetModel.all().then((data) => {
-        console.log(data.tweets, "Fetch data");
-        setTweets({ tweets: data.tweets, hasMore: true });
-      });
-    };
-    fetchData();
-    console.log("Number 2", tweets);
-  }, []);
+  // useEffect(function () {
+  //   const fetchData = () => {
+  //     tweetModel.all().then((data) => {
+  //       console.log(data.tweets, "Fetch data");
+  //       setTweets({ tweets: data.tweets, hasMore: true });
+  //     });
+  //   };
+  //   fetchData();
+  //   console.log("Number 2", tweets);
+  // }, []);
   const { loading, error, data } = useQuery(
     TWEETS_QUERY,
     //   {
@@ -48,26 +48,27 @@ const Infinite = () => {
 
   const Mapper = () => (
     <>
-      {tweets.tweets.map((tweet, i) => (
-        <Tweets {...tweet} key={i + 1} />
+      {data?.TWEETS_QUERY?.map((tweet) => (
+        <Tweets {...tweet} key {...tweet.id} />
       ))}
+      {/* {tweets.tweets.map((tweet, i) => (
+        <Tweets {...tweet} key={i + 1} />
+      ))} */}
     </>
   );
 
   const fetchMoreData = () => {
-    getLastTweet();
-    setLastTweetID(tweets.tweets[lastTweetIndex].id);
-
-    tweetModel.feed(lastTweetID).then((data) => {
-      console.log(data, "data1");
-      setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
-      /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
-    });
+    // getLastTweet();
+    // setLastTweetID(tweets.tweets[lastTweetIndex].id);
+    // tweetModel.feed(lastTweetID).then((data) => {
+    //   setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
+    /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
+    // });
+    // =======
     /*     if (tweets.tweets.length >= 10) {
       setTweets({ hasMore: false });
       return;
     } */
-
     /* setTweets({
       tweets: tweets.tweets.concat(moreTweets.tweets1),
     }); */
