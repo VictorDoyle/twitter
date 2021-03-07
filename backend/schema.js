@@ -16,6 +16,7 @@ const typeDefs = gql`
     bio: String
     dateOfBirth: String
     tweets: [Tweet]
+    # tweet(id: ID): Tweet
   }
   # for future
   # type Comment {

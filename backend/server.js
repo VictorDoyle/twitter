@@ -42,11 +42,16 @@ app.get("/", function (request, response) {
 const resolvers = {
   Query: {
     allUsers: () => {
-      return db.user.findMany();
+      return db.user.findMany({ include: { tweets: true } });
     },
     allTweets: () => {
-      return db.tweet.findMany();
+      return db.tweet.findMany({ include: { users: true } });
     },
+    // tweets: (parent, args) => {
+    //   return db.tweet.findUnique({
+    //     where: (tweet) => tweet.id === Number(args.id),
+    //   });
+    // },
   },
 };
 
