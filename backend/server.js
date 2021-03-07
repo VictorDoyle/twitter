@@ -45,13 +45,8 @@ const resolvers = {
       return db.user.findMany({ include: { tweets: true } });
     },
     allTweets: () => {
-      return db.tweet.findMany({ include: { users: true } });
+      return db.tweet.findMany({ include: { author: true } });
     },
-    // tweets: (parent, args) => {
-    //   return db.tweet.findUnique({
-    //     where: (tweet) => tweet.id === Number(args.id),
-    //   });
-    // },
   },
 };
 
