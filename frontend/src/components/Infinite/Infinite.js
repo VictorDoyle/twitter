@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import tweetModel from "../../models/tweet";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
-<<<<<<< HEAD
-=======
 import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
@@ -25,27 +23,9 @@ const TWEETS_QUERY = gql`
   }
 `;
 
->>>>>>> origin/submaster
 const Infinite = () => {
   const [moreTweets, setMoreTweets] = useState([]);
   const [tweets, setTweets] = useState([]);
-<<<<<<< HEAD
-  let initialState = 0;
-  let initialState2 = 5;
-  const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
-  const [currentIndexEnd, setCurrentIndexEnd] = useState(initialState2);
-  const loader = useRef(null);
-  useEffect(function () {
-    const fetchData = () => {
-      tweetModel.all().then((data) => {
-        console.log(data.tweets, "Fetch data");
-        setTweets({ tweets: data.tweets, hasMore: true });
-      });
-    };
-    fetchData();
-    console.log("Number 2", tweets);
-  }, []);
-=======
   const [lastTweetIndex, setLastTweetIndex] = useState(0);
   const [lastTweetID, setLastTweetID] = useState();
   // useEffect(function () {
@@ -76,7 +56,6 @@ const Infinite = () => {
     }
   };
 
->>>>>>> origin/submaster
   const Mapper = () => (
     <>
       {data?.TWEETS_QUERY?.map((tweet) => (
@@ -99,23 +78,14 @@ const Infinite = () => {
       setTweets({ hasMore: false });
       return;
     } */
-<<<<<<< HEAD
-    console.log(moreTweets.tweets1);
-=======
->>>>>>> origin/submaster
     /* setTweets({
       tweets: tweets.tweets.concat(moreTweets.tweets1),
     }); */
   };
-<<<<<<< HEAD
-  console.log(moreTweets.tweets1, "moreTweets");
-  console.log(tweets, "tweets");
-=======
   // if (tweets.tweets) {
   //   // console.log(tweets.tweets.length - 1, "tweets length");
   // }
   /* console.log(lastTweetID); */
->>>>>>> origin/submaster
   return (
     <>
       <div className="container" style={{ padding: 0 }}>

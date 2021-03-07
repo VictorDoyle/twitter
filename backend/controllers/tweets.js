@@ -24,10 +24,6 @@ router.get("/", async function (request, response) {
       comments: true,
     },
   });
-<<<<<<< HEAD
-  let lastPostInResults = tweets[9];
-  const myCursor = lastPostInResults.id;
-=======
   response.json({ tweets });
 });
 
@@ -35,7 +31,6 @@ router.get("/feed", async function (request, response) {
   const myCursor = Number(request.headers.id);
   console.log(request.headers.id);
 
->>>>>>> origin/submaster
   const tweets1 = await db.tweet.findMany({
     take: 10,
     skip: 1,
@@ -52,17 +47,10 @@ router.get("/feed", async function (request, response) {
       comments: true,
     },
   });
-<<<<<<< HEAD
-  console.log(tweets[2]);
-  console.log(tweets1[2]);
-  response.json({ tweets, tweets1 });
-  lastPostInResults = tweets1[9];
-=======
   /*   console.log(tweets[2]);
   console.log(tweets1[2]); */
   console.log(myCursor, "+++++++++++++++++++++++++");
   response.json({ tweets1 });
->>>>>>> origin/submaster
 });
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
