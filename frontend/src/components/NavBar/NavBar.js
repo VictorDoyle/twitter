@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 /* user state import */
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
-/*  */
-import { Link } from 'react-router-dom'
 import { Nav, Col, Container, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faHome,
-  faSearch,
   faListUl,
-  faAt,
   faHashtag,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,20 +22,21 @@ function NavBar() {
   const user = useRecoilState(userState);
   return (
     <>
-    <Container className="navbar-body">
-      <NavBarItem icon={faHome} route="/feed" name="Home" />
-      <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
-      
-      <NavBarItem icon={faBell} route="/" name="Notifications" />
-      <NavBarItem icon={faEnvelope} route="/" name="Messages" />
-      <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
-      <NavBarItem icon={faListUl} route="/" name="Lists" />
-      
-      <NavBarItem icon={faUser} route={`/tweets/profile/${user[0] && user[0].id}`} name="Profile" />
-      
-    
-    </Container>
+      <Container className="navbar-body">
+        <NavBarItem icon={faHome} route="/feed" name="Home" />
+        <NavBarItem icon={faHashtag} route="/feed" name="Explore" />
 
+        <NavBarItem icon={faBell} route="/" name="Notifications" />
+        <NavBarItem icon={faEnvelope} route="/" name="Messages" />
+        <NavBarItem icon={faBookmark} route="/" name="Bookmark" />
+        <NavBarItem icon={faListUl} route="/" name="Lists" />
+
+        <NavBarItem
+          icon={faUser}
+          route={`/tweets/profile/${user[0] && user[0].id}`}
+          name="Profile"
+        />
+      </Container>
     </>
   );
 }
@@ -50,19 +46,18 @@ export default NavBar;
 export const NavBarItem = ({ icon, route, name }) => {
   return (
     <>
-    <LinkContainer to={route}>
-      <Nav.Link className="link" eventKey="link-2">
-        <Row>
-          <Col xs={5}>
-            <FontAwesomeIcon icon={icon} size="2x" />
-          </Col>
-          <Col className="d-none d-lg-block">
-            <span className="description">{name}</span>
-          </Col>
-        </Row>
-      
-      </Nav.Link>
-    </LinkContainer>
+      <LinkContainer to={route}>
+        <Nav.Link className="link" eventKey="link-2">
+          <Row>
+            <Col xs={5}>
+              <FontAwesomeIcon icon={icon} size="2x" />
+            </Col>
+            <Col className="d-none d-lg-block">
+              <span className="description">{name}</span>
+            </Col>
+          </Row>
+        </Nav.Link>
+      </LinkContainer>
     </>
   );
 };

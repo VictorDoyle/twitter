@@ -53,7 +53,7 @@ function MainFeed() {
         //   console.log(user);
       }
     },
-    [user]
+    [user],
   );
 
   const { loading, error, data } = useQuery(TWEETS_QUERY, {
@@ -102,7 +102,6 @@ function MainFeed() {
                 descriptionValue={description}
               />
             )}
-            {/* {tweets ? <Infinite /> : <h1>No Tweets</h1>} */}
             <Infinite tweets={tweets} />
           </Col>
           <Col>

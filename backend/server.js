@@ -3,12 +3,15 @@ import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
 import typeDefs from "./schema.js";
 import cors from "cors";
+import path from "path";
 /* routes */
 import { register, login, logout } from "./controllers/auth.js";
 import userRoutes from "./controllers/users.js";
 import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
 import likeRoutes from "./controllers/likes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
+
 // import { protect } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
@@ -32,6 +35,8 @@ app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/upload", uploadRoutes);
+
 /* FIXME: */
 app.use("/api/logout", logout);
 
@@ -49,6 +54,11 @@ const resolvers = {
     },
   },
 };
+
+// import module doesn't work with __dir
+const __dirname = path.resolve();
+// makes the uploads folder accessible
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const server = new ApolloServer({ resolvers, typeDefs });
 server.listen({ port: 4025 }).then(() => {
