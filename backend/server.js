@@ -1,5 +1,7 @@
 import express from "express";
 import prisma from "@prisma/client";
+import { ApolloServer } from "apollo-server";
+import typeDefs from "./schema.js";
 import cors from "cors";
 /* routes */
 import { register, login, logout } from "./controllers/auth.js";
@@ -35,6 +37,27 @@ app.use("/api/logout", logout);
 
 app.get("/", function (request, response) {
   response.send("Welcome to SQL");
+});
+
+const resolvers = {
+  Query: {
+    allUsers: () => {
+      return db.user.findMany({ include: { tweets: true } });
+    },
+    allTweets: () => {
+      return db.tweet.findMany({ include: { author: true } });
+    },
+  },
+};
+
+const server = new ApolloServer({ resolvers, typeDefs });
+server.listen({ port: 4025 }).then(() => {
+  console.log(`
+  Server is running!
+  listening on port 4025
+  http://localhost:4025
+  studio.apollographql.com/dev
+  `);
 });
 
 /* Sever Listener */

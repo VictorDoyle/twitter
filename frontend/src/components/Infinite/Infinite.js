@@ -2,10 +2,34 @@ import React, { useEffect, useState, useRef } from "react";
 import tweetModel from "../../models/tweet";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
+<<<<<<< HEAD
+=======
+import { useQuery, gql } from "@apollo/client";
+
+const TWEETS_QUERY = gql`
+  query TWEETS_QUERY {
+    allUsers {
+      email
+      firstname
+      username
+      dateOfBirth
+      lastname
+      id
+      bio
+      tweets {
+        id
+        description
+        category
+      }
+    }
+  }
+`;
+
+>>>>>>> origin/submaster
 const Infinite = () => {
-  const [postList, setPostList] = useState([]);
   const [moreTweets, setMoreTweets] = useState([]);
   const [tweets, setTweets] = useState([]);
+<<<<<<< HEAD
   let initialState = 0;
   let initialState2 = 5;
   const [currentIndexStart, setCurrentIndexStart] = useState(initialState);
@@ -21,36 +45,81 @@ const Infinite = () => {
     fetchData();
     console.log("Number 2", tweets);
   }, []);
+=======
+  const [lastTweetIndex, setLastTweetIndex] = useState(0);
+  const [lastTweetID, setLastTweetID] = useState();
+  // useEffect(function () {
+  //   const fetchData = () => {
+  //     tweetModel.all().then((data) => {
+  //       console.log(data.tweets, "Fetch data");
+  //       setTweets({ tweets: data.tweets, hasMore: true });
+  //     });
+  //   };
+  //   fetchData();
+  //   console.log("Number 2", tweets);
+  // }, []);
+  const { loading, error, data } = useQuery(
+    TWEETS_QUERY,
+    //   {
+    //   variables: { limit: 10 },
+    // }
+  );
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  console.log(data);
+
+  // const loader = useRef(null);
+
+  const getLastTweet = () => {
+    if (tweets.tweets) {
+      setLastTweetIndex(tweets.tweets.length - 1);
+    }
+  };
+
+>>>>>>> origin/submaster
   const Mapper = () => (
     <>
-      {tweets.tweets.map((tweet, i) => (
-        <Tweets {...tweet} key={i + 1} />
+      {data?.TWEETS_QUERY?.map((tweet) => (
+        <Tweets {...tweet} key {...tweet.id} />
       ))}
+      {/* {tweets.tweets.map((tweet, i) => (
+        <Tweets {...tweet} key={i + 1} />
+      ))} */}
     </>
   );
   const fetchMoreData = () => {
-    tweetModel.all().then((data) => {
-      console.log(data, "data1");
-      setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
-      /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
-      console.log(data.tweets1, "data2");
-    });
+    // getLastTweet();
+    // setLastTweetID(tweets.tweets[lastTweetIndex].id);
+    // tweetModel.feed(lastTweetID).then((data) => {
+    //   setTweets({ tweets: tweets.tweets.concat(data.tweets1), hasMore: true });
+    /* setMoreTweets({ tweets1: data.tweets1, hasMore: true }); */
+    // });
+    // =======
     /*     if (tweets.tweets.length >= 10) {
       setTweets({ hasMore: false });
       return;
     } */
+<<<<<<< HEAD
     console.log(moreTweets.tweets1);
+=======
+>>>>>>> origin/submaster
     /* setTweets({
       tweets: tweets.tweets.concat(moreTweets.tweets1),
     }); */
-    console.log(tweets, "running");
   };
+<<<<<<< HEAD
   console.log(moreTweets.tweets1, "moreTweets");
   console.log(tweets, "tweets");
+=======
+  // if (tweets.tweets) {
+  //   // console.log(tweets.tweets.length - 1, "tweets length");
+  // }
+  /* console.log(lastTweetID); */
+>>>>>>> origin/submaster
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
-        <div className="loading" ref={loader}>
+        <div className="loading">
           {tweets.tweets ? (
             <InfiniteScroll
               dataLength={tweets.tweets.length}
@@ -64,7 +133,6 @@ const Infinite = () => {
                 </p>
               }
             >
-              {console.log(tweets.tweets)}
               <Mapper />
             </InfiniteScroll>
           ) : (
