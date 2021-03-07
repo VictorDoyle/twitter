@@ -5,7 +5,7 @@ import Routes from "./config/routes";
 
 import "./App.css";
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri: "http://localhost:4025",
   cache: new InMemoryCache(),
 });
 

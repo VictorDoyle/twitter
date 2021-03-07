@@ -51,17 +51,17 @@ const resolvers = {
 };
 
 const server = new ApolloServer({ resolvers, typeDefs });
-server.listen({ port: PORT }).then(() => {
+server.listen({ port: 4025 }).then(() => {
   console.log(`
   Server is running!
-  listening on port ${PORT}
-  http://localhost:4000
+  listening on port 4025
+  http://localhost:4025
   studio.apollographql.com/dev
   `);
 });
 
 /* Sever Listener */
 
-// app.listen(PORT, function () {
-//   console.log(`Server is live on ${PORT}`);
-// });
+app.listen(PORT, function () {
+  console.log(`Server is live on ${PORT}`);
+});
