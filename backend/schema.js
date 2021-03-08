@@ -1,5 +1,6 @@
 import prisma from "@prisma/client";
 import { gql } from "apollo-server";
+import bcrypt from "bcryptjs";
 
 const db = new prisma.PrismaClient({
   log: ["info", "warn"],
@@ -61,14 +62,20 @@ export const resolvers = {
     },
   },
   Mutation: {
-    signupUser: (parent, args) => {
+    signupUser: async (
+      parent,
+      { email, password, firstname, lastname, dateOfBirth },
+    ) => {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+      password = hash;
       return db.user.create({
         data: {
-          email: args.email,
-          firstname: args.firstname,
-          lastname: args.lastname,
-          password: args.password,
-          dateOfBirth: args.dateOfBirth,
+          email: email,
+          firstname: firstname,
+          lastname: lastname,
+          password: password,
+          dateOfBirth: dateOfBirth,
         },
       });
     },
