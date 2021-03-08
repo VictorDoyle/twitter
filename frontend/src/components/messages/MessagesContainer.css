@@ -9,3 +9,22 @@
 .scroll {
   overflow: scroll;
 }
+
+/* ================================ CARD ================================= */
+.cardImage {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.imageCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.cardTitle {
+  margin-bottom: 0 !important;
+}

@@ -2,6 +2,7 @@ import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
 import typeDefs from "./schema.js";
+// import resolvers from "./resolvers.js";
 import cors from "cors";
 import path from "path";
 /* routes */
@@ -44,6 +45,11 @@ app.get("/", function (request, response) {
   response.send("Welcome to SQL");
 });
 
+// import module doesn't work with __dir
+const __dirname = path.resolve();
+// makes the uploads folder accessible
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
 const resolvers = {
   Query: {
     allUsers: () => {
@@ -54,11 +60,6 @@ const resolvers = {
     },
   },
 };
-
-// import module doesn't work with __dir
-const __dirname = path.resolve();
-// makes the uploads folder accessible
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const server = new ApolloServer({ resolvers, typeDefs });
 server.listen({ port: 4025 }).then(() => {
