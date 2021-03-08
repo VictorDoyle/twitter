@@ -68,7 +68,7 @@ function TweetLikeCard (props) {
 
       function handleDislike(event) {
         event.preventDefault();
-        LikeModel.delete().then(json => {
+        LikeModel.delete(props.id).then(json => {
             console.log(json, "tweet unliked by user " ); 
         });
       }
@@ -179,8 +179,7 @@ function TweetLikeCard (props) {
                     {/* LIKE TWEET FUNCTION */}
                 <Card.Link className="text-muted" href="#">
 
-       <FontAwesomeIcon onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red"/> {props.tweet.likes.length} 
-
+       <FontAwesomeIcon  onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red"/> {props.tweet.likes.length} 
                 </Card.Link>
 
               </Col>

@@ -81,6 +81,8 @@ router.post("/", async function (request, response) {
 /* Delete */
 
 router.delete("/delete/:id", async function (request, response) {
+  console.log(request.params, "PARAMS FOR DELETE LIKE")
+  console.log(request.headers, "REQ DOT HEADERS FOR LIKE DELETE")
   const deletedLike = await db.like.delete({
     where: {
       id: Number(request.params.id),
