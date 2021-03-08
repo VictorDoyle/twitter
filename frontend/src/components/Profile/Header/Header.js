@@ -3,9 +3,31 @@ import react,{ useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import './Header.css'
 /* bootstrap component imports */
-import { Col, Container, Row, Button, Image} from "react-bootstrap";
+import { Col, Modal, Row, Button, Image, Form} from "react-bootstrap";
+import UserModel from '../../../models/user';
 
-function Header () {
+function Header (props) {
+/* modal settings */
+const [show, setShow] = useState(false);
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
+/* edit profile functions */
+const [username, setUsername] = useState("");
+const [bio, setBio] = useState("");
+const [firstname, setFirstname ] = useState("");
+const [email, setEmail] = useState("");
+const currentUser = props.user[0].id;
+
+function handleProfileEdit(event) {
+    event.preventDefault();
+      UserModel.update(currentUser, { username, bio, firstname, email }).then(json => {
+      if (json.status === 201) {
+        console.log(json, "updated")
+      } else {
+        console.log(json, "error with update");
+      }
+    });
+  }
 
 
 
@@ -21,11 +43,60 @@ function Header () {
 </Row>
 
 <Row>
-<Link to={'/settings'} className="editProfileLink">
-    <Button className="editProfileButton">
+
+    <Button className="editProfileButton editProfileLink" onClick={handleShow}>
         Edit Profile
     </Button>
-</Link>
+
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header>
+            <Button className="closeSettingsModal" onClick={handleClose}>
+                X
+            </Button>
+          <Modal.Title> Edit Profile </Modal.Title>
+       
+        </Modal.Header>
+        <Modal.Body>
+            <Form onSubmit={handleProfileEdit}>
+            {/* modal content with edit profile form */}
+            <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="username" placeholder={props.user[0].user.username} default={props.user[0].user.username} value={ username }  onChange={(e) => setUsername(e.target.value)} />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Bio</Form.Label>
+                <Form.Control type="bio" placeholder={props.user[0].user.bio} default={props.user[0].user.bio} value={ bio }  onChange={(e) => setBio(e.target.value)} />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="firstname"  placeholder={props.user[0].user.firstname} default={props.user[0].user.firstname} value={ firstname }  onChange={(e) => setFirstname(e.target.value)}  />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder={props.user[0].user.email} default={props.user[0].user.email} value={ email }  onChange={(e) => setEmail(e.target.value)}  />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Button className="submitButtonForm" type="submit">
+                Save
+            </Button>
+            </Form>
+
+            {/* end modal content section */}
+
+
+
+
+        </Modal.Body>
+      
+      </Modal>
 </Row>
 
 <Row>

@@ -49,13 +49,11 @@ function Profile() {
           <Col md={6}>
         
           {/* profile header*/}
-          <Header/>
+          <Header user={user} />
 
-          {/* profile subheader nav */}
+          {/* profile subheader nav with Feed */}
           <FeedNav />
-          {/* profile feed */}
-         {/*  <Feed tweets = {tweets} user= { user }/>
- */}
+        
 
 
           
