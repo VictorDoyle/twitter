@@ -8,7 +8,7 @@ import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
 import CommentModel from "../../models/comment";
-import StickyNav from "../../components/StickyNav/StickyNav";
+import StickyNavTweet from "../../components/StickyNavTweet/StickyNavTweet";
 
 import React, { useState, useEffect } from "react";
 
@@ -35,7 +35,7 @@ function CommentShow({ match }) {
             <NavBar />
           </Col>
           <Col md={6}>
-            <StickyNav />
+            <StickyNavTweet />
             {/* <TweetShow tweet={tweet} /> */}
             {tweet.author ? <TweetShow tweet={tweet} /> : <h1>Loading</h1>}
             {tweet.comments ? (
