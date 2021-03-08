@@ -8,7 +8,7 @@ import TweetLikeCard from '../TweetCard/TweetLikeCard';
 
 
 function FeedLikes  (props) {
-    console.log("props of feedlikes", props)
+   
 
     let authoredLikes = props.likes.map((like, index) => {
        

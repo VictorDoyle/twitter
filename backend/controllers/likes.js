@@ -14,6 +14,8 @@ router.get("/", async function (request, response) {
       author: true,
       tweet: {
         select: {
+          likes: true,
+          comments: true,
           description: true,
           author: true,
           id: true,
@@ -21,7 +23,7 @@ router.get("/", async function (request, response) {
       },
     },
   });
-  console.log(likes)
+  
   response.json({ likes });
 });
 

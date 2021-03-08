@@ -13,7 +13,7 @@ import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CommentModel from '../../../models/comment';
-
+import LikeModel from '../../../models/likes';
 /* LIKE TWEET FUNCTION */
 
 function likeUnlikeReducer(state, action) {
@@ -66,8 +66,17 @@ function TweetLikeCard (props) {
         });
       }
 
-     
-    
+      function handleDislike(event) {
+        event.preventDefault();
+        LikeModel.delete().then(json => {
+            console.log(json, "tweet unliked by user " ); 
+        });
+      }
+
+  /*    if {props.tweet.likes.length} contains authorId === props.user[0].id 
+     return Unlike 
+     else return like
+     */
 
     
     return(
@@ -102,7 +111,7 @@ function TweetLikeCard (props) {
                   <FontAwesomeIcon onClick={handleShow} className="image-icon" icon={faComment} size="1x"/>
                   
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {/* {props.tweet.comments.length} */} {/* FIXME: import backend comments select */}
+                    {props.tweet.comments.length}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>
@@ -169,8 +178,9 @@ function TweetLikeCard (props) {
 
                     {/* LIKE TWEET FUNCTION */}
                 <Card.Link className="text-muted" href="#">
-      {liked === false ? <FontAwesomeIcon  onClick={() => dispatch({ type: 'LIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="grey"/> 
-      : <FontAwesomeIcon onClick={() => dispatch({ type: 'UNLIKE_TWEET' })} className="image-icon" icon={faHeart} size="1x" color="red"/>}
+
+       <FontAwesomeIcon onClick={(event) => {dispatch({  type: 'UNLIKE_TWEET'}); handleDislike(event)}} className="image-icon" icon={faHeart} size="1x" color="red"/> {props.tweet.likes.length} 
+
                 </Card.Link>
 
               </Col>

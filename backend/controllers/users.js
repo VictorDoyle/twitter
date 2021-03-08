@@ -118,10 +118,10 @@ router.delete("/delete/:id", async function (request, response) {
 /* Update user route */
 
 router.put("/edit", async function (request, response){
-  console.log(request, "full REQ")
+  console.log(request.headers, "full REQ")
   const updatedUser = await db.user.update({
     where: {
-      id: Number(request.params.id),
+      id: Number(request.headers.id),
     },
       data: request.body,
   });
