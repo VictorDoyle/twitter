@@ -24,7 +24,7 @@ function Tweets(props) {
 
   return (
     <Card>
-      <Container className="containerTweet">
+      <Container className="containerTweet" href="/tweet/{props.id}">
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon
@@ -65,7 +65,7 @@ function Tweets(props) {
 
             <Row>
               <Col>
-                <Card.Link className="text-muted" href="#">
+                <Card.Link className="text-muted" href={"/tweets/" + props.id}>
                   <FontAwesomeIcon
                     className="image-icon"
                     icon={faComment}
