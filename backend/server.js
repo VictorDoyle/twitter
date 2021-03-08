@@ -2,7 +2,6 @@ import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
 import { typeDefs, resolvers } from "./schema.js";
-// import resolvers from "./resolvers.js";
 import cors from "cors";
 import path from "path";
 /* routes */

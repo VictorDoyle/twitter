@@ -13,18 +13,18 @@ import "./LandingPage.css";
 
 const SignupMutation = gql`
   mutation Mutation(
-    $signupUserEmail: String!
-    $signupUserFirstname: String!
-    $signupUserPassword: String!
-    $signupUserLastname: String
-    $signupUserDateOfBirth: String
+    $email: String!
+    $firstname: String!
+    $password: String!
+    $lastname: String
+    $dateOfBirth: String
   ) {
     signupUser(
-      email: $signupUserEmail
-      firstname: $signupUserFirstname
-      password: $signupUserPassword
-      lastname: $signupUserLastname
-      dateOfBirth: $signupUserDateOfBirth
+      email: $email
+      firstname: $firstname
+      password: $password
+      lastname: $lastname
+      dateOfBirth: $dateOfBirth
     ) {
       id
       email
@@ -46,7 +46,7 @@ const LandingPage = ({ history }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  const [signup] = useMutation(SignupMutation);
+  const [signup, { loading, error }] = useMutation(SignupMutation);
 
   useEffect(() => {
     /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
@@ -66,6 +66,7 @@ const LandingPage = ({ history }) => {
   const handleShow = () => setShow(true);
 
   const submitHandler = async () => {
+    console.log(firstname, email, password);
     await signup({
       variables: {
         firstname: firstname,
@@ -82,6 +83,8 @@ const LandingPage = ({ history }) => {
     // });
     history.push("/login");
   };
+  if (loading) return <p>Loading </p>;
+  if (error) return <p>An error occurred</p>;
 
   return (
     <>
