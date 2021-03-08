@@ -29,7 +29,7 @@ const Infinite = (props) => {
     <>
       {props.tweets.allTweets.map((tweet) => (
         <>
-          <Tweets {...tweet} key {...tweet.id} />
+          <Tweets {...tweet} key = {tweet.id} />
           {console.log(tweet)}
         </>
       ))}
