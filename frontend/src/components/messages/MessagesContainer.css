@@ -5,3 +5,7 @@
 .searchBarMessages {
   width: 100% !important;
 }
+
+.scroll {
+  overflow: scroll;
+}

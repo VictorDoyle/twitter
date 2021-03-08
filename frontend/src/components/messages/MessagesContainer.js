@@ -28,7 +28,6 @@ const MessagesContainer = ({ user, body, messages }) => {
             className="StickyNav"
           >
             <Navbar.Brand href="#">Messages</Navbar.Brand>
-            {/* Messages Icon */}
             <FontAwesomeIcon
               className="image-icon StickyNavIcon messagesIcon"
               icon={faEnvelope}
@@ -36,15 +35,18 @@ const MessagesContainer = ({ user, body, messages }) => {
             />
           </Navbar>
           {/* Search Bar */}
+          {/* <div className="scroll"> */}
           <Form inline>
             <FormControl
               type="text"
               placeholder="Search"
               className="searchBarMessages"
             />
+            {/* will need to have a search either with state and useEffect or with key binding */}
             {/* <Button variant="outline-info">Search</Button> */}
           </Form>
           {body}
+          {/* </div> */}
         </Col>
         <Col md={6}>{messages}</Col>
       </Row>
