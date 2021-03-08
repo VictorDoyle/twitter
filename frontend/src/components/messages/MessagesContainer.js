@@ -19,13 +19,13 @@ const MessagesContainer = ({ user, body, messages }) => {
         <Col>
           <NavBar {...user} />
         </Col>
-        <Col>
+        <Col className="centerCol">
           <Navbar
             sticky="top"
             expand="lg"
             variant="light"
             bg="light"
-            className="StickyNav"
+            className="chatNav"
           >
             <Navbar.Brand href="#">Messages</Navbar.Brand>
             <FontAwesomeIcon
@@ -36,7 +36,7 @@ const MessagesContainer = ({ user, body, messages }) => {
           </Navbar>
           {/* Search Bar */}
           {/* <div className="scroll"> */}
-          <Form inline>
+          <Form inline className="searchBar">
             <FormControl
               type="text"
               placeholder="Search"
@@ -48,7 +48,23 @@ const MessagesContainer = ({ user, body, messages }) => {
           {body}
           {/* </div> */}
         </Col>
-        <Col md={6}>{messages}</Col>
+        <Col md={6} className="chatCol">
+          <Navbar
+            sticky="top"
+            expand="lg"
+            variant="light"
+            bg="light"
+            className=" chatNav"
+          >
+            <Navbar.Brand href="#">Person</Navbar.Brand>
+            <FontAwesomeIcon
+              className="image-icon StickyNavIcon messagesIcon"
+              icon={faEnvelope}
+              size="1x"
+            />
+          </Navbar>
+          {messages}
+        </Col>
       </Row>
     </Container>
   );

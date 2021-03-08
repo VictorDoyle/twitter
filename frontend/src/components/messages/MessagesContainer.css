@@ -1,9 +1,34 @@
+.centerCol {
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.chatCol {
+  padding: 0 !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.chatNav {
+  padding-left: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  background: white !important;
+  font-weight: bold;
+}
+
 .messagesIcon {
   margin-left: 45% !important;
 }
 
+.searchBar {
+  border: 1px solid #ced4da;
+  border-radius: 1000000px;
+  margin: 1%;
+}
+
 .searchBarMessages {
   width: 100% !important;
+  border-radius: 10000px;
+  border: 0 !important;
 }
 
 .scroll {
