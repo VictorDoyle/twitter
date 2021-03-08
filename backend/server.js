@@ -1,7 +1,7 @@
 import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-import typeDefs from "./schema.js";
+import { typeDefs, resolvers } from "./schema.js";
 // import resolvers from "./resolvers.js";
 import cors from "cors";
 import path from "path";
@@ -49,17 +49,6 @@ app.get("/", function (request, response) {
 const __dirname = path.resolve();
 // makes the uploads folder accessible
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
-
-const resolvers = {
-  Query: {
-    allUsers: () => {
-      return db.user.findMany({ include: { tweets: true } });
-    },
-    allTweets: () => {
-      return db.tweet.findMany({ include: { author: true } });
-    },
-  },
-};
 
 const server = new ApolloServer({ resolvers, typeDefs });
 server.listen({ port: 4025 }).then(() => {

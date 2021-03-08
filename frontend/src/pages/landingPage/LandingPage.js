@@ -7,8 +7,36 @@ import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
 import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
+import { useMutation, gql } from "@apollo/client";
 
 import "./LandingPage.css";
+
+const SignupMutation = gql`
+  mutation Mutation(
+    $signupUserEmail: String!
+    $signupUserFirstname: String!
+    $signupUserPassword: String!
+    $signupUserLastname: String
+    $signupUserDateOfBirth: String
+  ) {
+    signupUser(
+      email: $signupUserEmail
+      firstname: $signupUserFirstname
+      password: $signupUserPassword
+      lastname: $signupUserLastname
+      dateOfBirth: $signupUserDateOfBirth
+    ) {
+      id
+      email
+      firstname
+      password
+      lastname
+      username
+      bio
+      dateOfBirth
+    }
+  }
+`;
 
 const LandingPage = ({ history }) => {
   const [firstname, setName] = useState("");
@@ -18,6 +46,7 @@ const LandingPage = ({ history }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
+  const [signup] = useMutation(SignupMutation);
 
   useEffect(() => {
     /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
@@ -36,13 +65,21 @@ const LandingPage = ({ history }) => {
   };
   const handleShow = () => setShow(true);
 
-  const submitHandler = () => {
-    UserModel.create({
-      firstname: firstname,
-      email: email,
-      password: password,
-      dateOfBirth: dateOfBirth,
+  const submitHandler = async () => {
+    await signup({
+      variables: {
+        firstname: firstname,
+        email: email,
+        password: password,
+        dateOfBirth: dateOfBirth,
+      },
     });
+    // UserModel.create({
+    //   firstname: firstname,
+    //   email: email,
+    //   password: password,
+    //   dateOfBirth: dateOfBirth,
+    // });
     history.push("/login");
   };
 
