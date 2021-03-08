@@ -7,8 +7,36 @@ import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
 import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
+import { useMutation, gql } from "@apollo/client";
 
 import "./LandingPage.css";
+
+const SignupMutation = gql`
+  mutation Mutation(
+    $email: String!
+    $firstname: String!
+    $password: String!
+    $lastname: String
+    $dateOfBirth: String
+  ) {
+    signupUser(
+      email: $email
+      firstname: $firstname
+      password: $password
+      lastname: $lastname
+      dateOfBirth: $dateOfBirth
+    ) {
+      id
+      email
+      firstname
+      password
+      lastname
+      username
+      bio
+      dateOfBirth
+    }
+  }
+`;
 
 const LandingPage = ({ history }) => {
   const [firstname, setName] = useState("");
@@ -18,6 +46,7 @@ const LandingPage = ({ history }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
+  const [signup, { loading, error }] = useMutation(SignupMutation);
 
   useEffect(() => {
     /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
@@ -36,15 +65,26 @@ const LandingPage = ({ history }) => {
   };
   const handleShow = () => setShow(true);
 
-  const submitHandler = () => {
-    UserModel.create({
-      firstname: firstname,
-      email: email,
-      password: password,
-      dateOfBirth: dateOfBirth,
+  const submitHandler = async () => {
+    console.log(firstname, email, password);
+    await signup({
+      variables: {
+        firstname: firstname,
+        email: email,
+        password: password,
+        dateOfBirth: dateOfBirth,
+      },
     });
+    // UserModel.create({
+    //   firstname: firstname,
+    //   email: email,
+    //   password: password,
+    //   dateOfBirth: dateOfBirth,
+    // });
     history.push("/login");
   };
+  if (loading) return <p>Loading </p>;
+  if (error) return <p>An error occurred</p>;
 
   return (
     <>
