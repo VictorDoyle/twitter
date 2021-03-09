@@ -5,7 +5,7 @@ import LandingPageRight from "../../components/LandingPage/LandingPageRight";
 import LandingNavbar from "../../components/LandingPage/LandingNavbar";
 import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
-import UserModel from "../../models/user";
+// import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
 import { useMutation, gql } from "@apollo/client";
 
@@ -55,7 +55,7 @@ const LandingPage = ({ history }) => {
     setDateOfBirth(date);
   }, [month, day, birthYear]);
   // ANCHOR
-  console.log(dateOfBirth);
+  // console.log(dateOfBirth);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
@@ -66,7 +66,6 @@ const LandingPage = ({ history }) => {
   const handleShow = () => setShow(true);
 
   const submitHandler = async () => {
-    console.log(firstname, email, password);
     await signup({
       variables: {
         firstname: firstname,
