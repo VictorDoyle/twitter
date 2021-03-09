@@ -7,11 +7,8 @@ import { useSetRecoilState } from "recoil";
 // import { useMutation, gql } from "@apollo/client";
 
 // const SigninMutation = gql`
-//   mutation SigninUserMutation(
-//     $signinUserEmail: String!
-//     $signinUserPassword: String!
-//   ) {
-//     signinUser(email: $signinUserEmail, password: $signinUserPassword)
+//   mutation SigninUserMutation($email: String!, $password: String!) {
+//     signinUser(email: $email, password: $password)
 //   }
 // `;
 
@@ -22,13 +19,14 @@ const LoginPage = ({ history }) => {
   // const [login, { loading, error }] = useMutation(SigninMutation);
 
   const submitHandler = async (e) => {
-    // await login({
+    e.preventDefault();
+    // const { data } = await login({
     //   variables: {
     //     email: email,
     //     password: password,
     //   },
     // });
-    e.preventDefault();
+    // console.log(data);
     AuthModel.login({ email, password }).then((json) => {
       localStorage.setItem("uid", json.token);
       localStorage.setItem("userinfo", JSON.stringify(json));

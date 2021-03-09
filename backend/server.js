@@ -11,8 +11,8 @@ import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
 import likeRoutes from "./controllers/likes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
-
-// import { protect } from "./middleware/authRequired.js";
+// auth
+import { getUserId } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
 const app = express();
@@ -52,6 +52,13 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 const server = new ApolloServer({
   resolvers,
   typeDefs,
+  // context: ({ req }) => {
+  //   return {
+  //     ...req,
+  //     db,
+  //     userId: req && req.headers.authorization ? getUserId(req) : null,
+  //   };
+  // },
 });
 server.listen({ port: 4025 }).then(() => {
   console.log(`

@@ -21,7 +21,12 @@ export const typeDefs = gql`
       dateOfBirth: String
     ): User!
     # login a user
-    signinUser(email: String!, password: String!): String!
+    signinUser(email: String!, password: String!): Auth
+  }
+
+  type Auth {
+    token: String
+    user: User
   }
   type Tweet {
     id: ID!
@@ -84,21 +89,22 @@ export const resolvers = {
       });
     },
     // this route will give a token if the userand password match
-    signinUser: async (parent, { email, password }) => {
-      const foundUser = await db.user.findUnique({
-        where: { email },
-      });
-      if (!foundUser) {
-        throw new Error("No user found ");
-      }
-      const isValid = await bcrypt.compare(password, foundUser.password);
-      if (!isValid) {
-        throw new Error("Incorrect password ");
-      }
-      if (isValid) {
-        const token = generateToken(foundUser.id);
-        return token;
-      }
-    },
+    // signinUser: async (parent, { email, password }) => {
+    //   const foundUser = await db.user.findUnique({
+    //     where: { email },
+    //   });
+    //   console.log(foundUser);
+    //   if (!foundUser) {
+    //     throw new Error("No user found ");
+    //   }
+    //   const isValid = await bcrypt.compare(password, foundUser.password);
+    //   if (!isValid) {
+    //     throw new Error("Incorrect password ");
+    //   }
+    //   if (isValid) {
+    //     const token = generateToken(foundUser.id);
+    //     return { token, foundUser };
+    //   }
+    // },
   },
 };
