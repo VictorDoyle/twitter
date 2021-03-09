@@ -53,7 +53,7 @@ function MainFeed(props) {
         //   console.log(user);
       }
     },
-    [user]
+    [user],
   );
 
   const { loading, error, data } = useQuery(TWEETS_QUERY, {
@@ -96,7 +96,6 @@ function MainFeed(props) {
             ) : (
               <TweetEntry redirectToFeed={redirectToFeed} user={user} />
             )}
-            {/* {tweets ? <Infinite /> : <h1>No Tweets</h1>} */}
             <Infinite tweets={tweets} />
           </Col>
           <Col>
