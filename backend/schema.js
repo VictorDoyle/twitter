@@ -22,6 +22,8 @@ export const typeDefs = gql`
     ): User!
     # login a user
     signinUser(email: String!, password: String!): Auth
+    # create a messages
+    createMessage(description: String): Message
   }
 
   type Auth {
@@ -45,7 +47,18 @@ export const typeDefs = gql`
     dateOfBirth: String
     password: String
     tweets: [Tweet]
+    messages: [Message]
     # tweet(id: ID): Tweet
+  }
+  type Friend {
+    id: ID!
+    user: User
+  }
+  type Message {
+    id: ID!
+    user: User
+    description: String
+    createdAt: String
   }
   # for future
   # type Comment {
@@ -58,6 +71,10 @@ export const typeDefs = gql`
   type Query {
     allUsers: [User!]!
     allTweets: [Tweet!]!
+    allMessages: [Message!]!
+  }
+  type Subscription {
+    messageReceived(messageID: ID!): Message
   }
 `;
 
@@ -69,11 +86,14 @@ export const resolvers = {
     allTweets: () => {
       return db.tweet.findMany({ include: { author: true } });
     },
+    allMessages: () => {
+      return db.message.findMany({ include: { user: true } });
+    },
   },
   Mutation: {
     signupUser: async (
       parent,
-      { email, password, firstname, lastname, dateOfBirth },
+      { email, password, firstname, lastname, dateOfBirth }
     ) => {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);
@@ -106,5 +126,12 @@ export const resolvers = {
     //     return { token, foundUser };
     //   }
     // },
+    createMessage: async (parent, args) => {
+      return db.message.create({
+        data: {
+          description: args.description,
+        },
+      });
+    },
   },
 };

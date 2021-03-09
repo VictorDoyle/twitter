@@ -25,6 +25,8 @@ model User {
   tweets      Tweet[]
   Comment     Comment[]
   Like        Like[]
+  messages    Message[]
+  friends     Friend[]
 }
 
 model Tweet {
@@ -61,4 +63,22 @@ model Like {
   authorId  Int
   tweet     Tweet    @relation(fields: [tweetId], references: [id])
   tweetId   Int
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  friend      Friend   @relation(fields: [userId], references: [id])
+  friendId    Int
+  description String
+
+}
+
+model Friend {
+  id      Int       @id @default(autoincrement())
+  user    User      @relation(fields: [userId], references: [id])
+  userId  Int
+  Message Message[]
 }
