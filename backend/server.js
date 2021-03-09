@@ -49,7 +49,10 @@ const __dirname = path.resolve();
 // makes the uploads folder accessible
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-const server = new ApolloServer({ resolvers, typeDefs });
+const server = new ApolloServer({
+  resolvers,
+  typeDefs,
+});
 server.listen({ port: 4025 }).then(() => {
   console.log(`
   Server is running!

@@ -1,6 +1,7 @@
 import prisma from "@prisma/client";
 import { gql } from "apollo-server";
 import bcrypt from "bcryptjs";
+import generateToken from "./utils/generateToken.js";
 
 const db = new prisma.PrismaClient({
   log: ["info", "warn"],
@@ -19,11 +20,14 @@ export const typeDefs = gql`
       password: String!
       dateOfBirth: String
     ): User!
+    # login a user
+    signinUser(email: String!, password: String!): String!
   }
   type Tweet {
     id: ID!
     description: String
     category: String
+    createdAt: String
     author: User
   }
   type User {
@@ -78,6 +82,23 @@ export const resolvers = {
           dateOfBirth: dateOfBirth,
         },
       });
+    },
+    // this route will give a token if the userand password match
+    signinUser: async (parent, { email, password }) => {
+      const foundUser = await db.user.findUnique({
+        where: { email },
+      });
+      if (!foundUser) {
+        throw new Error("No user found ");
+      }
+      const isValid = await bcrypt.compare(password, foundUser.password);
+      if (!isValid) {
+        throw new Error("Incorrect password ");
+      }
+      if (isValid) {
+        const token = generateToken(foundUser.id);
+        return token;
+      }
     },
   },
 };
