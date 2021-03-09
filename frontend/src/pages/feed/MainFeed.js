@@ -23,6 +23,7 @@ const TWEETS_QUERY = gql`
       id
       description
       category
+      createdAt
       author {
         id
         firstname
