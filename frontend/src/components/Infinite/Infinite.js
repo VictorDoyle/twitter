@@ -2,23 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import tweetModel from "../../models/tweet";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useQuery, gql } from "@apollo/client";
-
-const TWEETS_QUERY = gql`
-  query TWEETS_QUERY {
-    allTweets {
-      id
-      description
-      category
-      author {
-        id
-        firstname
-        lastname
-        username
-      }
-    }
-  }
-`;
 
 const Infinite = (props) => {
   console.log(props.tweets);
@@ -30,7 +13,6 @@ const Infinite = (props) => {
       {props.tweets.allTweets.map((tweet) => (
         <>
           <Tweets {...tweet} key {...tweet.id} />
-          {console.log(tweet)}
         </>
       ))}
     </>
