@@ -78,9 +78,10 @@ function MainFeed(props) {
     console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
     tweetModel.create({ description: description, authorId: Number(user.id) });
-  const redirectToFeed = () => {
-    const { history } = props;
-    if (history) history.go(0);
+    const redirectToFeed = () => {
+      const { history } = props;
+      if (history) history.go(0);
+    };
   };
 
   const handleState = () => {
