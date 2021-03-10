@@ -6,8 +6,12 @@ const db = new prisma.PrismaClient({
 });
 export default {
   Query: {
-    allTweets: () => {
-      return db.tweet.findMany({ include: { author: true } });
+    allTweets: async () => {
+      try {
+        return db.tweet.findMany({ include: { author: true } });
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 };

@@ -5,21 +5,23 @@ const typeDefs = gql`
 
   type Mutation {
     # Create a new User
-    signupUser(
-      email: String!
-      firstname: String!
-      lastname: String
-      password: String!
-      dateOfBirth: String
-    ): User!
+    signupUser(signupInput: SignupInput): User!
     # login a user
-    signinUser(email: String!, password: String!): Auth
+    signinUser(email: String!, password: String!): User!
   }
 
-  type Auth {
-    token: String
-    user: User
+  input SignupInput {
+    email: String!
+    firstname: String!
+    lastname: String
+    password: String!
+    dateOfBirth: String
   }
+
+  # type Auth {
+  #   token: String
+  #   user: User
+  # }
   type Tweet {
     id: ID!
     description: String
@@ -35,6 +37,7 @@ const typeDefs = gql`
     username: String
     bio: String
     dateOfBirth: String
+    token: String
     password: String
     tweets: [Tweet]
     # tweet(id: ID): Tweet
