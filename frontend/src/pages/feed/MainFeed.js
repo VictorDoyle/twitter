@@ -77,7 +77,7 @@ function MainFeed() {
     e.preventDefault();
     console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
-    tweetModel.create({ description: description, authorId: user.user.id });
+    tweetModel.create({ description: description, authorId: Number(user.id) });
   };
 
   const handleState = () => {

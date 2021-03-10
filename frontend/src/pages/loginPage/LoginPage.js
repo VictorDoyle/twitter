@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import Login from "../../components/loginPage/Login";
-import AuthModel from "../../models/auth";
+// import AuthModel from "../../models/auth";
 import { userState } from "../../recoil/atoms";
 import { useSetRecoilState } from "recoil";
 import { useMutation, gql } from "@apollo/client";
@@ -39,6 +39,7 @@ const LoginPage = ({ history }) => {
     });
     if (!loading && data) {
       const { signinUser } = data;
+      console.log(signinUser);
       localStorage.setItem("uid", JSON.stringify(signinUser.token));
       localStorage.setItem("userinfo", JSON.stringify(signinUser));
       setUser(signinUser);

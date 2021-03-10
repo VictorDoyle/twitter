@@ -8,7 +8,14 @@ export default {
   Query: {
     allTweets: async () => {
       try {
-        return db.tweet.findMany({ include: { author: true } });
+        return db.tweet.findMany({
+          orderBy: [
+            {
+              id: "desc",
+            },
+          ],
+          include: { author: true },
+        });
       } catch (error) {
         throw new Error(error);
       }
