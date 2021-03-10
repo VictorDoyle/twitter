@@ -19,7 +19,18 @@ const typeDefs = gql`
     dateOfBirth: String
     token: String
     password: String
+    messages: [Message]
     tweets: [Tweet]
+  }
+  type Friend {
+    id: ID!
+    user: User
+  }
+  type Message {
+    id: ID!
+    user: User
+    description: String
+    createdAt: String
   }
   # for future
   # type Comment {
@@ -33,6 +44,7 @@ const typeDefs = gql`
     allUsers: [User!]!
     allTweets: [Tweet!]!
     getTweet(tweetId: ID!): Tweet
+    allMessages: [Message!]!
   }
   type Mutation {
     # Create a new User
@@ -43,6 +55,8 @@ const typeDefs = gql`
     createTweet(description: String!): Tweet!
     # delete a tweet
     deleteTweet(tweetId: ID!): String!
+    # create a messages
+    createMessage(description: String): Message
   }
 
   input SignupInput {
@@ -51,6 +65,9 @@ const typeDefs = gql`
     lastname: String
     password: String!
     dateOfBirth: String
+  }
+  type Subscription {
+    messageReceived(messageID: ID!): Message
   }
 `;
 

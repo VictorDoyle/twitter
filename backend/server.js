@@ -12,6 +12,7 @@ import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
 import likeRoutes from "./controllers/likes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+import followRoutes from "./controllers/follows.js";
 // auth
 import { getUserId } from "./middleware/authRequired.js";
 
@@ -37,6 +38,7 @@ app.use("/api/likes", likeRoutes);
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/follows", followRoutes);
 
 /* FIXME: */
 app.use("/api/logout", logout);
