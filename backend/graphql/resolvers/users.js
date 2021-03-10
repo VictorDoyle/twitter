@@ -36,14 +36,14 @@ export default {
         if (!valid) {
           throw new UserInputError("Errors", { errors });
         }
-        // const user = await db.user.findUnique({ email });
-        // if (user) {
-        //   throw new UserInputError("email is taken", {
-        //     errors: {
-        //       email: "This email is taken",
-        //     },
-        //   });
-        // }
+        const user = await db.user.findUnique({ where: { email } });
+        if (user) {
+          throw new UserInputError("email is taken", {
+            errors: {
+              email: "This email is taken",
+            },
+          });
+        }
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
         password = hash;
