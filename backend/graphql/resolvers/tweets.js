@@ -58,18 +58,19 @@ export default {
     },
     async deleteTweet(_, { tweetId }, context) {
       const user = checkAuth(context);
-
+      // console.log(tweetId);
+      // auth for user to only be able to delete their tweets
       try {
-        if (user.email === tweet.email) {
-          await db.tweet.delete({
-            where: {
-              id: tweetId,
-            },
-          });
-          return "Tweet deleted successfully";
-        } else {
-          throw new AuthenticationError("Action not allowed");
-        }
+        // if (user.id === tweetId) {
+        await db.tweet.delete({
+          where: {
+            id: Number(tweetId),
+          },
+        });
+        return "Tweet deleted successfully";
+        // } else {
+        //   throw new AuthenticationError("Action not allowed");
+        // }
       } catch (err) {
         throw new Error(err);
       }
