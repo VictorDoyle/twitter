@@ -12,27 +12,13 @@ import { useMutation, gql } from "@apollo/client";
 import "./LandingPage.css";
 
 const SignupMutation = gql`
-  mutation Mutation(
-    $email: String!
-    $firstname: String!
-    $password: String!
-    $lastname: String
-    $dateOfBirth: String
-  ) {
-    signupUser(
-      email: $email
-      firstname: $firstname
-      password: $password
-      lastname: $lastname
-      dateOfBirth: $dateOfBirth
-    ) {
-      id
+  mutation Mutation($SignupInput: SignupInput) {
+    signupUser(signupInput: $SignupInput) {
       email
+      id
       firstname
-      password
       lastname
       username
-      bio
       dateOfBirth
     }
   }
@@ -68,10 +54,12 @@ const LandingPage = ({ history }) => {
   const submitHandler = async () => {
     await signup({
       variables: {
-        firstname: firstname,
-        email: email,
-        password: password,
-        dateOfBirth: dateOfBirth,
+        SignupInput: {
+          firstname: firstname,
+          email: email,
+          password: password,
+          dateOfBirth: dateOfBirth,
+        },
       },
     });
     // UserModel.create({

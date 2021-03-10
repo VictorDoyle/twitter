@@ -1,7 +1,8 @@
 import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-import { typeDefs, resolvers } from "./schema.js";
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers/index.js";
 import cors from "cors";
 import path from "path";
 /* routes */
@@ -54,13 +55,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 const server = new ApolloServer({
   resolvers,
   typeDefs,
-  // context: ({ req }) => {
-  //   return {
-  //     ...req,
-  //     db,
-  //     userId: req && req.headers.authorization ? getUserId(req) : null,
-  //   };
-  // },
+  context: ({ req }) => ({ req /* pubSub */ }),
 });
 server.listen({ port: 4025 }).then(() => {
   console.log(`
