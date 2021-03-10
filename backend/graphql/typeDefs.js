@@ -2,26 +2,6 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
   scalar Date
-
-  type Mutation {
-    # Create a new User
-    signupUser(signupInput: SignupInput): User!
-    # login a user
-    signinUser(email: String!, password: String!): User!
-  }
-
-  input SignupInput {
-    email: String!
-    firstname: String!
-    lastname: String
-    password: String!
-    dateOfBirth: String
-  }
-
-  # type Auth {
-  #   token: String
-  #   user: User
-  # }
   type Tweet {
     id: ID!
     description: String
@@ -40,7 +20,6 @@ const typeDefs = gql`
     token: String
     password: String
     tweets: [Tweet]
-    # tweet(id: ID): Tweet
   }
   # for future
   # type Comment {
@@ -53,6 +32,23 @@ const typeDefs = gql`
   type Query {
     allUsers: [User!]!
     allTweets: [Tweet!]!
+    getTweet(tweetId: ID!): Tweet
+  }
+  type Mutation {
+    # Create a new User
+    signupUser(signupInput: SignupInput): User!
+    # login a user
+    signinUser(email: String!, password: String!): User!
+    createTweet(description: String!): Tweet!
+    deleteTweet(tweetId: ID!): String!
+  }
+
+  input SignupInput {
+    email: String!
+    firstname: String!
+    lastname: String
+    password: String!
+    dateOfBirth: String
   }
 `;
 

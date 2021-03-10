@@ -39,7 +39,6 @@ const LoginPage = ({ history }) => {
     });
     if (!loading && data) {
       const { signinUser } = data;
-      console.log(signinUser);
       localStorage.setItem("uid", JSON.stringify(signinUser.token));
       localStorage.setItem("userinfo", JSON.stringify(signinUser));
       setUser(signinUser);
