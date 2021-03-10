@@ -1,7 +1,8 @@
 import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-import { typeDefs, resolvers } from "./schema.js";
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers/index.js";
 import cors from "cors";
 import path from "path";
 /* routes */
