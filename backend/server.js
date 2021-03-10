@@ -53,13 +53,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 const server = new ApolloServer({
   resolvers,
   typeDefs,
-  // context: ({ req }) => {
-  //   return {
-  //     ...req,
-  //     db,
-  //     userId: req && req.headers.authorization ? getUserId(req) : null,
-  //   };
-  // },
+  context: ({ req }) => ({ req /* pubSub */ }),
 });
 server.listen({ port: 4025 }).then(() => {
   console.log(`

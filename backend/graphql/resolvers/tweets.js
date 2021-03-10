@@ -39,19 +39,20 @@ export default {
     },
   },
   Mutation: {
-    async createTweet(_, { body }, context) {
+    async createTweet(_, { description }, context) {
       const user = checkAuth(context);
-
+      console.log(user);
       if (description.trim() === "") {
-        throw new Error("Tweet body must not be empty");
+        throw new Error("Tweet description must not be empty");
       }
 
       return db.tweet.create({
-        body,
-        user: user.id,
-        email: user.email,
-        // username: user.username,
-        // createdAt: new Date().toISOString(),
+        data: {
+          description: description,
+          author: Number(user.id),
+          // username: user.username,
+          // createdAt: new Date().toISOString(),
+        },
       });
     },
     async deleteTweet(_, { tweetId }, context) {
