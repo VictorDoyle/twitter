@@ -6,7 +6,7 @@ export default {
   Query: {
     ...tweetResolvers.Query,
     ...usersResolvers.Query,
-    ...MessagesResolvers.Query,
+    ...messagesResolvers.Query,
   },
   Mutation: {
     ...usersResolvers.Mutation,
