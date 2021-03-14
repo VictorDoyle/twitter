@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import MainFeed from "../pages/feed/MainFeed";
 import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
+import MessagePage from "../pages/messagesPage/MessagePage";
 import Profile from "../pages/profile/Profile";
 import CommentShow from "../pages/commentShow/CommentShow";
 
@@ -14,6 +15,7 @@ const Routes = () => {
       <Route path="/login" component={LoginPage} />
       {/* main pages */}
       <Route exact path="/feed" component={MainFeed} />
+      <Route exact path="/messages" component={MessagePage} />
 
       <Route exact path="/tweets/:id" component={CommentShow} />
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Card, Col, Container, Row, Nav, NavDropdown } from "react-bootstrap";
+import React from "react";
+import { Card, Col, Container, Row, NavDropdown } from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import {
   faComment,

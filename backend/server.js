@@ -1,15 +1,20 @@
 import express from "express";
 import prisma from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-import typeDefs from "./schema.js";
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers/index.js";
 import cors from "cors";
+import path from "path";
 /* routes */
 import { register, login, logout } from "./controllers/auth.js";
 import userRoutes from "./controllers/users.js";
 import tweetRoutes from "./controllers/tweets.js";
 import commentRoutes from "./controllers/comments.js";
 import likeRoutes from "./controllers/likes.js";
-// import { protect } from "./middleware/authRequired.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
+import followRoutes from "./controllers/follows.js";
+// auth
+import { getUserId } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
 const app = express();
@@ -32,6 +37,9 @@ app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/upload", uploadRoutes);
+app.use("/api/follows", followRoutes);
+
 /* FIXME: */
 app.use("/api/logout", logout);
 
@@ -39,18 +47,16 @@ app.get("/", function (request, response) {
   response.send("Welcome to SQL");
 });
 
-const resolvers = {
-  Query: {
-    allUsers: () => {
-      return db.user.findMany({ include: { tweets: true } });
-    },
-    allTweets: () => {
-      return db.tweet.findMany({ include: { author: true } });
-    },
-  },
-};
+// import module doesn't work with __dir
+const __dirname = path.resolve();
+// makes the uploads folder accessible
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-const server = new ApolloServer({ resolvers, typeDefs });
+const server = new ApolloServer({
+  resolvers,
+  typeDefs,
+  context: ({ req }) => ({ req /* pubSub */ }),
+});
 server.listen({ port: 4025 }).then(() => {
   console.log(`
   Server is running!

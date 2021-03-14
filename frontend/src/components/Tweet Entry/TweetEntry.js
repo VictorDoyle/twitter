@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import tweetModel from "../../models/tweet";
 import { Card, Col, Container, Row, Form, Button } from "react-bootstrap";
 import {
   faUserCircle,
@@ -16,7 +17,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TweetEntry.css";
 
-function TweetEntry({ submitHandler, description, descriptionValue }) {
+function TweetEntry({ user, history, redirectToFeed }) {
+  const [description, setDescription] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("Tweet Created");
+    // currently pulling in more information so this is what is needed for id
+    tweetModel.create({ description: description, authorId: user.user.id });
+    redirectToFeed();
+  };
+
   return (
     <Form onSubmit={submitHandler}>
       <Card>
@@ -38,8 +49,7 @@ function TweetEntry({ submitHandler, description, descriptionValue }) {
                     type="description"
                     rows={2.5}
                     placeholder="What's Happening?"
-                    value={descriptionValue}
-                    onChange={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </Form.Group>
               </Card.Body>
