@@ -5,10 +5,24 @@ import LandingPageRight from "../../components/LandingPage/LandingPageRight";
 import LandingNavbar from "../../components/LandingPage/LandingNavbar";
 import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
-import UserModel from "../../models/user";
+// import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
+import { useMutation, gql } from "@apollo/client";
 
 import "./LandingPage.css";
+
+const SignupMutation = gql`
+  mutation Mutation($SignupInput: SignupInput) {
+    signupUser(signupInput: $SignupInput) {
+      email
+      id
+      firstname
+      lastname
+      username
+      dateOfBirth
+    }
+  }
+`;
 
 const LandingPage = ({ history }) => {
   const [firstname, setName] = useState("");
@@ -18,6 +32,7 @@ const LandingPage = ({ history }) => {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
+  const [signup, { loading, error }] = useMutation(SignupMutation);
 
   useEffect(() => {
     /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
@@ -26,7 +41,7 @@ const LandingPage = ({ history }) => {
     setDateOfBirth(date);
   }, [month, day, birthYear]);
   // ANCHOR
-  console.log(dateOfBirth);
+  // console.log(dateOfBirth);
 
   const [show, setShow] = useState(false);
   const handleClose = (e) => {
@@ -36,15 +51,27 @@ const LandingPage = ({ history }) => {
   };
   const handleShow = () => setShow(true);
 
-  const submitHandler = () => {
-    UserModel.create({
-      firstname: firstname,
-      email: email,
-      password: password,
-      dateOfBirth: dateOfBirth,
+  const submitHandler = async () => {
+    await signup({
+      variables: {
+        SignupInput: {
+          firstname: firstname,
+          email: email,
+          password: password,
+          dateOfBirth: dateOfBirth,
+        },
+      },
     });
+    // UserModel.create({
+    //   firstname: firstname,
+    //   email: email,
+    //   password: password,
+    //   dateOfBirth: dateOfBirth,
+    // });
     history.push("/login");
   };
+  if (loading) return <p>Loading </p>;
+  if (error) return <p>An error occurred</p>;
 
   return (
     <>

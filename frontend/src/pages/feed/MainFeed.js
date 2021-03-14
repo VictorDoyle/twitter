@@ -23,6 +23,7 @@ const TWEETS_QUERY = gql`
       id
       description
       category
+      createdAt
       author {
         id
         firstname
@@ -33,9 +34,9 @@ const TWEETS_QUERY = gql`
   }
 `;
 
-function MainFeed() {
+function MainFeed(props) {
   const [user, setUser] = useRecoilState(userState);
-  const [description, setDescription] = useState("");
+
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
 
@@ -53,7 +54,7 @@ function MainFeed() {
         //   console.log(user);
       }
     },
-    [user]
+    [user],
   );
 
   const { loading, error, data } = useQuery(TWEETS_QUERY, {
@@ -76,7 +77,11 @@ function MainFeed() {
     e.preventDefault();
     console.log("Mail Mother fucker");
     // currently pulling in more information so this is what is needed for id
-    tweetModel.create({ description: description, authorId: user.user.id });
+    tweetModel.create({ description: description, authorId: Number(user.id) });
+    const redirectToFeed = () => {
+      const { history } = props;
+      if (history) history.go(0);
+    };
   };
 
   const handleState = () => {
@@ -96,13 +101,8 @@ function MainFeed() {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-              <TweetEntry
-                submitHandler={submitHandler}
-                description={(e) => setDescription(e.target.value)}
-                descriptionValue={description}
-              />
+              <TweetEntry redirectToFeed={redirectToFeed} user={user} />
             )}
-            {/* {tweets ? <Infinite /> : <h1>No Tweets</h1>} */}
             <Infinite tweets={tweets} />
           </Col>
           <Col>
