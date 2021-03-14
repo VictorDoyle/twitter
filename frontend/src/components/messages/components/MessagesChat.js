@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { Button } from "react-bootstrap";
 import "./MessagesChat.css";
 import { useQuery, gql } from "@apollo/client";
@@ -38,4 +38,4 @@ const MessagesChat = () => {
   );
 };
 
-export default MessagesChat;
+export default MessagesChat; */
