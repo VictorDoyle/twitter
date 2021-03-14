@@ -1,6 +1,7 @@
 import tweetResolvers from "./tweets.js";
 import usersResolvers from "./users.js";
 import messagesResolvers from "./messages.js";
+import commentsResolvers from "./comments.js";
 
 export default {
   Query: {
@@ -12,5 +13,6 @@ export default {
     ...usersResolvers.Mutation,
     ...tweetResolvers.Mutation,
     ...messagesResolvers.Mutation,
+    ...commentsResolvers.Mutation,
   },
 };
