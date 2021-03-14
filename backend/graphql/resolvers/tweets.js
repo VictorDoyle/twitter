@@ -11,6 +11,8 @@ export default {
     allTweets: async () => {
       try {
         return db.tweet.findMany({
+          skip: 1,
+          take: 10,
           orderBy: [
             {
               id: "desc",

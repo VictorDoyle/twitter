@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql, PubSub } from "apollo-server";
 
 const typeDefs = gql`
   scalar Date
@@ -30,10 +30,11 @@ const typeDefs = gql`
   }
   type Message {
     id: ID!
-    user: User
+    user: String!
     description: String
     createdAt: String
   }
+
   # for future
   type Comment {
     id: ID!
@@ -52,9 +53,9 @@ const typeDefs = gql`
   # Top level
   type Query {
     allUsers: [User!]!
-    allTweets: [Tweet!]!
+    allTweets(offset: Int, limit: Int): [Tweet!]!
     getTweet(tweetId: ID!): Tweet
-    allMessages: [Message!]!
+    messages: [Message!]!
   }
   type Mutation {
     # Create a new User
@@ -66,7 +67,7 @@ const typeDefs = gql`
     # delete a tweet
     deleteTweet(tweetId: ID!): String!
     # create a messages
-    createMessage(description: String): Message
+    # createMessage(description: String, user: String!): Message!
     # create a comment
     createComment(tweetId: String!, content: String!): Tweet!
     # delete a comment
@@ -82,9 +83,9 @@ const typeDefs = gql`
     password: String!
     dateOfBirth: String
   }
-  type Subscription {
-    messageReceived(messageID: ID!): Message
-  }
+  # type Subscription {
+  # messages: [Message!]
+  # }
 `;
 
 export default typeDefs;
