@@ -8,17 +8,31 @@ const db = new prisma.PrismaClient({
 
 export default {
   Query: {
-    allMessages: () => {
-      return db.message.findMany({ include: { user: true } });
+    messages: async () => {
+      try {
+        return db.message.findMany({
+          orderBy: [
+            {
+              id: "desc",
+            },
+          ],
+        });
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
+
   Mutation: {
     createMessage: async (parent, args) => {
-      return db.message.create({
+      console.log(args);
+      const message = await db.message.create({
         data: {
           description: args.description,
+          user: args.user,
         },
       });
+      return message;
     },
   },
 };
