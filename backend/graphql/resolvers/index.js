@@ -13,4 +13,7 @@ export default {
     ...tweetResolvers.Mutation,
     ...messagesResolvers.Mutation,
   },
+  Subscription: {
+    ...messagesResolvers.Subscription,
+  },
 };

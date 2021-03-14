@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql, PubSub } from "apollo-server";
 
 const typeDefs = gql`
   scalar Date
@@ -66,6 +66,9 @@ const typeDefs = gql`
     lastname: String
     password: String!
     dateOfBirth: String
+  }
+  type Subscription {
+    messages: [Message!]
   }
 `;
 
