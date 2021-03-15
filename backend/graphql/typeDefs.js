@@ -50,7 +50,7 @@ const typeDefs = gql`
   # Top level
   type Query {
     allUsers: [User!]!
-    allTweets(take: Int, skip: Int): [Tweet!]!
+    allTweets(take: Int, skip: Int, myCursor: Int): [Tweet!]!
     getTweet(tweetId: ID!): Tweet
     messages: [Message!]!
   }

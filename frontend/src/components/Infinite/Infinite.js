@@ -19,7 +19,8 @@ const Infinite = ({ tweets, onLoadMore }) => {
         <div className="loading">
           {tweets ? (
             <InfiniteScroll
-              dataLength={tweets.length}
+              dataLength={30}
+              hasMore={true}
               next={onLoadMore}
               className="scroll"
               loader={<h4>Loading...</h4>}

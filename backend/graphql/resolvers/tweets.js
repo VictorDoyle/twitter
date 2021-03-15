@@ -8,10 +8,13 @@ const db = new prisma.PrismaClient({
 });
 export default {
   Query: {
-    allTweets: async (_, { take, skip }) => {
+    allTweets: async (_, { take, skip, myCursor }) => {
       const opArgs = {
         take: take,
         skip: skip,
+        cursor: {
+          id: myCursor,
+        },
         include: { author: true },
         orderBy: [
           {

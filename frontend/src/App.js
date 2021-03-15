@@ -15,10 +15,23 @@ const client = new ApolloClient({
       Query: {
         fields: {
           allTweets: {
-            ...offsetLimitPagination(),
+            keyArgs: ["type"],
 
-            read(existing, { args: { offset, limit } }) {
-              return existing && existing.slice(offset, offset + limit);
+            // While args.cursor may still be important for requesting
+            // a given page, it no longer has any role to play in the
+            // merge function.
+            merge(existing, incoming, { readField }) {
+              const merged = { ...existing };
+              incoming.forEach((item) => {
+                merged[readField("id", item)] = item;
+              });
+              return merged;
+            },
+
+            // Return all items stored so far, to avoid ambiguities
+            // about the order of the items.
+            read(existing) {
+              return existing && Object.values(existing);
             },
           },
         },
