@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+/* import React, { useEffect } from "react";
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import { Container } from "react-bootstrap";
@@ -20,3 +20,4 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+ */
