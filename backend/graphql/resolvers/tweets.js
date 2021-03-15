@@ -8,18 +8,30 @@ const db = new prisma.PrismaClient({
 });
 export default {
   Query: {
-    allTweets: async () => {
+    allTweets: async (_, { take, skip, myCursor }) => {
+      const opArgs = {
+        take: take,
+        skip: skip,
+        cursor: {
+          id: myCursor,
+        },
+        include: { author: true },
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+        ],
+      };
       try {
-        return db.tweet.findMany({
-          skip: 1,
-          take: 10,
-          orderBy: [
-            {
-              id: "desc",
-            },
-          ],
-          include: { author: true },
-        });
+        return await db.tweet.findMany(opArgs);
+        // return db.tweet.findMany({
+        //   orderBy: [
+        //     {
+        //       id: "desc",
+        //     },
+        //   ],
+        //   include: { author: true },
+        // });
       } catch (error) {
         throw new Error(error);
       }
@@ -43,7 +55,7 @@ export default {
   Mutation: {
     async createTweet(_, { description }, context) {
       const user = checkAuth(context);
-      console.log(user);
+      console.log(user.id);
       if (description.trim() === "") {
         throw new Error("Tweet description must not be empty");
       }
@@ -51,7 +63,7 @@ export default {
       const newTweet = await db.tweet.create({
         data: {
           description: description,
-          authorId: Number(user.id),
+          authorId: user.id,
           // username: user.username,
           createdAt: new Date().toISOString(),
         },

@@ -7,8 +7,8 @@ const Infinite = ({ tweets, onLoadMore }) => {
 
   const Mapper = () => (
     <>
-      {tweets.map((tweet) => (
-        <Tweets {...tweet} key={tweet.id} />
+      {tweets.map((tweet, i) => (
+        <Tweets {...tweet} key={i + 1} />
       ))}
     </>
   );
@@ -20,6 +20,7 @@ const Infinite = ({ tweets, onLoadMore }) => {
           {tweets ? (
             <InfiniteScroll
               dataLength={tweets.length}
+              hasMore={true}
               next={onLoadMore}
               className="scroll"
               loader={<h4>Loading...</h4>}

@@ -9,7 +9,7 @@ import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
-import tweetModel from "../../models/tweet";
+// import tweetModel from "../../models/tweet";
 import StickyNav from "../../components/StickyNav/StickyNav";
 import Infinite from "../../components/Infinite/Infinite";
 
@@ -18,8 +18,16 @@ import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
-  query TWEETS_QUERY($offset: Int, $limit: Int) {
-    allTweets(offset: $offset, limit: $limit) {
+  query Query(
+    $allTweetsTake: Int
+    $allTweetsSkip: Int
+    $allTweetsMyCursor: Int
+  ) {
+    allTweets(
+      take: $allTweetsTake
+      skip: $allTweetsSkip
+      myCursor: $allTweetsMyCursor
+    ) {
       id
       description
       category
@@ -39,29 +47,26 @@ function MainFeed(props) {
 
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
-  const [limit, setLimit] = useState(10);
+  // const [limit, setLimit] = useState(10);
+  const [take] = useState(10);
+  const [end, setEnd] = useState(54);
+  const [skip, setSkip] = useState(0);
 
   useEffect(
     function () {
       if (!user) {
         // takes user from storage and sets global again
         setUser(JSON.parse(localStorage.getItem("userinfo")));
-
-        //   AuthModel.verify().then((json) => {
-        //     localStorage.setItem("uid", json.token);
-        //     console.log(json.user, "login");
-        //     setUser(json);
-        //   });
-        //   console.log(user);
       }
     },
-    [user]
+    [user],
   );
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
     variables: {
-      offset: 0,
-      limit,
+      allTweetsTake: take,
+      allTweetsSkip: skip,
+      allTweetsMyCursor: end,
     },
   });
 
@@ -96,7 +101,19 @@ function MainFeed(props) {
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  console.log(tweets);
+  console.log(data.allTweets.length, "hiiii");
+  // console.log(tweets[0].id, "hiiii");
+  console.log(end);
+  const bigFetch = () => {
+    fetchMore(
+      {
+        variables: {
+          allTweetsMyCursor: end - take,
+        },
+      },
+      setEnd(tweets[tweets.length - 1].id),
+    );
+  };
 
   return (
     <div className="Feed" id="feed-page">
@@ -110,24 +127,9 @@ function MainFeed(props) {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-              <TweetEntry redirectToFeed={redirectToFeed} user={user} />
+              <TweetEntry user={user} redirectToFeed={redirectToFeed} />
             )}
-            <Infinite
-              tweets={tweets}
-              onLoadMore={() => {
-                if (tweets.allTweets) {
-                  const currentLength = data.allTweets.length;
-                  console.log(currentLength, "hiiii");
-                  fetchMore({
-                    variables: { offset: currentLength, limit: 10 },
-                  }).then((fetchMoreResult) => {
-                    setLimit(
-                      currentLength + fetchMoreResult.data.allTweets.length
-                    );
-                  });
-                }
-              }}
-            />
+            <Infinite tweets={tweets} onLoadMore={bigFetch} />
           </Col>
           <Col>
             <WhatsHappening />

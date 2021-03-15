@@ -80,6 +80,7 @@ export default {
         throw new UserInputError("Wrong crendetials", { errors });
       }
       const token = generateToken(foundUser.id);
+      console.log(token);
       return { ...foundUser, id: foundUser.id, token: token };
     },
   },

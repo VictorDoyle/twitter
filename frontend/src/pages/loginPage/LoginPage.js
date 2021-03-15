@@ -39,7 +39,8 @@ const LoginPage = ({ history }) => {
     });
     if (!loading && data) {
       const { signinUser } = data;
-      localStorage.setItem("uid", JSON.stringify(signinUser.token));
+      //FIXME having issues with auth on token
+      localStorage.setItem("uid", JSON.stringify(`Bearer ${signinUser.token}`));
       localStorage.setItem("userinfo", JSON.stringify(signinUser));
       setUser(signinUser);
       history.push("/feed");
