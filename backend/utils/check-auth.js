@@ -1,16 +1,21 @@
 import { AuthenticationError } from "apollo-server";
-
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+
+dotenv.config();
 
 const checkAuth = (context) => {
   // context = { ... headers }
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
     // Bearer ....
-    const token = authHeader.split("Bearer ")[1];
-    if (token) {
+    const token = authHeader.split(" ")[1];
+    const unQ = token.replace(/["]+/g, "");
+    if (unQ) {
       try {
-        const user = jwt.verify(token, process.env.JWT_SECRET);
+        const user = jwt.verify(unQ, process.env.JWT_SECRET);
+        // const user = await db.user.findUnique({ where: checkedToken.id });
+        console.log(user);
         return user;
       } catch (err) {
         throw new AuthenticationError("Invalid/Expired token");
