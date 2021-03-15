@@ -1,6 +1,6 @@
 import express from "express";
 import prisma from "@prisma/client";
-import { ApolloServer, PubSub } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers/index.js";
 import cors from "cors";
@@ -18,7 +18,6 @@ import { getUserId } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
 const app = express();
-const pubsub = new PubSub();
 
 const db = new prisma.PrismaClient({
   log: ["info", "warn"],
@@ -56,12 +55,8 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 const server = new ApolloServer({
   resolvers,
   typeDefs,
-  subscriptions: {
-    path: "/subscriptions",
-  },
-  context: ({ req, pubsub }) => ({ req, pubsub }),
+  context: ({ req }) => ({ req /* pubSub */ }),
 });
-
 server.listen({ port: 4025 }).then(() => {
   console.log(`
   Server is running!
@@ -69,7 +64,6 @@ server.listen({ port: 4025 }).then(() => {
   http://localhost:4025
   studio.apollographql.com/dev
   `);
-  console.log(resolvers.Query.allUsers);
 });
 
 /* Sever Listener */

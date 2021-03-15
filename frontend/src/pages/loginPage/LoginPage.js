@@ -39,14 +39,11 @@ const LoginPage = ({ history }) => {
     });
     if (!loading && data) {
       const { signinUser } = data;
-      //FIXME having issues with auth on token
-      localStorage.setItem("uid", JSON.stringify(`Bearer ${signinUser.token}`));
+      localStorage.setItem("uid", JSON.stringify(signinUser.token));
       localStorage.setItem("userinfo", JSON.stringify(signinUser));
       setUser(signinUser);
       history.push("/feed");
     }
-    if (loading) return "Loading...";
-    if (error) return `Error! ${error.message}`;
 
     // AuthModel.login({ email, password }).then((json) => {
     //   localStorage.setItem("uid", json.token);

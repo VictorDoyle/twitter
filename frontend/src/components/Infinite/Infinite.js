@@ -2,13 +2,14 @@ import React from "react";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Infinite = ({ tweets, onLoadMore }) => {
+const Infinite = ({ tweets }) => {
+  const { allTweets } = tweets;
   console.log(tweets);
 
   const Mapper = () => (
     <>
-      {tweets.map((tweet, i) => (
-        <Tweets {...tweet} key={i + 1} />
+      {allTweets.map((tweet) => (
+        <Tweets {...tweet} key={tweet.id} />
       ))}
     </>
   );
@@ -17,11 +18,9 @@ const Infinite = ({ tweets, onLoadMore }) => {
     <>
       <div className="container" style={{ padding: 0 }}>
         <div className="loading">
-          {tweets ? (
+          {allTweets ? (
             <InfiniteScroll
-              dataLength={tweets.length}
-              hasMore={true}
-              next={onLoadMore}
+              dataLength={allTweets.length}
               className="scroll"
               loader={<h4>Loading...</h4>}
               endMessage={

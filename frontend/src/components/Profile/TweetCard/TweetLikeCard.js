@@ -1,44 +1,36 @@
 /* base */
-import React, { useState, useReducer } from "react";
-import "./TweetCard.css";
+import react, {useEffect, useState, useReducer} from 'react'
+import './TweetCard.css'
 
 /* vendor modules */
+import { Card, Row, Col, Container, Modal, Button, Form} from 'react-bootstrap'
 import {
-  Card,
-  Row,
-  Col,
-  Container,
-  Modal,
-  Button,
-  Form,
-} from "react-bootstrap";
-import {
-  faComment,
-  faHeart,
-  faShareSquare,
-} from "@fortawesome/free-regular-svg-icons";
+    faComment,
+    faHeart,
+    faShareSquare,
+  } from "@fortawesome/free-regular-svg-icons";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import CommentModel from "../../../models/comment";
-import LikeModel from "../../../models/likes";
+import CommentModel from '../../../models/comment';
+import LikeModel from '../../../models/likes';
 /* LIKE TWEET FUNCTION */
 
 function likeUnlikeReducer(state, action) {
-  switch (action.type) {
-    case "LIKE_TWEET":
-      console.log("liked");
-      return { ...state, liked: true };
-    case "UNLIKE_TWEET":
-      console.log("unliked");
-      return { ...state, liked: false };
-    default:
-      throw new Error();
+    switch (action.type) {
+      case 'LIKE_TWEET':
+        console.log("liked")
+        return {  ...state, liked: true }
+      case 'UNLIKE_TWEET':
+        console.log("unliked")
+        return { ...state, liked: false }
+      default:
+        throw new Error()
+    }
   }
-}
 
-/* ============= FIX ASAP ============= */
-/* FIXME: add the following for scalability:
+            /* ============= FIX ASAP ============= */
+  /* FIXME: add the following for scalability:
   
   if (tweet.hasProperty(like === {props.user[0].id}) {
       liked: true
@@ -46,34 +38,33 @@ function likeUnlikeReducer(state, action) {
         liked: false
   
   */
-const initialState = {
-  liked: false,
-};
+  const initialState = {
+    liked: false
+  };
 
-function TweetLikeCard(props) {
-  /* like/unlike functionality */
-  const [state, dispatch] = useReducer(likeUnlikeReducer, initialState);
-  const { liked } = state;
 
-  /* commenting on a tweet functionality */
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [content, setComment] = useState("");
+  
 
-  /* submit comment to tweets  via profile*/
-  function submitComment(event) {
-    event.preventDefault();
-    CommentModel.create({
-      content: content,
-      authorId: props.user[0].id,
-      tweetId: props.id,
-    }).then((json) => {
-      if (json.status === 201) {
-        console.log(json, "user commented");
+function TweetLikeCard (props) {
+     /* like/unlike functionality */
+    const [state, dispatch] = useReducer(likeUnlikeReducer, initialState);
+    const { liked } = state
+    
+    /* commenting on a tweet functionality */
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [content, setComment] = useState("");
+    
+    /* submit comment to tweets  via profile*/
+    function submitComment(event) {
+        event.preventDefault();
+        CommentModel.create({ content: content, authorId: props.user[0].id, tweetId:props.id}).then(json => {
+          if (json.status === 201) {
+            console.log(json, "user commented"); 
+          }
+        });
       }
-    });
-  }
 
       function handleDislike(event) {
         event.preventDefault();
@@ -126,62 +117,45 @@ function TweetLikeCard(props) {
               </Col>
                 
                 <Modal show={show} onHide={handleClose} className="modalStyle">
-                  <Modal.Header
-                    closeButton
-                    className="closeModalButton"
-                  ></Modal.Header>
-                  <span className="dividerModal"></span>
-                  <Card.Body>
-                    <FontAwesomeIcon
-                      className="image-icon"
-                      icon={faUserCircle}
-                      size="2x"
-                    />
-                    <Card.Title className="username">
-                      {props.tweet.author.firstname}
-                    </Card.Title>
-
-                    <Card.Subtitle className="tweet-title mb-2 text-muted">
-                      @{props.tweet.author.username}
-                    </Card.Subtitle>
-                    <Card.Subtitle className="tweet-title mb-2 text-muted">
-                      {/* {tweet.createdAt} */}
-                    </Card.Subtitle>
-                    <Card.Text className="text-left">
-                      {" "}
-                      {props.tweet.description}
-                    </Card.Text>
-                  </Card.Body>
-                  <Modal.Body className="tweet-title text-muted">
-                    {" "}
-                    Replying To @{props.tweet.author.firstname}{" "}
-                    {/* TODO: add Link to={'/profile/props.author.id} */}
-                  </Modal.Body>
-
-                  <Modal.Body>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Control
-                        as="textarea"
-                        value={content}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Tweet Your Reply"
-                        rows={3}
-                      />
+                    <Modal.Header closeButton className="closeModalButton">
+                    </Modal.Header>
+                        <span className="dividerModal"></span>
+                        <Card.Body>
+                            
+                        <FontAwesomeIcon
+                        className="image-icon"
+                        icon={faUserCircle}
+                        size="2x"
+                            />
+                      <Card.Title className="username">{props.tweet.author.firstname}</Card.Title>
+                      
+                      <Card.Subtitle className="tweet-title mb-2 text-muted">
+                        @{props.tweet.author.username}
+                      </Card.Subtitle>
+                      <Card.Subtitle className="tweet-title mb-2 text-muted">
+                        {/* {tweet.createdAt} */}
+                      </Card.Subtitle>
+                      <Card.Text className="text-left"> {props.tweet.description}</Card.Text>
+                      </Card.Body>
+                    <Modal.Body className="tweet-title text-muted"> Replying To @{props.tweet.author.firstname}  {/* TODO: add Link to={'/profile/props.author.id} */}</Modal.Body>
+                   
+                    <Modal.Body> 
+                    <Form.Group controlId="exampleForm.ControlTextarea1" >
+                        
+                            
+                       
+                        <Form.Control as="textarea" value = { content } onChange={(e) => setComment(e.target.value)}  placeholder="Tweet Your Reply" rows={3} />
                     </Form.Group>
-                  </Modal.Body>
-                  <Modal.Footer>
+                        
+                        
+                        
+                    </Modal.Body>
+                    <Modal.Footer>
                     {/* TODO: if Form.Input === empty show button style 1 else if Form.Input !=== empty show style 2 */}
-                    <Button
-                      variant="primary"
-                      className="tweetButton"
-                      onClick={(event) => {
-                        handleClose();
-                        submitComment(event);
-                      }}
-                    >
-                      Reply
+                    <Button variant="primary" className="tweetButton" onClick={(event) => {handleClose(); submitComment(event)}} >
+                        Reply
                     </Button>
-                  </Modal.Footer>
+                    </Modal.Footer>
                 </Modal>
 
               {/* END OF COMMENTING FUNCTION MODAL */}
@@ -231,4 +205,4 @@ function TweetLikeCard(props) {
 
 }
 
-export default TweetLikeCard;
+export default TweetLikeCard
