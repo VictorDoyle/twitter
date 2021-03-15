@@ -8,7 +8,8 @@ import "./App.css";
 const client = new ApolloClient({
   uri: "http://localhost:4025",
   headers: {
-    authorization: localStorage.getItem("uid") || "",
+    authorization: localStorage.uid || "",
+    // authorization: localStorage.getItem("uid") || "",
   },
   cache: new InMemoryCache({
     typePolicies: {
@@ -16,23 +17,26 @@ const client = new ApolloClient({
         fields: {
           allTweets: {
             keyArgs: ["type"],
+            merge(existing = [], incoming = []) {
+              return [...existing, ...incoming];
+            },
 
             // While args.cursor may still be important for requesting
             // a given page, it no longer has any role to play in the
             // merge function.
-            merge(existing, incoming, { readField }) {
-              const merged = { ...existing };
-              incoming.forEach((item) => {
-                merged[readField("id", item)] = item;
-              });
-              return merged;
-            },
+            // merge(existing, incoming, { readField }) {
+            //   const merged = { ...existing };
+            //   incoming.forEach((item) => {
+            //     merged[readField("id", item)] = item;
+            //   });
+            //   return merged;
+            // },
 
-            // Return all items stored so far, to avoid ambiguities
-            // about the order of the items.
-            read(existing) {
-              return existing && Object.values(existing);
-            },
+            // // Return all items stored so far, to avoid ambiguities
+            // // about the order of the items.
+            // read(existing) {
+            //   return existing && Object.values(existing);
+            // },
           },
         },
       },

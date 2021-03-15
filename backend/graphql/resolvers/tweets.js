@@ -18,7 +18,7 @@ export default {
         include: { author: true },
         orderBy: [
           {
-            id: "desc",
+            createdAt: "desc",
           },
         ],
       };
@@ -55,7 +55,7 @@ export default {
   Mutation: {
     async createTweet(_, { description }, context) {
       const user = checkAuth(context);
-      console.log(user);
+      console.log(user.id);
       if (description.trim() === "") {
         throw new Error("Tweet description must not be empty");
       }
@@ -63,7 +63,7 @@ export default {
       const newTweet = await db.tweet.create({
         data: {
           description: description,
-          authorId: Number(user.id),
+          authorId: user.id,
           // username: user.username,
           createdAt: new Date().toISOString(),
         },

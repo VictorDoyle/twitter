@@ -48,7 +48,9 @@ function MainFeed(props) {
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
   // const [limit, setLimit] = useState(10);
-  const [end, setEnd] = useState(30);
+  const [take] = useState(10);
+  const [end, setEnd] = useState(54);
+  const [skip, setSkip] = useState(0);
 
   useEffect(
     function () {
@@ -62,8 +64,8 @@ function MainFeed(props) {
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
     variables: {
-      allTweetsTake: 10,
-      allTweetsSkip: 0,
+      allTweetsTake: take,
+      allTweetsSkip: skip,
       allTweetsMyCursor: end,
     },
   });
@@ -101,6 +103,17 @@ function MainFeed(props) {
   }
   console.log(data.allTweets.length, "hiiii");
   // console.log(tweets[0].id, "hiiii");
+  console.log(end);
+  const bigFetch = () => {
+    fetchMore(
+      {
+        variables: {
+          allTweetsMyCursor: end - take,
+        },
+      },
+      setEnd(tweets[tweets.length - 1].id),
+    );
+  };
 
   return (
     <div className="Feed" id="feed-page">
@@ -114,25 +127,9 @@ function MainFeed(props) {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-              <TweetEntry user={user} />
+              <TweetEntry user={user} redirectToFeed={redirectToFeed} />
             )}
-            <Infinite
-              tweets={tweets}
-              onLoadMore={
-                () =>
-                  fetchMore({
-                    variables: {
-                      allTweetsMyCursor: end - 10,
-                    },
-                  }).then(setEnd(tweets[0].id))
-                // .then((fetchMoreResult) => {
-                //   setLimit(
-                //     data.allTweets.length +
-                //       fetchMoreResult.data.allTweets.length,
-                //   );
-                // })
-              }
-            />
+            <Infinite tweets={tweets} onLoadMore={bigFetch} />
           </Col>
           <Col>
             <WhatsHappening />
