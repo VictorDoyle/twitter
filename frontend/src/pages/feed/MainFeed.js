@@ -18,8 +18,8 @@ import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 const TWEETS_QUERY = gql`
-  query TWEETS_QUERY {
-    allTweets {
+  query TWEETS_QUERY($offset: Int, $limit: Int) {
+    allTweets(offset: $offset, limit: $limit) {
       id
       description
       category
@@ -39,6 +39,7 @@ function MainFeed(props) {
 
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
+  const [limit, setLimit] = useState(10);
 
   useEffect(
     function () {
@@ -54,40 +55,48 @@ function MainFeed(props) {
         //   console.log(user);
       }
     },
-    [user],
+    [user]
   );
 
-  const { loading, error, data } = useQuery(TWEETS_QUERY, {
-    variables: { limit: 10 },
+  const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
+    variables: {
+      offset: 0,
+      limit,
+    },
   });
-  console.log(data);
+
   useEffect(() => {
     if (loading === false && data) {
       console.log(data);
-      setTweets(data);
+      setTweets(data.allTweets);
       console.log("tweets set");
     }
   }, [loading, data]);
   if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
 
   //TODO refactor for authorID = user.id
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log("Mail Mother fucker");
-  //   // currently pulling in more information so this is what is needed for id
-  //   tweetModel.create({ description: description, authorId: Number(user.id) });
-  //   const redirectToFeed = () => {
-  //     const { history } = props;
-  //     if (history) history.go(0);
-  //   };
-  // };
+  /*   const submitHandler = (e) => {
+      e.preventDefault();
+      console.log("Mail Mother fucker");
+      // currently pulling in more information so this is what is needed for id
+      tweetModel.create({
+        description: description,
+        authorId: Number(user.id),
+      }); */
+  const redirectToFeed = () => {
+    const { history } = props;
+    if (history) history.go(0);
+  };
 
   const handleState = () => {
     console.log("handlestate");
     setInput(true);
   };
+  if (tweets.allTweets) {
+    console.log(tweets.allTweets.length, "I'm tweets");
+  }
+  console.log(tweets);
 
   return (
     <div className="Feed" id="feed-page">
@@ -103,7 +112,22 @@ function MainFeed(props) {
             ) : (
               <TweetEntry user={user} />
             )}
-            <Infinite tweets={tweets} />
+            <Infinite
+              tweets={tweets}
+              onLoadMore={() => {
+                if (tweets.allTweets) {
+                  const currentLength = data.allTweets.length;
+                  console.log(currentLength, "hiiii");
+                  fetchMore({
+                    variables: { offset: currentLength, limit: 10 },
+                  }).then((fetchMoreResult) => {
+                    setLimit(
+                      currentLength + fetchMoreResult.data.allTweets.length
+                    );
+                  });
+                }
+              }}
+            />
           </Col>
           <Col>
             <WhatsHappening />
