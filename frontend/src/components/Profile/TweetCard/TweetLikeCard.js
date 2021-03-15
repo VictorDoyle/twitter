@@ -20,13 +20,8 @@ import {
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-<<<<<<< HEAD
-import CommentModel from '../../../models/comment';
-import LikeModel from '../../../models/likes';
-=======
 import CommentModel from "../../../models/comment";
-
->>>>>>> origin/submaster
+import LikeModel from "../../../models/likes";
 /* LIKE TWEET FUNCTION */
 
 function likeUnlikeReducer(state, action) {
@@ -80,7 +75,6 @@ function TweetLikeCard(props) {
     });
   }
 
-<<<<<<< HEAD
       function handleDislike(event) {
         event.preventDefault();
         LikeModel.delete(props.id).then(json => {
@@ -131,54 +125,6 @@ function TweetLikeCard(props) {
                 </Card.Link>
               </Col>
                 
-=======
-  return (
-    <>
-      <Card>
-        <Container>
-          <Row>
-            <Col xs={2}>
-              <FontAwesomeIcon
-                className="image-icon"
-                icon={faUserCircle}
-                size="4x"
-              />
-            </Col>
-            <Col>
-              <Card.Body>
-                <Card.Title className="username">
-                  {props.tweet.author.firstname}
-                </Card.Title>
-                <Card.Subtitle className="tweet-title mb-2 text-muted">
-                  @{props.tweet.author.username}
-                </Card.Subtitle>
-                <Card.Subtitle className="tweet-title mb-2 text-muted">
-                  {/* {tweet.createdAt} */}
-                </Card.Subtitle>
-                <Card.Text className="text-left">
-                  {" "}
-                  {props.tweet.description}
-                </Card.Text>
-              </Card.Body>
-              <Row>
-                {/* commenting on a tweet Modal */}
-                <Col>
-                  <Card.Link className="text-muted" href="#">
-                    <FontAwesomeIcon
-                      onClick={handleShow}
-                      className="image-icon"
-                      icon={faComment}
-                      size="1x"
-                    />
-
-                    <Card.Subtitle className="tweet-title mb-2 text-muted">
-                      {/* {props.tweet.comments.length} */}{" "}
-                      {/* FIXME: import backend comments select */}
-                    </Card.Subtitle>
-                  </Card.Link>
-                </Col>
-
->>>>>>> origin/submaster
                 <Modal show={show} onHide={handleClose} className="modalStyle">
                   <Modal.Header
                     closeButton
@@ -238,7 +184,6 @@ function TweetLikeCard(props) {
                   </Modal.Footer>
                 </Modal>
 
-<<<<<<< HEAD
               {/* END OF COMMENTING FUNCTION MODAL */}
 
               <Col>
@@ -284,61 +229,6 @@ function TweetLikeCard(props) {
         </>
     )
 
-=======
-                {/* END OF COMMENTING FUNCTION MODAL */}
-
-                <Col>
-                  <Card.Link className="text-muted" href="#">
-                    <FontAwesomeIcon
-                      className="image-icon"
-                      icon={faRetweet}
-                      size="1x"
-                    />
-
-                    <Card.Subtitle className="tweet-title mb-2 text-muted">
-                      3
-                    </Card.Subtitle>
-                  </Card.Link>
-                </Col>
-                <Col>
-                  {/* LIKE TWEET FUNCTION */}
-                  <Card.Link className="text-muted" href="#">
-                    {liked === false ? (
-                      <FontAwesomeIcon
-                        onClick={() => dispatch({ type: "LIKE_TWEET" })}
-                        className="image-icon"
-                        icon={faHeart}
-                        size="1x"
-                        color="grey"
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        onClick={() => dispatch({ type: "UNLIKE_TWEET" })}
-                        className="image-icon"
-                        icon={faHeart}
-                        size="1x"
-                        color="red"
-                      />
-                    )}
-                  </Card.Link>
-                </Col>
-                <Col>
-                  <Card.Link className="text-muted" href="#">
-                    <FontAwesomeIcon
-                      className="image-icon"
-                      icon={faShareSquare}
-                      size="1x"
-                    />
-                  </Card.Link>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </Card>
-    </>
-  );
->>>>>>> origin/submaster
 }
 
 export default TweetLikeCard;
