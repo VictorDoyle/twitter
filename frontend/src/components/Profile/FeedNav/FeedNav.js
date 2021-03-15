@@ -6,29 +6,28 @@ import { Nav, Tab, Col } from "react-bootstrap";
 import Feed from "../Feed/Feed";
 import FeedWithReplies from "../Feed/WithReplies";
 import "./FeedNav.css";
-import tweetModel from "../../../models/tweet";
+// import tweetModel from "../../../models/tweet";
 import FeedLikes from "../Feed/Likes";
 import likeModel from "../../../models/likes";
 
-function FeedNav() {
+function FeedNav({ tweets }) {
   const user = useRecoilState(userState);
-  const [tweets, setTweets] = useState([]);
+  // const [tweets, setTweets] = useState([]);
   const [likes, setLikes] = useState([]);
-
   /* base */
   useEffect(function () {
-    fetchData();
+    // fetchData();
     fetchLikes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* get tweets by user id */
-  const fetchData = () => {
-    tweetModel.showByUser(user[0].id).then((data) => {
-      console.log("these are tweets fetched by data", data);
-      setTweets(data.tweetsByAuthor);
-    });
-  };
+  // const fetchData = () => {
+  //   tweetModel.showByUser(user[0].id).then((data) => {
+  //     console.log("these are tweets fetched by data", data);
+  //     setTweets(data.tweetsByAuthor);
+  //   });
+  // };
 
   /* get likes by user id */
   /* FIXME: refactor route */

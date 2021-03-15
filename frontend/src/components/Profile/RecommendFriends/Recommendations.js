@@ -12,7 +12,8 @@ import UserModel from "../../../models/user";
 // import RecommendationLoader from "../Loaders/RecommendationLoader";
 
 function Recommendations() {
-  const [/* recommendations, */ setRecommendations] = useState([]);
+  // eslint-disable-next-line
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(function () {
     fetchData();

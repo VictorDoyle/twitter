@@ -18,19 +18,23 @@ import FeedNav from "../../components/Profile/FeedNav/FeedNav";
 import tweetModel from "../../models/tweet";
 
 function Profile() {
-  const user = useRecoilState(userState);
-  console.log("this is the current user id", user[0].id);
-  const [setTweets] = useState([]);
+  const [user, setUser] = useRecoilState(userState);
+  const [tweets, setTweets] = useState([]);
 
-  /* base */
-  useEffect(function () {
-    fetchData();
+  useEffect(() => {
+    if (!user) {
+      setUser(JSON.parse(localStorage.getItem("userinfo")));
+    } else {
+      console.log(user.id);
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
+  /* base */
 
   /* get tweets by user id */
   const fetchData = () => {
-    tweetModel.showByUser(user[0].id).then((data) => {
+    tweetModel.showByUser(user.id).then((data) => {
       console.log("these are tweets fetched by data", data);
       setTweets(data.tweetsByAuthor);
     });
@@ -48,7 +52,7 @@ function Profile() {
             <Header />
 
             {/* profile subheader nav */}
-            <FeedNav />
+            <FeedNav tweets={tweets} />
             {/* profile feed */}
             {/*  <Feed tweets = {tweets} user= { user }/>
              */}
