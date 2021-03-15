@@ -2,7 +2,7 @@
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 /* bootstrap component imports */
-import { Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 /* base */
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
@@ -12,32 +12,29 @@ import Recommendations from "../../components/Profile/RecommendFriends/Recommend
 import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
 import Happening from "../../components/Profile/Happening/Happening";
 import Header from "../../components/Profile/Header/Header";
-import Feed from "../../components/Profile/Feed/Feed";
+// import Feed from "../../components/Profile/Feed/Feed";
 import FeedNav from "../../components/Profile/FeedNav/FeedNav";
 /* models */
-import tweetModel from '../../models/tweet'
+import tweetModel from "../../models/tweet";
 
 function Profile() {
   const user = useRecoilState(userState);
-  console.log("this is the current user id", user[0].id)
-  const [tweets, setTweets] = useState([]);
-
+  console.log("this is the current user id", user[0].id);
+  const [setTweets] = useState([]);
 
   /* base */
   useEffect(function () {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* get tweets by user id */
   const fetchData = () => {
     tweetModel.showByUser(user[0].id).then((data) => {
-      console.log("these are tweets fetched by data", data)
+      console.log("these are tweets fetched by data", data);
       setTweets(data.tweetsByAuthor);
     });
   };
-
-  
-  
 
   return (
     <div className="Feed" id="feed-page">
@@ -47,23 +44,19 @@ function Profile() {
             <NavBar />
           </Col>
           <Col md={6}>
-        
-          {/* profile header*/}
-          <Header/>
+            {/* profile header*/}
+            <Header />
 
-          {/* profile subheader nav */}
-          <FeedNav />
-          {/* profile feed */}
-         {/*  <Feed tweets = {tweets} user= { user }/>
- */}
-
-
-          
+            {/* profile subheader nav */}
+            <FeedNav />
+            {/* profile feed */}
+            {/*  <Feed tweets = {tweets} user= { user }/>
+             */}
           </Col>
           <Col>
-          {/* SECTION: media box */}
+            {/* SECTION: media box */}
             <ProfileMedia />
-          {/* Recommended Follows */}
+            {/* Recommended Follows */}
             <Recommendations />
             {/* What's Happening Section */}
             <Happening />

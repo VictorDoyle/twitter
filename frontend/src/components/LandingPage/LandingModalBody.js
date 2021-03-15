@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Form } from "react-bootstrap";
 //TODO Really should get a npm package for date or ask about making dates in javascript
 const LandingModalBody = ({

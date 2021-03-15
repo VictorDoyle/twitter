@@ -1,5 +1,5 @@
 /* base */
-import react, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import "./Follow.css";
 import {
   Card,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -35,7 +35,6 @@ function WhoToFollow() {
       </Row>
       <Row>
         <span className="divider"></span>
-        
       </Row>
     </Container>
   );

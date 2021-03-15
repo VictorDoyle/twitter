@@ -50,7 +50,7 @@ function MainFeed(props) {
   // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
   const [end, setEnd] = useState(54);
-  const [skip, setSkip] = useState(0);
+  const [skip] = useState(0);
 
   useEffect(
     function () {
@@ -59,6 +59,7 @@ function MainFeed(props) {
         setUser(JSON.parse(localStorage.getItem("userinfo")));
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user],
   );
 
@@ -76,6 +77,7 @@ function MainFeed(props) {
       setTweets(data.allTweets);
       console.log("tweets set");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
   if (loading) return "Loading...";
 

@@ -37,6 +37,8 @@ function TweetEntry({ user, history, redirectToFeed }) {
     // tweetModel.create({ description: description, authorId: user.user.id });
     redirectToFeed();
   };
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
   return (
     <Form onSubmit={submitHandler}>

@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
 import WhoToFollow from "../../components/WhoToFollow/WhoToFollow";
 import tweetModel from "../../models/tweet";
-import CommentModel from "../../models/comment";
+// import CommentModel from "../../models/comment";
 import StickyNavTweet from "../../components/StickyNavTweet/StickyNavTweet";
 
 import React, { useState, useEffect } from "react";
@@ -17,6 +17,7 @@ function CommentShow({ match }) {
 
   useEffect(function () {
     fetchTweet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchTweet = () => {
@@ -39,7 +40,7 @@ function CommentShow({ match }) {
             {/* <TweetShow tweet={tweet} /> */}
             {tweet.author ? <TweetShow tweet={tweet} /> : <h1>Loading</h1>}
             {tweet.comments ? (
-              tweet.comments.map((comment, index) => {
+              tweet.comments.map((comment) => {
                 return (
                   <>
                     <Comments {...comment} key={comment.id} />
