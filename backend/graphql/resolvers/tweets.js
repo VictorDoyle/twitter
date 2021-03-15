@@ -8,16 +8,27 @@ const db = new prisma.PrismaClient({
 });
 export default {
   Query: {
-    allTweets: async () => {
+    allTweets: async (_, { take, skip }) => {
+      const opArgs = {
+        take: take,
+        skip: skip,
+        include: { author: true },
+        orderBy: [
+          {
+            id: "desc",
+          },
+        ],
+      };
       try {
-        return db.tweet.findMany({
-          orderBy: [
-            {
-              id: "desc",
-            },
-          ],
-          include: { author: true },
-        });
+        return await db.tweet.findMany(opArgs);
+        // return db.tweet.findMany({
+        //   orderBy: [
+        //     {
+        //       id: "desc",
+        //     },
+        //   ],
+        //   include: { author: true },
+        // });
       } catch (error) {
         throw new Error(error);
       }

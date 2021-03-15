@@ -9,7 +9,8 @@ const typeDefs = gql`
     createdAt: String
     author: User
     comments: [Comment]!
-    likes: [Like]
+    likes: [Like]!
+    likeCount: Int!
   }
   type User {
     id: ID!
@@ -34,17 +35,14 @@ const typeDefs = gql`
     description: String
     createdAt: String
   }
-  # for future
   type Comment {
     id: ID!
     content: String
-    # author: User
-    author: String!
+    author: User
     tweet: Tweet
   }
   type Like {
     id: ID!
-    value: Int
     # author: User
     author: String!
     tweet: Tweet
@@ -52,7 +50,7 @@ const typeDefs = gql`
   # Top level
   type Query {
     allUsers: [User!]!
-    allTweets: [Tweet!]!
+    allTweets(take: Int, skip: Int): [Tweet!]!
     getTweet(tweetId: ID!): Tweet
     allMessages: [Message!]!
   }
@@ -68,7 +66,7 @@ const typeDefs = gql`
     # create a messages
     createMessage(description: String): Message
     # create a comment
-    createComment(tweetId: String!, content: String!): Tweet!
+    createComment(tweetId: ID!, content: String!, authorId: ID): Tweet!
     # delete a comment
     deleteComment(tweetId: ID!, commentId: ID!): Tweet!
     # like a tweetpo  m

@@ -73,16 +73,16 @@ function MainFeed(props) {
 
   //TODO refactor for authorID = user.id
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("Mail Mother fucker");
-    // currently pulling in more information so this is what is needed for id
-    tweetModel.create({ description: description, authorId: Number(user.id) });
-    const redirectToFeed = () => {
-      const { history } = props;
-      if (history) history.go(0);
-    };
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   console.log("Mail Mother fucker");
+  //   // currently pulling in more information so this is what is needed for id
+  //   tweetModel.create({ description: description, authorId: Number(user.id) });
+  //   const redirectToFeed = () => {
+  //     const { history } = props;
+  //     if (history) history.go(0);
+  //   };
+  // };
 
   const handleState = () => {
     console.log("handlestate");
@@ -101,7 +101,7 @@ function MainFeed(props) {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-              <TweetEntry redirectToFeed={redirectToFeed} user={user} />
+              <TweetEntry user={user} />
             )}
             <Infinite tweets={tweets} />
           </Col>
