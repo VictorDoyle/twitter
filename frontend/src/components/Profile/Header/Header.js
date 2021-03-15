@@ -63,22 +63,22 @@ function handleProfileEdit(event) {
             {/* modal content with edit profile form */}
             <Form.Group>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="username" placeholder={props.user[0].user.username} default={props.user[0].user.username} value={ username }  onChange={(e) => setUsername(e.target.value)} />
+                <Form.Control type="username" placeholder={props.user[0].username} default={props.user[0].username} value={ username }  onChange={(e) => setUsername(e.target.value)} />
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>Bio</Form.Label>
-                <Form.Control type="bio" placeholder={props.user[0].user.bio} default={props.user[0].user.bio} value={ bio }  onChange={(e) => setBio(e.target.value)} />
+                {/* <Form.Control type="bio" placeholder={props.user[0].bio} default={props.user[0].bio} value={ bio }  onChange={(e) => setBio(e.target.value)} /> */}
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>First Name</Form.Label>
-                <Form.Control type="firstname"  placeholder={props.user[0].user.firstname} default={props.user[0].user.firstname} value={ firstname }  onChange={(e) => setFirstname(e.target.value)}  />
+                <Form.Control type="firstname"  placeholder={props.user[0].firstname} default={props.user[0].firstname} value={ firstname }  onChange={(e) => setFirstname(e.target.value)}  />
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder={props.user[0].user.email} default={props.user[0].user.email} value={ email }  onChange={(e) => setEmail(e.target.value)}  />
+                <Form.Control type="email" placeholder={props.user[0].email} default={props.user[0].email} value={ email }  onChange={(e) => setEmail(e.target.value)}  />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
