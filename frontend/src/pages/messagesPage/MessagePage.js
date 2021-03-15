@@ -24,12 +24,13 @@ const MESSAGES_QUERY = gql`
 
 const MessagePage = () => {
   const [user, setUser] = useRecoilState(userState);
-  const [messages, setMessages] = useState([]);
+  const [setMessages] = useState([]);
   // this page will need auth to pervent errors
   useEffect(() => {
     if (!user) {
       setUser(JSON.parse(localStorage.getItem("userinfo")));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   const { loading, error, data } = useQuery(MESSAGES_QUERY, {
     variables: { limit: 10 },
@@ -41,6 +42,7 @@ const MessagePage = () => {
       setMessages(data);
       console.log("messages set");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
