@@ -1,0 +1,16 @@
+.profileNavBar{
+    color: grey !important;
+    font-weight: bold;
+}
+
+.profileNavBar a:hover {
+    background-color: rgb(29, 161, 242, 0.1);
+    border-color: #ffff #ffff  transparent !important;
+}
+
+.profileNavBar .nav-link.active {
+    border-color: #ffff #ffff rgb(29, 161, 242)  !important;
+    border-bottom-width: 2px;
+    color: #1DA1F2;
+    font-weight: bold;
+}

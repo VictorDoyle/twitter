@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import React from "react";
+import { Card, Col, Container, Row, NavDropdown } from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import {
   faComment,
@@ -10,11 +7,24 @@ import {
   faShareSquare,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import tweetModel from "../../models/tweet";
 import "./Tweets.css";
-function Tweets() {
+
+function Tweets(props) {
+  function handleDelete(event) {
+    tweetModel.delete(props.id).then((data) => {
+      console.log(data, "Tweet Deleted ");
+    });
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    handleDelete();
+  }
+
   return (
     <Card>
-      <Container>
+      <Container className="containerTweet">
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon
@@ -27,16 +37,32 @@ function Tweets() {
             <Card.Body>
               <Card.Title className="username">Elon Musk</Card.Title>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
-                @ElonMusk
+                {props.author.username}
               </Card.Subtitle>
               <Card.Subtitle className="tweet-title mb-2 text-muted">
                 7m
               </Card.Subtitle>
-              <Card.Text className="text-left">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
+              <Card.Subtitle className="tweet-title mb-2 text-muted elips">
+                <NavDropdown title="..." id="nav-dropdown">
+                  <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
+                    Delete
+                  </NavDropdown.Item>
+                  <NavDropdown.Item eventKey="4.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item eventKey="4.3">
+                    Something else here
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item eventKey="4.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Card.Subtitle>
+
+              <Card.Text className="text-left">{props.description}</Card.Text>
             </Card.Body>
+
             <Row>
               <Col>
                 <Card.Link className="text-muted" href="#">
@@ -47,7 +73,7 @@ function Tweets() {
                   />
                   {/* TODO Comment counter */}
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    7
+                    {/* {props.comments.length} */}
                   </Card.Subtitle>
                 </Card.Link>
               </Col>

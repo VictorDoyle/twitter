@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <RecoilRoot>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root"),
+  </RecoilRoot>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

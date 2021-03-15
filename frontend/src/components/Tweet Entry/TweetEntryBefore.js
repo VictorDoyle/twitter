@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
 import {
   faUserCircle,
   faPhotoVideo,
   faPollH,
   faSmile,
 } from "@fortawesome/free-solid-svg-icons";
-import { faShareSquare, faImage } from "@fortawesome/free-regular-svg-icons";
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./TweetEntry.css";
+import "./TweetEntryBefore.css";
 
 function TweetEntryBefore({ handleState }) {
   return (
@@ -21,7 +20,7 @@ function TweetEntryBefore({ handleState }) {
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon
-              className="image-icon"
+              className="image-icon image"
               icon={faUserCircle}
               size="4x"
             />

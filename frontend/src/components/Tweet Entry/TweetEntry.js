@@ -1,26 +1,45 @@
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
+// import tweetModel from "../../models/tweet";
+import { Card, Col, Container, Row, Form, Button } from "react-bootstrap";
 import {
   faUserCircle,
-  faRetweet,
   faPhotoVideo,
   faPollH,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faComment,
-  faHeart,
-  faShareSquare,
-  faImage,
-  faSmile,
-} from "@fortawesome/free-regular-svg-icons";
+import { faImage, faSmile } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TweetEntry.css";
+import { useMutation, gql } from "@apollo/client";
 
-function TweetEntry({ submitHandler }) {
+const CREATE_TWEET = gql`
+  mutation CreateTweetMutation($createTweetDescription: String!) {
+    createTweet(description: $createTweetDescription) {
+      id
+      description
+      createdAt
+    }
+  }
+`;
+
+function TweetEntry({ user, history, redirectToFeed }) {
+  const [description, setDescription] = useState("");
+  const [createTweet, { loading, error }] = useMutation(CREATE_TWEET);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log("Tweet Created");
+    await createTweet({
+      variables: {
+        createTweetDescription: description,
+      },
+    });
+    // currently pulling in more information so this is what is needed for id
+    // tweetModel.create({ description: description, authorId: user.user.id });
+    redirectToFeed();
+  };
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
   return (
     <Form onSubmit={submitHandler}>
       <Card>
@@ -39,8 +58,10 @@ function TweetEntry({ submitHandler }) {
                   <Form.Label></Form.Label>
                   <Form.Control
                     as="textarea"
+                    type="description"
                     rows={2.5}
                     placeholder="What's Happening?"
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </Form.Group>
               </Card.Body>
@@ -90,6 +111,9 @@ function TweetEntry({ submitHandler }) {
               </Col>
             </Col>
           </Row>
+          <Button variant="primary" type="submit">
+            Primary
+          </Button>{" "}
         </Container>
       </Card>
     </Form>

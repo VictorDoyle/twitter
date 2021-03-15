@@ -1,35 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../components/Modal";
 import LandingPageLeft from "../../components/LandingPage/LandingPageLeft";
 import LandingPageRight from "../../components/LandingPage/LandingPageRight";
 import LandingNavbar from "../../components/LandingPage/LandingNavbar";
 import ModalHeader from "../../components/LandingPage/LandingModalHeader";
 import ModalBody from "../../components/LandingPage/LandingModalBody";
+// import UserModel from "../../models/user";
 import { Container, Row } from "react-bootstrap";
+import { useMutation, gql } from "@apollo/client";
 
 import "./LandingPage.css";
 
-const LandingPage = () => {
-  const [state, setState] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+const SignupMutation = gql`
+  mutation Mutation($SignupInput: SignupInput) {
+    signupUser(signupInput: $SignupInput) {
+      email
+      id
+      firstname
+      lastname
+      username
+      dateOfBirth
+    }
+  }
+`;
+
+const LandingPage = ({ history }) => {
+  const [firstname, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [birthYear, setBirthYear] = useState("");
-  const [show, setShow] = useState(false);
+  const [signup, { loading, error }] = useMutation(SignupMutation);
 
+  useEffect(() => {
+    /* FIXME: EST -- Date.UTC(birthYear, month, day, 22, 0, 0)) */
+    /* FIXME: PST -- Date.UTC(birthYear, month, day, 19, 0, 0)) */
+    let date = new Date(Date.UTC(birthYear, month, day, 19, 0, 0));
+    setDateOfBirth(date);
+  }, [month, day, birthYear]);
+  // ANCHOR
+  // console.log(dateOfBirth);
+
+  const [show, setShow] = useState(false);
   const handleClose = (e) => {
     e.preventDefault();
     setShow(false);
-    setDateOfBirth(month, day, birthYear);
     submitHandler();
   };
   const handleShow = () => setShow(true);
 
-  const submitHandler = () => {
-    console.log("Hello for now");
+  const submitHandler = async () => {
+    await signup({
+      variables: {
+        SignupInput: {
+          firstname: firstname,
+          email: email,
+          password: password,
+          dateOfBirth: dateOfBirth,
+        },
+      },
+    });
+    // UserModel.create({
+    //   firstname: firstname,
+    //   email: email,
+    //   password: password,
+    //   dateOfBirth: dateOfBirth,
+    // });
+    history.push("/login");
   };
+  if (loading) return <p>Loading </p>;
+  if (error) return <p>An error occurred</p>;
 
   return (
     <>
@@ -53,14 +95,14 @@ const LandingPage = () => {
         body={
           <ModalBody
             submitHandler={submitHandler}
-            name={(e) => setName(e.target.value)}
-            phone={(e) => setPhone(e.target.value)}
+            firstName={(e) => setName(e.target.value)}
+            email={(e) => setEmail(e.target.value)}
             day={(e) => setDay(e.target.value)}
             month={(e) => setMonth(e.target.value)}
             birthYear={(e) => setBirthYear(e.target.value)}
+            password={(e) => setPassword(e.target.value)}
           />
         }
-        footer=""
         className="LandingModal"
       />
     </>
