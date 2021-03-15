@@ -45,6 +45,8 @@ const LoginPage = ({ history }) => {
       setUser(signinUser);
       history.push("/feed");
     }
+    if (loading) return "Loading...";
+    if (error) return `Error! ${error.message}`;
 
     // AuthModel.login({ email, password }).then((json) => {
     //   localStorage.setItem("uid", json.token);

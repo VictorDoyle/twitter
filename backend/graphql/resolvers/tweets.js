@@ -24,14 +24,6 @@ export default {
       };
       try {
         return await db.tweet.findMany(opArgs);
-        // return db.tweet.findMany({
-        //   orderBy: [
-        //     {
-        //       id: "desc",
-        //     },
-        //   ],
-        //   include: { author: true },
-        // });
       } catch (error) {
         throw new Error(error);
       }
