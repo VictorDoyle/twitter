@@ -49,8 +49,9 @@ function MainFeed(props) {
   const [tweets, setTweets] = useState([]);
   // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
+  // FIXME this need to be dynamic
   const [end, setEnd] = useState(54);
-  const [skip, setSkip] = useState(0);
+  const [skip] = useState(0);
 
   useEffect(
     function () {
@@ -59,6 +60,7 @@ function MainFeed(props) {
         setUser(JSON.parse(localStorage.getItem("userinfo")));
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user]
   );
 
@@ -76,6 +78,7 @@ function MainFeed(props) {
       setTweets(data.allTweets);
       console.log("tweets set");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
   if (loading) return "Loading...";
 
@@ -101,9 +104,9 @@ function MainFeed(props) {
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  console.log(data.allTweets.length, "hiiii");
+  // console.log(data.allTweets.length, "hiiii");
   // console.log(tweets[0].id, "hiiii");
-  console.log(end);
+  // console.log(end);
   const bigFetch = () => {
     fetchMore(
       {

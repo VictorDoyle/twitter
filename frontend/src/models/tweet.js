@@ -4,9 +4,9 @@ const url = `http://localhost:4000/api/tweets`;
 
 class tweetModel {
   // access all tweets
-  static all = () => {
+  static all = (id) => {
     return axios
-      .get(`${url}`, {
+      .get(`${url}/`, {
         headers: {
           authorization: `Bearer ${localStorage.uid}`,
         },

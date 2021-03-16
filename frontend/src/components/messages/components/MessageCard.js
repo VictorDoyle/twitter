@@ -7,7 +7,7 @@ const MessageCard = () => {
     <Card>
       <Row>
         <Col md={2} className="imageCard">
-          <Card.Img variant="left" src={image} cap className="cardImage" />
+          <Card.Img variant="left" src={image} className="cardImage" />
         </Col>
         <Col md={10}>
           {/* titles too big and padding */}
