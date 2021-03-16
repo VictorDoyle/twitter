@@ -36,32 +36,46 @@ function Tweets(props) {
           </Col>
           <Col>
             <Card.Body>
-              <Card.Title className="username">Elon Musk</Card.Title>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {props.author.username}
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                7m
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted elips">
-                <NavDropdown title="..." id="nav-dropdown">
-                  <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
-                    Delete
-                  </NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.3">
-                    Something else here
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item eventKey="4.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Card.Subtitle>
-
-              <Card.Text className="text-left">{props.description}</Card.Text>
+              <Row>
+                <Col md={4}>
+                  <Card.Title className="username">Elon Musk</Card.Title>
+                </Col>
+                <Col md={4}>
+                  <Card.Subtitle className="tweet-title mb-2 text-muted">
+                    {props.author.username}
+                  </Card.Subtitle>
+                </Col>
+                <Col md={2}>
+                  <Card.Subtitle className="tweet-title mb-2 text-muted">
+                    7m
+                  </Card.Subtitle>
+                </Col>
+                <Col md={2}>
+                  {/* took out classname tweet-title  */}
+                  <Card.Subtitle className="mb-2 text-muted elips">
+                    <NavDropdown title="..." id="nav-dropdown">
+                      <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
+                        Delete
+                      </NavDropdown.Item>
+                      <NavDropdown.Item eventKey="4.2">
+                        Another action
+                      </NavDropdown.Item>
+                      <NavDropdown.Item eventKey="4.3">
+                        Something else here
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item eventKey="4.4">
+                        Separated link
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Card.Subtitle>
+                </Col>
+                <Col md={12}>
+                  <Card.Text className="text-left">
+                    {props.description}
+                  </Card.Text>
+                </Col>
+              </Row>
             </Card.Body>
 
             <Row>
