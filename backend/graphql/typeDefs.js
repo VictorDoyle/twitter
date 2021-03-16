@@ -11,6 +11,7 @@ const typeDefs = gql`
     comments: [Comment]!
     likes: [Like]!
     likeCount: Int!
+    totalCount: Int
   }
   type User {
     id: ID!
@@ -51,6 +52,7 @@ const typeDefs = gql`
   type Query {
     allUsers: [User!]!
     allTweets(take: Int, skip: Int, myCursor: Int): [Tweet!]!
+    lastTweets: Tweet
     getTweet(tweetId: ID!): Tweet
     messages: [Message!]!
   }
