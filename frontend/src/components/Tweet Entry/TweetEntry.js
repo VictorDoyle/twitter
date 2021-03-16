@@ -21,7 +21,7 @@ const CREATE_TWEET = gql`
   }
 `;
 
-function TweetEntry({ user, history, redirectToFeed }) {
+function TweetEntry({ redirectToFeed }) {
   const [description, setDescription] = useState("");
   const [createTweet, { loading, error }] = useMutation(CREATE_TWEET);
 

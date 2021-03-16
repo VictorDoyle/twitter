@@ -49,6 +49,7 @@ function MainFeed(props) {
   const [tweets, setTweets] = useState([]);
   // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
+  // FIXME this need to be dynamic
   const [end, setEnd] = useState(54);
   const [skip] = useState(0);
 
@@ -103,9 +104,9 @@ function MainFeed(props) {
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  console.log(data.allTweets.length, "hiiii");
+  // console.log(data.allTweets.length, "hiiii");
   // console.log(tweets[0].id, "hiiii");
-  console.log(end);
+  // console.log(end);
   const bigFetch = () => {
     fetchMore(
       {

@@ -52,6 +52,26 @@ router.get("/feed", async function (request, response) {
   console.log(myCursor, "+++++++++++++++++++++++++");
   response.json({ tweets1 });
 });
+/* SHOW ONE TWEET BY ID */
+router.get("/:id", async function (request, response) {
+  console.log(request);
+  const tweet = await db.tweet.findUnique({
+    where: {
+      id: Number(request.params.id),
+    },
+    include: {
+      author: true,
+      comments: {
+        select: {
+          content: true,
+          author: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+  response.json({ tweet });
+});
 
 /* SHOW ONE TWEET BY ID */
 router.get("/:id", async function (request, response) {
@@ -78,7 +98,7 @@ router.get("/:id", async function (request, response) {
 
 /* show tweet via Author Id */
 router.get("/profile/:authorId", async function (request, response) {
-  console.log("REQ PARAMS SHOWING CURRENT USER ID", request.params.authorId);
+  console.log("REQ PARAMS SHOW TWT BY AUTH ID -->", request.params.authorId);
   const tweetsByAuthor = await db.tweet.findMany({
     select: {
       description: true,

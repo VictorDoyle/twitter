@@ -59,6 +59,13 @@ const typeDefs = gql`
     signupUser(signupInput: SignupInput): User!
     # login a user
     signinUser(email: String!, password: String!): User!
+    # Update user
+    updateUser(
+      username: String
+      firstname: String
+      email: String
+      bio: String
+    ): User
     # create a new tweet
     createTweet(description: String!): Tweet!
     # delete a tweet
@@ -72,7 +79,6 @@ const typeDefs = gql`
     # like a tweetpo  m
     likePost(tweetId: ID!): Tweet!
   }
-
   input SignupInput {
     email: String!
     firstname: String!

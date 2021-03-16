@@ -1,18 +1,14 @@
 /* import prisma from "@prisma/client";
 import checkAuth from "../../utils/check-auth.js";
 import { PubSub } from "apollo-server";
-
 const pubsub = new PubSub();
 const messages = [];
-
 const subscribers = [];
 const onMessagesUpdates = (fn) => subscribers.push(fn);
-
 const db = new prisma.PrismaClient({
   log: ["info", "warn"],
   errorFormat: "pretty",
 });
-
 export default {
   Query: {
         messages: async () => {
@@ -29,7 +25,6 @@ export default {
       }
     }, 
   },
-
   Mutation: {
     createMessage: async (parent, args) => {
       const id = message.length;

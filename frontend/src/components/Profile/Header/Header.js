@@ -1,11 +1,65 @@
 /* base */
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 /* bootstrap component imports */
-import { Col, Row, Button, Image } from "react-bootstrap";
+import { Col, Modal, Row, Button, Image, Form } from "react-bootstrap";
+// import UserModel from "../../../models/user";
+import { useMutation, gql } from "@apollo/client";
+import Loader from "../Loaders/RecommendationLoader";
 
-function Header() {
+const updateUserMutation = gql`
+  mutation UpdateUserMutation(
+    $updateUserUsername: String
+    $updateUserFirstname: String
+    $updateUserBio: String
+    $updateUserEmail: String
+  ) {
+    updateUser(
+      username: $updateUserUsername
+      firstname: $updateUserFirstname
+      bio: $updateUserBio
+      email: $updateUserEmail
+    ) {
+      id
+    }
+  }
+`;
+function Header({ user }) {
+  const [update, { loading, error }] = useMutation(updateUserMutation);
+  /* modal settings */
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  /* edit profile functions */
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [email, setEmail] = useState("");
+  // const { id } = user;
+
+  async function handleProfileEdit(event) {
+    event.preventDefault();
+    await update({
+      variables: {
+        updateUserUsername: username,
+        updateUserFirstname: firstname,
+        updateUserEmail: email,
+        updateUserBio: bio,
+      },
+    });
+    handleClose();
+    // UserModel.update({ id, username, bio, firstname, email }).then((json) => {
+    //   if (json.status === 201) {
+    //     console.log(json, "updated");
+    //   } else {
+    //     console.log(json, "error with update");
+    //   }
+    // });
+  }
+  if (loading) return <Loader />;
+  if (error) return <p>An error occurred</p>;
+
   return (
     <>
       <Row className="profileHero">
@@ -24,9 +78,82 @@ function Header() {
       </Row>
 
       <Row>
-        <Link to={"/settings"} className="editProfileLink">
-          <Button className="editProfileButton">Edit Profile</Button>
-        </Link>
+        <Button
+          className="editProfileButton editProfileLink"
+          onClick={handleShow}
+        >
+          Edit Profile
+        </Button>
+
+        {user.id ? (
+          <>
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Header>
+                <Button className="closeSettingsModal" onClick={handleClose}>
+                  X
+                </Button>
+                <Modal.Title> Edit Profile </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form onSubmit={handleProfileEdit}>
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      type="username"
+                      placeholder={user.username}
+                      default={user.username}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Bio</Form.Label>
+                    <Form.Control
+                      type="bio"
+                      placeholder={user.bio}
+                      default={user.bio}
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                      type="firstname"
+                      placeholder={user.firstname}
+                      default={user.firstname}
+                      value={firstname}
+                      onChange={(e) => setFirstname(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder={user.email}
+                      default={user.email}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                  </Form.Group>
+                  <Button className="submitButtonForm" type="submit">
+                    Save
+                  </Button>
+                </Form>
+              </Modal.Body>
+            </Modal>
+          </>
+        ) : (
+          <h1> no user to edit </h1>
+        )}
       </Row>
 
       <Row>
