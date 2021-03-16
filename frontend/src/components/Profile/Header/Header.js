@@ -158,14 +158,13 @@ function Header({ user }) {
 
       <Row>
         <div className="bioContent">
-          <h5> Username Here</h5>
+        <h5> {user.firstname}</h5>
+          <h5> {user.username}</h5>
           <p className="mb-2 text-muted">@twitterHandle</p>
 
           <p>
-            {" "}
-            Here is the user bio/description. Max 300 chars? Sed ut perspiciatis
-            unde omnis iste natus error sit voluptatem accusantium doloremque
-            laudantium, totam rem aperiam, eaque ipsa quae ab illo.
+            
+            {user.bio}
           </p>
 
           <p className="mb-2 text-muted">

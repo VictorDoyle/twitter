@@ -19,6 +19,7 @@ const SigninMutation = gql`
       username
       dateOfBirth
       token
+      bio
     }
   }
 `;

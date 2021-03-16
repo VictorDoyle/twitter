@@ -48,6 +48,7 @@ export default {
         }
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
+        const bio = "";
         password = hash;
         return db.user.create({
           data: {
@@ -56,6 +57,7 @@ export default {
             lastname: lastname,
             password: password,
             dateOfBirth: dateOfBirth,
+            bio: bio,
           },
         });
       } catch (error) {
