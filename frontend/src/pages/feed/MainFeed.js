@@ -42,6 +42,14 @@ const TWEETS_QUERY = gql`
   }
 `;
 
+const LASTTWEET = gql`
+  query Query {
+    lastTweets {
+      id
+    }
+  }
+`;
+
 function MainFeed(props) {
   const [user, setUser] = useRecoilState(userState);
 
@@ -50,8 +58,9 @@ function MainFeed(props) {
   // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
   // FIXME this need to be dynamic
-  const [end, setEnd] = useState(54);
   const [skip] = useState(0);
+  const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
+  const [end, setEnd] = useState(0);
 
   useEffect(
     function () {
@@ -73,10 +82,22 @@ function MainFeed(props) {
   });
 
   useEffect(() => {
+    if (loadingT === false && dataT) {
+      setEnd(Number(dataT.lastTweets.id));
+      console.log(
+        dataT.lastTweets.id,
+        "1=============DataT====================",
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingT, dataT]);
+
+  useEffect(() => {
     if (loading === false && data) {
-      console.log(data);
+      console.log(data, "test");
       setTweets(data.allTweets);
       console.log("tweets set");
+      // console.log(end, "2===============end==================");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
@@ -104,9 +125,7 @@ function MainFeed(props) {
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  // console.log(data.allTweets.length, "hiiii");
-  // console.log(tweets[0].id, "hiiii");
-  // console.log(end);
+
   const bigFetch = () => {
     fetchMore(
       {
