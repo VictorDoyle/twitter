@@ -24,6 +24,7 @@ export default {
     },
   },
   Mutation: {
+    // ========================= Signup User ========================================
     signupUser: async (
       parent,
       { signupInput: { email, password, firstname, lastname, dateOfBirth } },
@@ -61,6 +62,7 @@ export default {
         throw new Error(error);
       }
     },
+    // ========================= Signin User ========================================
     // this route will give a token if the user and check if password match
     signinUser: async (parent, { email, password }) => {
       const { errors, valid } = validateLoginInput(email, password);
@@ -84,11 +86,13 @@ export default {
       console.log(token);
       return { ...foundUser, id: foundUser.id, token: token };
     },
+    // ========================= Update User ========================================
     updateUser: async (_, { firstname, email, username, bio }, context) => {
       const user = checkAuth(context);
       try {
         if (!user) {
-          throw new Error("User not found");
+          errors.general = "User not found";
+          throw new UserInputError("User not found", { errors });
         }
         const newUser = await db.user.update({
           where: { id: user.id },

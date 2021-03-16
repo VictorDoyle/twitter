@@ -65,7 +65,9 @@ router.get("/:id", async function (request, response) {
     where: {
       id: Number(request.params.id),
     },
+    // can be made a select to just get username
     include: {
+      author: true,
       tweets: {
         select: {
           description: true,
@@ -116,7 +118,7 @@ router.delete("/delete/:id", async function (request, response) {
 /* Update user route */
 
 router.put("/edit", async function (request, response) {
-  console.log(request.body);
+  // console.log(request.body);
   const updatedUser = await db.user.update({
     where: {
       id: Math.trunc(request.body.id),

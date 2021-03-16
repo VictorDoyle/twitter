@@ -6,6 +6,7 @@ import "./Header.css";
 import { Col, Modal, Row, Button, Image, Form } from "react-bootstrap";
 // import UserModel from "../../../models/user";
 import { useMutation, gql } from "@apollo/client";
+import Loader from "../Loaders/RecommendationLoader";
 
 const updateUserMutation = gql`
   mutation UpdateUserMutation(
@@ -56,6 +57,8 @@ function Header({ user }) {
     //   }
     // });
   }
+  if (loading) return <Loader />;
+  if (error) return <p>An error occurred</p>;
 
   return (
     <>
