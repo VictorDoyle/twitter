@@ -23,7 +23,7 @@ function Tweets({ id, author, description }) {
   }
   return (
     <Card>
-      <Container className="containerTweet">
+      <Container className="containerTweet" href="/tweet/{props.id}">
         <Row>
           <Col md={3} className="miscCardImage">
             <FontAwesomeIcon
@@ -35,6 +35,7 @@ function Tweets({ id, author, description }) {
           <Col md={9}>
             <Card.Body>
               <Row>
+
                 <Col md={4} className="miscCard">
                   <Card.Title className="username">Elon Musk</Card.Title>
                 </Col>
@@ -58,11 +59,12 @@ function Tweets({ id, author, description }) {
                   <Card.Text className="text-left">{description}</Card.Text>
                 </Col>
               </Row>
+
             </Card.Body>
 
             <Row>
               <Col>
-                <Card.Link className="text-muted" href="#">
+                <Card.Link className="text-muted" href={"/tweets/" + props.id}>
                   <FontAwesomeIcon
                     className="image-icon"
                     icon={faComment}

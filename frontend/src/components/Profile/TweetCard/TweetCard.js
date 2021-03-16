@@ -58,7 +58,7 @@ function TweetCard(props) {
     event.preventDefault();
     CommentModel.create({
       content: content,
-      authorId: props.user[0].id,
+      authorId: parseInt(props.user[0].id),
       tweetId: props.id,
     }).then((json) => {
       if (json.status === 201) {
@@ -71,7 +71,7 @@ function TweetCard(props) {
 
   function handleLike(event) {
     event.preventDefault();
-    LikeModel.create({ authorId: props.user[0].id, tweetId: props.id }).then(
+    LikeModel.create({ authorId: parseInt(props.user[0].id), tweetId: props.id }).then(
       (json) => {
         console.log(json, "tweet liked by user");
       },
