@@ -30,11 +30,13 @@ import "./MessagesChat.css";
 const MessagesChat = () => {
   // const [createMessage] = useMutation(POST_MESSAGE);
   return (
-    <nonSelected className="NonSelected">
-      <h4>You don’t have a message selected </h4>
-      <h5>Choose one from your existing messages, or start a new one.</h5>
-      <Button>This is a Button</Button>
-    </nonSelected>
+    <>
+      <div className="NonSelected">
+        <h4>You don’t have a message selected </h4>
+        <h5>Choose one from your existing messages, or start a new one.</h5>
+        <Button>This is a Button</Button>
+      </div>
+    </>
   );
 };
 
