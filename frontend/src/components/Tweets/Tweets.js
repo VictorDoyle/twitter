@@ -25,7 +25,7 @@ function Tweets(props) {
 
   return (
     <Card>
-      <Container className="containerTweet">
+      <Container className="containerTweet" href="/tweet/{props.id}">
         <Row>
           <Col xs={2}>
             <FontAwesomeIcon
@@ -36,14 +36,14 @@ function Tweets(props) {
           </Col>
           <Col>
             <Card.Body>
-              <Card.Title className="username">Elon Musk</Card.Title>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {props.author.username}
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                7m
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted elips">
+              <Row>
+                <Card.Title className="username">Elon Musk</Card.Title>
+                <Card.Subtitle className="tweet-title mb-2 text-muted">
+                  {props.author.username}
+                </Card.Subtitle>
+                <Card.Subtitle className="tweet-title mb-2 text-muted">
+                  7m
+                </Card.Subtitle>
                 <NavDropdown title="..." id="nav-dropdown">
                   <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
                     Delete
@@ -59,14 +59,14 @@ function Tweets(props) {
                     Separated link
                   </NavDropdown.Item>
                 </NavDropdown>
-              </Card.Subtitle>
+              </Row>
 
               <Card.Text className="text-left">{props.description}</Card.Text>
             </Card.Body>
 
             <Row>
               <Col>
-                <Card.Link className="text-muted" href="#">
+                <Card.Link className="text-muted" href={"/tweets/" + props.id}>
                   <FontAwesomeIcon
                     className="image-icon"
                     icon={faComment}
