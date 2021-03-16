@@ -51,16 +51,15 @@ class UserModel {
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${localStorage.uid}`,
-     
       },
     };
+    console.log(data);
     return axios.put(`http://localhost:4000/api/users/edit`, data, config);
   };
 
-
   // update-Edit user
 
-/*   static update = (data) => {
+  /*   static update = (data) => {
     return fetch(`${url}/edit`, {
       method: "PUT",
       headers: {

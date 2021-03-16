@@ -113,21 +113,18 @@ router.delete("/delete/:id", async function (request, response) {
   });
 });
 
-
-
 /* Update user route */
 
-router.put("/edit", async function (request, response){
-  console.log(request.headers, "full REQ")
+router.put("/edit", async function (request, response) {
+  console.log(request.body);
   const updatedUser = await db.user.update({
     where: {
-      id: Number(request.headers.id),
+      id: Math.trunc(request.body.id),
     },
-      data: request.body,
+    data: request.body,
   });
   // message return on create for testing
-  response.json({message: "the User has been updated", user: updatedUser })
+  response.json({ message: "the User has been updated", user: updatedUser });
 });
-
 
 export default router;

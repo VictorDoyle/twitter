@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import generateToken from "../../utils/generateToken.js";
 import prisma from "@prisma/client";
+import checkAuth from "../../utils/check-auth.js";
 import { UserInputError } from "apollo-server";
 
 import {
@@ -82,6 +83,27 @@ export default {
       const token = generateToken(foundUser.id);
       console.log(token);
       return { ...foundUser, id: foundUser.id, token: token };
+    },
+    updateUser: async (_, { firstname, email, username, bio }, context) => {
+      const user = checkAuth(context);
+      try {
+        if (!user) {
+          throw new Error("User not found");
+        }
+        const newUser = await db.user.update({
+          where: { id: user.id },
+          data: {
+            firstname: firstname,
+            email: email,
+            username: username,
+            bio: bio,
+          },
+        });
+
+        return newUser;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 };

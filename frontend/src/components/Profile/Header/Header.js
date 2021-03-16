@@ -4,9 +4,28 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 /* bootstrap component imports */
 import { Col, Modal, Row, Button, Image, Form } from "react-bootstrap";
-import UserModel from "../../../models/user";
+// import UserModel from "../../../models/user";
+import { useMutation, gql } from "@apollo/client";
 
+const updateUserMutation = gql`
+  mutation UpdateUserMutation(
+    $updateUserUsername: String
+    $updateUserFirstname: String
+    $updateUserBio: String
+    $updateUserEmail: String
+  ) {
+    updateUser(
+      username: $updateUserUsername
+      firstname: $updateUserFirstname
+      bio: $updateUserBio
+      email: $updateUserEmail
+    ) {
+      id
+    }
+  }
+`;
 function Header({ user }) {
+  const [update, { loading, error }] = useMutation(updateUserMutation);
   /* modal settings */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -16,18 +35,26 @@ function Header({ user }) {
   const [bio, setBio] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
+  // const { id } = user;
 
-  function handleProfileEdit(event) {
+  async function handleProfileEdit(event) {
     event.preventDefault();
-    UserModel.update(user.id, { username, bio, firstname, email }).then(
-      (json) => {
-        if (json.status === 201) {
-          console.log(json, "updated");
-        } else {
-          console.log(json, "error with update");
-        }
+    await update({
+      variables: {
+        updateUserUsername: username,
+        updateUserFirstname: firstname,
+        updateUserEmail: email,
+        updateUserBio: bio,
       },
-    );
+    });
+    handleClose();
+    // UserModel.update({ id, username, bio, firstname, email }).then((json) => {
+    //   if (json.status === 201) {
+    //     console.log(json, "updated");
+    //   } else {
+    //     console.log(json, "error with update");
+    //   }
+    // });
   }
 
   return (
