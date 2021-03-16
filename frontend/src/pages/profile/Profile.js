@@ -2,7 +2,7 @@
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 /* bootstrap component imports */
-import { Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 /* base */
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
@@ -12,62 +12,65 @@ import Recommendations from "../../components/Profile/RecommendFriends/Recommend
 import ProfileMedia from "../../components/Profile/ProfileMedia/ProfileMedia";
 import Happening from "../../components/Profile/Happening/Happening";
 import Header from "../../components/Profile/Header/Header";
-import Feed from "../../components/Profile/Feed/Feed";
+// import Feed from "../../components/Profile/Feed/Feed";
 import FeedNav from "../../components/Profile/FeedNav/FeedNav";
 /* models */
-import tweetModel from '../../models/tweet'
+import tweetModel from "../../models/tweet";
 
 function Profile() {
-  const user = useRecoilState(userState);
-  console.log("this is the current user id", user[0].id)
+  const [user, setUser] = useRecoilState(userState);
   const [tweets, setTweets] = useState([]);
 
-
+  useEffect(() => {
+    if (!user) {
+      setUser(JSON.parse(localStorage.getItem("userinfo")));
+    } else {
+      console.log(user.id);
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   /* base */
-  useEffect(function () {
-    fetchData();
-  }, []);
 
   /* get tweets by user id */
   const fetchData = () => {
-    tweetModel.showByUser(user[0].id).then((data) => {
-      console.log("these are tweets fetched by data", data)
+    tweetModel.showByUser(user.id).then((data) => {
+      console.log("these are tweets fetched by data", data);
       setTweets(data.tweetsByAuthor);
     });
   };
 
-  
-  
-
   return (
     <div className="Feed" id="feed-page">
-      <Container>
-        <Row>
-          <Col>
-            <NavBar />
-          </Col>
-          <Col md={6}>
-        
-          {/* profile header*/}
-          <Header user={user} />
+      {user ? (
+        <Container>
+          <Row>
+            <Col>
+              <NavBar />
+            </Col>
+            <Col md={6}>
+              {/* profile header*/}
+              <Header user={user} />
 
-          {/* profile subheader nav with Feed */}
-          <FeedNav />
-        
-
-
-          
-          </Col>
-          <Col>
-          {/* SECTION: media box */}
-            <ProfileMedia />
-          {/* Recommended Follows */}
-            <Recommendations />
-            {/* What's Happening Section */}
-            <Happening />
-          </Col>
-        </Row>
-      </Container>
+              {/* profile subheader nav */}
+              <FeedNav tweets={tweets} />
+              {/* profile feed */}
+              {/*  <Feed tweets = {tweets} user= { user }/>
+               */}
+            </Col>
+            <Col>
+              {/* SECTION: media box */}
+              <ProfileMedia />
+              {/* Recommended Follows */}
+              <Recommendations />
+              {/* What's Happening Section */}
+              <Happening />
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

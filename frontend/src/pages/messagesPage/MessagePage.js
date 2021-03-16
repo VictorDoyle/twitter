@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MessagesContainer from "../../components/messages/MessagesContainer";
 import MessageCard from "../../components/messages/components/MessageCard";
 import MessagesChat from "../../components/messages/components/MessagesChat";
@@ -24,12 +24,13 @@ import "./MessagePage.css";
 
 const MessagePage = () => {
   const [user, setUser] = useRecoilState(userState);
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   // this page will need auth to pervent errors
   useEffect(() => {
     if (!user) {
       setUser(JSON.parse(localStorage.getItem("userinfo")));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   // const { loading, error, data } = useQuery(MESSAGES_QUERY, {
   //   variables: { limit: 10 },

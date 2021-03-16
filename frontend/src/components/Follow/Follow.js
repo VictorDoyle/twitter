@@ -1,15 +1,7 @@
 /* base */
-import react, { useEffect, useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import "./Follow.css";
-import {
-  Card,
-  Row,
-  Col,
-  Container,
-  Modal,
-  Button,
-  Form,
-} from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 import FollowModel from "../../models/follow";
 

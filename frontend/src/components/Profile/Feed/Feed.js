@@ -1,31 +1,15 @@
 /* base */
-import react, {useEffect, useState, useReducer} from 'react'
-import './Feed.css'
-import RecommendationLoader from '../Loaders/RecommendationLoader';
-import TweetCard from '../TweetCard/TweetCard';
+// import react, { useEffect, useState, useReducer } from "react";
+import "./Feed.css";
+import RecommendationLoader from "../Loaders/RecommendationLoader";
+import TweetCard from "../TweetCard/TweetCard";
 
+function Feed(props) {
+  let allTweets = props.tweets.map((tweet, i) => {
+    return <TweetCard {...tweet} key={i + 1} user={props.user} />;
+  });
 
-
-function Feed  (props) {
-   
-    let allTweets = props.tweets.map((tweet, index) =>{
-
-      return <>
-        <TweetCard {...tweet} key={ tweet.id } user = {props.user}/>
-              
-      </>
-    })
-
-
-
-
-    return (
-        <>
-
- {props.tweets ? allTweets : <RecommendationLoader/>}
-  
-</>
-    )
+  return <>{props.tweets ? allTweets : <RecommendationLoader />}</>;
 }
 
-export default Feed
+export default Feed;

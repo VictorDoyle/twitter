@@ -12,6 +12,7 @@ import "./Tweets.css";
 
 function Tweets(props) {
   function handleDelete(event) {
+    event.preventDefault();
     tweetModel.delete(props.id).then((data) => {
       console.log(data, "Tweet Deleted ");
     });
