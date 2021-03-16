@@ -50,7 +50,7 @@ function MainFeed(props) {
   // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
   // FIXME this need to be dynamic
-  const [end, setEnd] = useState(54);
+  const [end, setEnd] = useState(13);
   const [skip] = useState(0);
 
   useEffect(
