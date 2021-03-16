@@ -60,12 +60,8 @@ function MainFeed(props) {
         setUser(JSON.parse(localStorage.getItem("userinfo")));
       }
     },
-<<<<<<< HEAD
-    [user]
-=======
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
->>>>>>> 97d2e266a7a3ea65a979821772d94638dde98aff
+    [user]
   );
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
@@ -88,17 +84,6 @@ function MainFeed(props) {
 
   //TODO refactor for authorID = user.id
 
-<<<<<<< HEAD
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("Mail Mother fucker");
-    // currently pulling in more information so this is what is needed for id
-    // tweetModel.create({ description: description, authorId: Number(user.id) });
-    const redirectToFeed = () => {
-      const { history } = props;
-      if (history) history.go(0);
-    };
-=======
   /*   const submitHandler = (e) => {
       e.preventDefault();
       console.log("Mail Mother fucker");
@@ -110,7 +95,6 @@ function MainFeed(props) {
   const redirectToFeed = () => {
     const { history } = props;
     if (history) history.go(0);
->>>>>>> b5a806d38f9a685f197511b0ec39a19537321853
   };
 
   const handleState = () => {
@@ -130,7 +114,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id),
+      setEnd(tweets[tweets.length - 1].id)
     );
   };
 
@@ -146,12 +130,7 @@ function MainFeed(props) {
             {input === false ? (
               <TweetEntryBefore handleState={handleState} />
             ) : (
-<<<<<<< HEAD
-              <h1>hello</h1>
-              // <TweetEntry redirectToFeed={redirectToFeed} user={user} />
-=======
               <TweetEntry user={user} redirectToFeed={redirectToFeed} />
->>>>>>> b5a806d38f9a685f197511b0ec39a19537321853
             )}
             <Infinite tweets={tweets} onLoadMore={bigFetch} />
           </Col>
