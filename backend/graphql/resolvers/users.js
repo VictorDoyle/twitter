@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import generateToken from "../../utils/generateToken.js";
 import prisma from "@prisma/client";
+import checkAuth from "../../utils/check-auth.js";
 import { UserInputError } from "apollo-server";
 
 import {
@@ -23,6 +24,7 @@ export default {
     },
   },
   Mutation: {
+    // ========================= Signup User ========================================
     signupUser: async (
       parent,
       { signupInput: { email, password, firstname, lastname, dateOfBirth } },
@@ -60,6 +62,7 @@ export default {
         throw new Error(error);
       }
     },
+    // ========================= Signin User ========================================
     // this route will give a token if the user and check if password match
     signinUser: async (parent, { email, password }) => {
       const { errors, valid } = validateLoginInput(email, password);
@@ -82,6 +85,29 @@ export default {
       const token = generateToken(foundUser.id);
       console.log(token);
       return { ...foundUser, id: foundUser.id, token: token };
+    },
+    // ========================= Update User ========================================
+    updateUser: async (_, { firstname, email, username, bio }, context) => {
+      const user = checkAuth(context);
+      try {
+        if (!user) {
+          errors.general = "User not found";
+          throw new UserInputError("User not found", { errors });
+        }
+        const newUser = await db.user.update({
+          where: { id: user.id },
+          data: {
+            firstname: firstname,
+            email: email,
+            username: username,
+            bio: bio,
+          },
+        });
+
+        return newUser;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 };

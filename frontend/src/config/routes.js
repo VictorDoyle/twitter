@@ -5,6 +5,7 @@ import LandingPage from "../pages/landingPage/LandingPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import MessagePage from "../pages/messagesPage/MessagePage";
 import Profile from "../pages/profile/Profile";
+// import SettingsPage from "../pages/settings/SettingsPage";
 import CommentShow from "../pages/commentShow/CommentShow";
 
 const Routes = () => {
@@ -16,6 +17,7 @@ const Routes = () => {
       {/* main pages */}
       <Route exact path="/feed" component={MainFeed} />
       <Route exact path="/messages" component={MessagePage} />
+      {/* <Route exact path="/settings" component={SettingsPage} /> */}
 
       <Route exact path="/tweets/:id" component={CommentShow} />
 

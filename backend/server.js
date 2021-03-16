@@ -14,11 +14,11 @@ import likeRoutes from "./controllers/likes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import followRoutes from "./controllers/follows.js";
 // auth
-import { getUserId } from "./middleware/authRequired.js";
+// import { getUserId } from "./middleware/authRequired.js";
 
 /* Instanced Modules */
 const app = express();
-const pubsub = new PubSub();
+// const pubsub = new PubSub();
 
 const db = new prisma.PrismaClient({
   log: ["info", "warn"],
@@ -59,7 +59,7 @@ const server = new ApolloServer({
   subscriptions: {
     path: "/subscriptions",
   },
-  context: ({ req, pubsub }) => ({ req, pubsub }),
+  context: ({ req /* , pubsub */ }) => ({ req /* , pubsub */ }),
 });
 
 server.listen({ port: 4025 }).then(() => {

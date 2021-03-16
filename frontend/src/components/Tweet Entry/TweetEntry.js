@@ -21,7 +21,7 @@ const CREATE_TWEET = gql`
   }
 `;
 
-function TweetEntry({ user, history, redirectToFeed }) {
+function TweetEntry({ redirectToFeed }) {
   const [description, setDescription] = useState("");
   const [createTweet, { loading, error }] = useMutation(CREATE_TWEET);
 
@@ -37,6 +37,8 @@ function TweetEntry({ user, history, redirectToFeed }) {
     // tweetModel.create({ description: description, authorId: user.user.id });
     redirectToFeed();
   };
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
   return (
     <Form onSubmit={submitHandler}>

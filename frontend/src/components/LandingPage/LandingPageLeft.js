@@ -6,6 +6,7 @@ import {
   faUserFriends,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
+// import logo from "../../assets/images/twitterlogo.svg";
 
 const LandingPageLeft = () => {
   return (

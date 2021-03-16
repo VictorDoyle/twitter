@@ -45,9 +45,21 @@ class UserModel {
     return axios.post(`http://localhost:4000/api/register`, data, config);
   };
 
+  // update/edit a user
+  static update = (data) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.uid}`,
+      },
+    };
+    console.log(data);
+    return axios.put(`http://localhost:4000/api/users/edit`, data, config);
+  };
+
   // update-Edit user
 
-  static update = (data) => {
+  /*   static update = (data) => {
     return fetch(`${url}/edit`, {
       method: "PUT",
       headers: {
@@ -56,7 +68,7 @@ class UserModel {
       },
       body: JSON.stringify(data),
     }).then((res) => res.json());
-  };
+  }; */
 
   // delete route for user
   static delete = (id) => {
