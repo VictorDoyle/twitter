@@ -27,30 +27,30 @@ function Tweets(props) {
     <Card>
       <Container className="containerTweet">
         <Row>
-          <Col xs={2}>
+          <Col md={3} className="miscCardImage">
             <FontAwesomeIcon
               className="image-icon"
               icon={faUserCircle}
               size="4x"
             />
           </Col>
-          <Col>
+          <Col md={9}>
             <Card.Body>
               <Row>
-                <Col md={4}>
+                <Col md={4} className="miscCard">
                   <Card.Title className="username">Elon Musk</Card.Title>
                 </Col>
-                <Col md={4}>
+                <Col md={4} className="miscCard">
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
                     {props.author.username}
                   </Card.Subtitle>
                 </Col>
-                <Col md={2}>
+                <Col md={2} className="miscCard">
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
                     7m
                   </Card.Subtitle>
                 </Col>
-                <Col md={2}>
+                <Col md={2} className="miscCard">
                   {/* took out classname tweet-title  */}
                   <Card.Subtitle className="mb-2 text-muted elips">
                     <NavDropdown title="..." id="nav-dropdown">
