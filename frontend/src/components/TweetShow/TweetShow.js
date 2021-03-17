@@ -11,8 +11,13 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./TweetShow.css";
+import moment from "moment";
 
 function TweetShow(props) {
+  const createdDate = props.tweet.updatedAt;
+  console.log(props.tweet.createdAt);
+
+  console.log(moment(createdDate).format("hA MMM D, YYYY"));
   return (
     <>
       {props ? (
@@ -29,8 +34,7 @@ function TweetShow(props) {
               <Col>
                 <Card.Body>
                   <Card.Title className="username">
-                    {props.tweet.author.firstname}
-                    {props.tweet.author.lastname}
+                    {props.tweet.author.firstname} {props.tweet.author.lastname}
                   </Card.Title>
                   <Card.Subtitle className=" mb-2 text-muted">
                     {props.tweet.author.username}
@@ -48,7 +52,7 @@ function TweetShow(props) {
             <Row>
               <Card.Body>
                 <Card.Subtitle className="tweet-title mb-2 text-muted">
-                  {props.tweet.updatedAt}
+                  {moment(createdDate).format("hA MMM D, YYYY")}
                 </Card.Subtitle>
               </Card.Body>
             </Row>

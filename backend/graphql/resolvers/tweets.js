@@ -9,21 +9,37 @@ const db = new prisma.PrismaClient({
 export default {
   Query: {
     allTweets: async (_, { take, skip, myCursor }) => {
-      const opArgs = {
-        take: take,
-        skip: skip,
-        cursor: {
-          id: myCursor,
-        },
-        include: { author: true },
-        orderBy: [
-          {
-            createdAt: "desc",
-          },
-        ],
-      };
+      // const alltweets = await db.tweet.findMany({});
+      // const allTweetsCount = alltweets.length;
       try {
+        const opArgs = {
+          take: take,
+          skip: skip,
+          cursor: {
+            id: myCursor,
+          },
+          include: { author: true },
+          orderBy: [
+            {
+              createdAt: "desc",
+            },
+          ],
+        };
+
+        // console.log(returned);
         return await db.tweet.findMany(opArgs);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    lastTweets: async (_, args) => {
+      try {
+        const allTweets = await db.tweet.findFirst({
+          orderBy: {
+            id: "desc",
+          },
+        });
+        return allTweets;
       } catch (error) {
         throw new Error(error);
       }

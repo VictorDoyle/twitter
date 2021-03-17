@@ -19,3 +19,10 @@
 .containerTweet {
   padding: 0 !important;
 }
+
+.miscCard{
+  padding: .5px !important;
+}
+.miscCardImage{
+text-align-last: center !important;
+}

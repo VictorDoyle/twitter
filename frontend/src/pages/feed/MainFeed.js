@@ -42,16 +42,21 @@ const TWEETS_QUERY = gql`
   }
 `;
 
+const LASTTWEET = gql`
+  query Query {
+    lastTweets {
+      id
+    }
+  }
+`;
+
 function MainFeed(props) {
   const [user, setUser] = useRecoilState(userState);
-
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
-  // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
-  // FIXME this need to be dynamic
-  const [end, setEnd] = useState(13);
   const [skip] = useState(0);
+  const [end, setEnd] = useState(0);
 
   useEffect(
     function () {
@@ -63,6 +68,7 @@ function MainFeed(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [user]
   );
+  const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
     variables: {
@@ -73,8 +79,15 @@ function MainFeed(props) {
   });
 
   useEffect(() => {
+    if (loadingT === false && dataT) {
+      setEnd(Number(dataT.lastTweets.id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingT, dataT]);
+
+  useEffect(() => {
     if (loading === false && data) {
-      console.log(data);
+      console.log(data, "test");
       setTweets(data.allTweets);
       console.log("tweets set");
     }
@@ -82,31 +95,18 @@ function MainFeed(props) {
   }, [loading, data]);
   if (loading) return "Loading...";
 
-  //TODO refactor for authorID = user.id
-
-  /*   const submitHandler = (e) => {
-      e.preventDefault();
-      console.log("Mail Mother fucker");
-      // currently pulling in more information so this is what is needed for id
-      tweetModel.create({
-        description: description,
-        authorId: Number(user.id),
-      }); */
   const redirectToFeed = () => {
     const { history } = props;
     if (history) history.go(0);
   };
 
   const handleState = () => {
-    console.log("handlestate");
     setInput(true);
   };
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  // console.log(data.allTweets.length, "hiiii");
-  // console.log(tweets[0].id, "hiiii");
-  // console.log(end);
+
   const bigFetch = () => {
     fetchMore(
       {
