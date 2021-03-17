@@ -25,13 +25,15 @@ export default {
             },
           ],
         };
-
         // console.log(returned);
         return await db.tweet.findMany(opArgs);
       } catch (error) {
         throw new Error(error);
       }
     },
+    /**
+     * Get a tweet for pagination
+     *  */
     lastTweets: async (_, args) => {
       try {
         const allTweets = await db.tweet.findFirst({
@@ -44,6 +46,9 @@ export default {
         throw new Error(error);
       }
     },
+    /**
+     * Get A tweet
+     *  */
     getTweet: async (_, { tweetId }) => {
       try {
         const tweet = await db.tweet.findUnique({
@@ -61,6 +66,9 @@ export default {
     },
   },
   Mutation: {
+    /**
+     * Create A tweet
+     *  */
     async createTweet(_, { description }, context) {
       const user = checkAuth(context);
       console.log(user.id);
@@ -78,17 +86,30 @@ export default {
       });
       return newTweet;
     },
+    /**
+     * Delete A tweet
+     *  */
     async deleteTweet(_, { tweetId }, context) {
       const user = checkAuth(context);
-      // auth for user to only be able to delete their tweets
       try {
-        const tweet = await db.tweet.delete({
-          where: {
-            id: Number(tweetId),
-          },
+        const tweet = await db.tweet.findUnique({
+          where: { id: Number(tweetId) },
+          include: { author: true },
         });
+        console.log(tweet);
         if (user.id === tweet.authorId) {
-          return "Tweet deleted successfully";
+          const deletedTweet = await db.tweet.delete({
+            where: {
+              id: Number(tweetId),
+            },
+          });
+          //NOTE if we want to delete the comments also here is the logic have not tested
+          /* const deleteAttachedComments = await db.comment.deleteMany({
+            where: {
+              tweetId: tweetId,
+            },
+          }); */
+          return deletedTweet /* , deleteAttachedComments */;
         } else {
           throw new AuthenticationError("Action not allowed");
         }

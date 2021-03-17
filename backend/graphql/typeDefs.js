@@ -32,7 +32,7 @@ const typeDefs = gql`
   }
   type Message {
     id: ID!
-    user: String!
+    user: User!
     description: String
     createdAt: String
   }
@@ -71,7 +71,7 @@ const typeDefs = gql`
     # create a new tweet
     createTweet(description: String!): Tweet!
     # delete a tweet
-    deleteTweet(tweetId: ID!): String!
+    deleteTweet(tweetId: ID!): Tweet!
     # create a messages
     # createMessage(description: String, user: String!): Message!
     # create a comment
