@@ -48,6 +48,13 @@ const typeDefs = gql`
     author: String!
     tweet: Tweet
   }
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
   # Top level
   type Query {
     allUsers: [User!]!
@@ -55,6 +62,7 @@ const typeDefs = gql`
     lastTweets: Tweet
     getTweet(tweetId: ID!): Tweet
     messages: [Message!]!
+    uploads: [File]
   }
   type Mutation {
     # Create a new User
@@ -80,6 +88,8 @@ const typeDefs = gql`
     deleteComment(tweetId: ID!, commentId: ID!): Tweet!
     # like a tweetpo  m
     likePost(tweetId: ID!): Tweet!
+    #Upload
+    singleUpload(file: Upload!): File!
   }
   input SignupInput {
     email: String!

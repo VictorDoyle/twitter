@@ -71,20 +71,22 @@ export default {
      *  */
     async createTweet(_, { description }, context) {
       const user = checkAuth(context);
-      console.log(user.id);
       if (description.trim() === "") {
         throw new Error("Tweet description must not be empty");
       }
-
-      const newTweet = await db.tweet.create({
-        data: {
-          description: description,
-          authorId: user.id,
-          // username: user.username,
-          createdAt: new Date().toISOString(),
-        },
-      });
-      return newTweet;
+      try {
+        const newTweet = await db.tweet.create({
+          data: {
+            description: description,
+            authorId: user.id,
+            // username: user.username,
+            createdAt: new Date().toISOString(),
+          },
+        });
+        return newTweet;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
     /**
      * Delete A tweet
