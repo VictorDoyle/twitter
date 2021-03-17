@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Container, Row, NavDropdown } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { faUserCircle, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import {
   faComment,
@@ -7,66 +7,62 @@ import {
   faShareSquare,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import tweetModel from "../../models/tweet";
+import Elips from "./Elips";
 import "./Tweets.css";
+import tweetModel from "../../models/tweet";
 
-function Tweets(props) {
-  function handleDelete(event) {
-    event.preventDefault();
-    tweetModel.delete(props.id).then((data) => {
+function Tweets({ id, author, description }) {
+  function handleDelete() {
+    tweetModel.delete(id).then((data) => {
       console.log(data, "Tweet Deleted ");
     });
   }
 
-  function handleClick(event) {
-    event.preventDefault();
+  function handleClick() {
     handleDelete();
   }
-
   return (
     <Card>
-      <Container className="containerTweet">
+      <Container className="containerTweet" href="/tweet/{props.id}">
         <Row>
-          <Col xs={2}>
+          <Col md={3} className="miscCardImage">
             <FontAwesomeIcon
               className="image-icon"
               icon={faUserCircle}
               size="4x"
             />
           </Col>
-          <Col>
+          <Col md={9}>
             <Card.Body>
-              <Card.Title className="username">Elon Musk</Card.Title>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                {props.author.username}
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted">
-                7m
-              </Card.Subtitle>
-              <Card.Subtitle className="tweet-title mb-2 text-muted elips">
-                <NavDropdown title="..." id="nav-dropdown">
-                  <NavDropdown.Item eventKey="4.1" onClick={handleClick}>
-                    Delete
-                  </NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item eventKey="4.3">
-                    Something else here
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item eventKey="4.4">
-                    Separated link
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Card.Subtitle>
-
-              <Card.Text className="text-left">{props.description}</Card.Text>
+              <Row>
+                <Col md={4} className="miscCard">
+                  <Card.Title className="username">Elon Musk</Card.Title>
+                </Col>
+                <Col md={4} className="miscCard">
+                  <Card.Subtitle className="tweet-title mb-2 text-muted">
+                    {author.username}
+                  </Card.Subtitle>
+                </Col>
+                <Col md={2} className="miscCard">
+                  <Card.Subtitle className="tweet-title mb-2 text-muted">
+                    7m
+                  </Card.Subtitle>
+                </Col>
+                <Col md={2} className="miscCard">
+                  {/* took out classname tweet-title  */}
+                  <Card.Subtitle className="mb-2 text-muted elips">
+                    <Elips handleClick={handleClick} />
+                  </Card.Subtitle>
+                </Col>
+                <Col md={12}>
+                  <Card.Text className="text-left">{description}</Card.Text>
+                </Col>
+              </Row>
             </Card.Body>
 
             <Row>
               <Col>
-                <Card.Link className="text-muted" href="#">
+                <Card.Link className="text-muted" href={"/tweets/" + id}>
                   <FontAwesomeIcon
                     className="image-icon"
                     icon={faComment}

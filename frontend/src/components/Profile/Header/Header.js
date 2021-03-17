@@ -1,6 +1,8 @@
 /* base */
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { userState } from "../../../recoil/atoms";
+import { useSetRecoilState } from "recoil";
 import "./Header.css";
 /* bootstrap component imports */
 import { Col, Modal, Row, Button, Image, Form } from "react-bootstrap";
@@ -9,24 +11,35 @@ import { useMutation, gql } from "@apollo/client";
 import Loader from "../Loaders/RecommendationLoader";
 
 const updateUserMutation = gql`
-  mutation UpdateUserMutation(
-    $updateUserUsername: String
-    $updateUserFirstname: String
+  mutation Mutation(
     $updateUserBio: String
     $updateUserEmail: String
+    $updateUserFirstname: String
+    $updateUserUsername: String
   ) {
     updateUser(
-      username: $updateUserUsername
-      firstname: $updateUserFirstname
       bio: $updateUserBio
       email: $updateUserEmail
+      firstname: $updateUserFirstname
+      username: $updateUserUsername
     ) {
       id
+      email
+      firstname
+      lastname
+      username
+      bio
+      dateOfBirth
+      password
+      token
     }
   }
 `;
+
 function Header({ user }) {
-  const [update, { loading, error }] = useMutation(updateUserMutation);
+  const [update, { loading, error, data }] = useMutation(updateUserMutation);
+  const setUser = useSetRecoilState(userState);
+
   /* modal settings */
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -49,6 +62,7 @@ function Header({ user }) {
       },
     });
     handleClose();
+
     // UserModel.update({ id, username, bio, firstname, email }).then((json) => {
     //   if (json.status === 201) {
     //     console.log(json, "updated");
@@ -56,6 +70,11 @@ function Header({ user }) {
     //     console.log(json, "error with update");
     //   }
     // });
+  }
+  if (!loading && data) {
+    const { updateUser } = data;
+    localStorage.setItem("userinfo", JSON.stringify(updateUser));
+    setUser(updateUser);
   }
   if (loading) return <Loader />;
   if (error) return <p>An error occurred</p>;
@@ -162,10 +181,7 @@ function Header({ user }) {
           <h5> {user.username}</h5>
           <p className="mb-2 text-muted">@twitterHandle</p>
 
-          <p>
-            
-            {user.bio}
-          </p>
+          <p>{user.bio}</p>
 
           <p className="mb-2 text-muted">
             <Link to={"/following"} className="followLinks text-muted">
