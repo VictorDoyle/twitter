@@ -20,8 +20,6 @@ function Tweets(props) {
   }
   const created = moment.unix(props.createdAt / 1000);
   const now = moment();
-  console.log(created);
-  console.log(now);
 
   function handleClick() {
     handleDelete();

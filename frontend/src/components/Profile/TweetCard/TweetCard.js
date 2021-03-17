@@ -22,6 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 /* models */
 import CommentModel from "../../../models/comment";
 import LikeModel from "../../../models/likes";
+import moment from "moment";
 
 /* LIKE TWEET FUNCTION */
 
@@ -43,6 +44,9 @@ const initialState = {
 };
 
 function TweetCard(props) {
+  const created = moment(props.createdAt);
+  const now = moment();
+
   /* like/unlike functionality */
   const [state, dispatch] = useReducer(likeUnlikeReducer, initialState);
   const { liked } = state;
@@ -71,11 +75,12 @@ function TweetCard(props) {
 
   function handleLike(event) {
     event.preventDefault();
-    LikeModel.create({ authorId: parseInt(props.user[0].id), tweetId: props.id }).then(
-      (json) => {
-        console.log(json, "tweet liked by user");
-      },
-    );
+    LikeModel.create({
+      authorId: parseInt(props.user[0].id),
+      tweetId: props.id,
+    }).then((json) => {
+      console.log(json, "tweet liked by user");
+    });
   }
   /* user dislikes a tweet */
   function handleDislike(event) {
@@ -106,7 +111,7 @@ function TweetCard(props) {
                   @{props.author.username}
                 </Card.Subtitle>
                 <Card.Subtitle className="tweet-title mb-2 text-muted">
-                  {/* {tweet.createdAt} */}
+                  {created.from(now)}
                 </Card.Subtitle>
                 <Card.Text className="text-left">
                   {" "}
