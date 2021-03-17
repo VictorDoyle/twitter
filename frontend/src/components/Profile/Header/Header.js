@@ -62,7 +62,6 @@ function Header({ user }) {
       },
     });
     handleClose();
-    // setUser(JSON.parse(localStorage.getItem("userinfo")));
 
     // UserModel.update({ id, username, bio, firstname, email }).then((json) => {
     //   if (json.status === 201) {
