@@ -52,14 +52,10 @@ const LASTTWEET = gql`
 
 function MainFeed(props) {
   const [user, setUser] = useRecoilState(userState);
-
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
-  // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
-  // FIXME this need to be dynamic
   const [skip] = useState(0);
-  const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
   const [end, setEnd] = useState(0);
 
   useEffect(
@@ -70,8 +66,9 @@ function MainFeed(props) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user]
+    [user],
   );
+  const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
     variables: {
@@ -84,10 +81,6 @@ function MainFeed(props) {
   useEffect(() => {
     if (loadingT === false && dataT) {
       setEnd(Number(dataT.lastTweets.id));
-      console.log(
-        dataT.lastTweets.id,
-        "1=============DataT====================",
-      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadingT, dataT]);
@@ -97,29 +90,17 @@ function MainFeed(props) {
       console.log(data, "test");
       setTweets(data.allTweets);
       console.log("tweets set");
-      // console.log(end, "2===============end==================");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
   if (loading) return "Loading...";
 
-  //TODO refactor for authorID = user.id
-
-  /*   const submitHandler = (e) => {
-      e.preventDefault();
-      console.log("Mail Mother fucker");
-      // currently pulling in more information so this is what is needed for id
-      tweetModel.create({
-        description: description,
-        authorId: Number(user.id),
-      }); */
   const redirectToFeed = () => {
     const { history } = props;
     if (history) history.go(0);
   };
 
   const handleState = () => {
-    console.log("handlestate");
     setInput(true);
   };
   if (tweets.allTweets) {
@@ -133,7 +114,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id)
+      setEnd(tweets[tweets.length - 1].id),
     );
   };
 
