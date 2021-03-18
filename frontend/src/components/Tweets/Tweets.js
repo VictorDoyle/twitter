@@ -14,13 +14,6 @@ import "./Tweets.css";
 import tweetModel from "../../models/tweet";
 import moment from "moment";
 
-function Tweets(props) {
-  function handleDelete() {
-    tweetModel.delete(props.tweet.id).then((data) => {
-      console.log(data, "Tweet Deleted ");
-
-// import tweetModel from "../../models/tweet";
-
 const DELETE_TWEET = gql`
   mutation DeleteTweetMutation($deleteTweetTweetId: ID!) {
     deleteTweet(tweetId: $deleteTweetTweetId) {
@@ -29,17 +22,24 @@ const DELETE_TWEET = gql`
   }
 `;
 
-function Tweets({ id, author, description }) {
+function Tweets(props) {
+  // function handleDelete() {
+  //   tweetModel.delete(props.tweet.id).then((data) => {
+  //     console.log(data, "Tweet Deleted ");
+  //   }};
+
+  // import tweetModel from "../../models/tweet";
+
+  // function Tweets({ id, author, description }) {
   const [deleteTweet, { loading, error }] = useMutation(DELETE_TWEET);
 
   async function handleDelete() {
     await deleteTweet({
       variables: {
-        deleteTweetTweetId: id,
+        deleteTweetTweetId: props.id,
       },
-
     });
-    console.log(id, "Tweet Deleted ");
+    console.log(props.id, "Tweet Deleted ");
 
     // tweetModel.delete(id).then((data) => {
     //   console.log(data, "Tweet Deleted ");
@@ -51,7 +51,6 @@ function Tweets({ id, author, description }) {
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>An error occurred</p>;
-
 
   function handleClick() {
     handleDelete();
