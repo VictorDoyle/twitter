@@ -66,7 +66,7 @@ function MainFeed(props) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
+    [user]
   );
   const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
@@ -116,7 +116,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id),
+      setEnd(tweets[tweets.length - 1].id)
     );
   };
 
