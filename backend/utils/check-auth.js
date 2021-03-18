@@ -11,7 +11,6 @@ const checkAuth = (context) => {
     // Bearer ....
     const token = authHeader.split(" ")[1];
     // const token = authHeader.replace("Bearer ", "");
-
     // needed regex because the token was not removing last quote
     // const unQ = token.replace(/["]+/g, "");
     if (token) {

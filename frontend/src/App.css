@@ -23,3 +23,12 @@
 .App-link {
   color: #61dafb;
 }
+
+.spinner-centered-lg{
+align-items: center;
+}
+
+.spinner-border{
+    width: 16rem !important;
+    height: 16rem !important;
+}

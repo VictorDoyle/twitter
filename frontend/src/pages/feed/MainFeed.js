@@ -1,10 +1,7 @@
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import NavBar from "../../components/NavBar/NavBar";
-
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
@@ -93,7 +90,12 @@ function MainFeed(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
-  if (loading) return "Loading...";
+  if (loading)
+    return (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
 
   const redirectToFeed = () => {
     const { history } = props;
