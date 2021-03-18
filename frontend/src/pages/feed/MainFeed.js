@@ -63,7 +63,7 @@ function MainFeed(props) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
+    [user]
   );
   const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
@@ -86,7 +86,6 @@ function MainFeed(props) {
     if (loading === false && data) {
       console.log(data, "test");
       setTweets(data.allTweets);
-      console.log("tweets set");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
@@ -99,8 +98,8 @@ function MainFeed(props) {
 
   const redirectToFeed = () => {
     const { history } = props;
-    if (history) history.go(0);
     console.log("this is happening");
+    if (history) history.go(0);
   };
 
   const handleState = () => {
@@ -118,7 +117,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id),
+      setEnd(tweets[tweets.length - 1].id)
     );
   };
 

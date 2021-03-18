@@ -8,6 +8,7 @@ const checkAuth = (context) => {
   // context = { ... headers }
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
+    console.log("auth Header", authHeader);
     // Bearer ....
     const token = authHeader.split(" ")[1];
     // const token = authHeader.replace("Bearer ", "");
