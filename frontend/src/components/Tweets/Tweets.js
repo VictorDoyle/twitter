@@ -6,9 +6,11 @@ import {
   faHeart,
   faShareSquare,
 } from "@fortawesome/free-regular-svg-icons";
+import { useMutation, gql } from "@apollo/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Elips from "./Elips";
 import "./Tweets.css";
+
 import tweetModel from "../../models/tweet";
 import moment from "moment";
 
@@ -16,10 +18,40 @@ function Tweets(props) {
   function handleDelete() {
     tweetModel.delete(props.tweet.id).then((data) => {
       console.log(data, "Tweet Deleted ");
-    });
+
+// import tweetModel from "../../models/tweet";
+
+const DELETE_TWEET = gql`
+  mutation DeleteTweetMutation($deleteTweetTweetId: ID!) {
+    deleteTweet(tweetId: $deleteTweetTweetId) {
+      description
+    }
   }
+`;
+
+function Tweets({ id, author, description }) {
+  const [deleteTweet, { loading, error }] = useMutation(DELETE_TWEET);
+
+  async function handleDelete() {
+    await deleteTweet({
+      variables: {
+        deleteTweetTweetId: id,
+      },
+
+    });
+    console.log(id, "Tweet Deleted ");
+
+    // tweetModel.delete(id).then((data) => {
+    //   console.log(data, "Tweet Deleted ");
+    // });
+  }
+
   const created = moment.unix(props.createdAt / 1000);
   const now = moment();
+
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>An error occurred</p>;
+
 
   function handleClick() {
     handleDelete();

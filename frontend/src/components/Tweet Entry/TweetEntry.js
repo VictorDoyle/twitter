@@ -33,6 +33,7 @@ function TweetEntry({ redirectToFeed }) {
         createTweetDescription: description,
       },
     });
+    console.log("the English are coming");
     // currently pulling in more information so this is what is needed for id
     // tweetModel.create({ description: description, authorId: user.user.id });
     redirectToFeed();

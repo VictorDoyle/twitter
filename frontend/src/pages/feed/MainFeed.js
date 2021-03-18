@@ -98,6 +98,7 @@ function MainFeed(props) {
   const redirectToFeed = () => {
     const { history } = props;
     if (history) history.go(0);
+    console.log("this is happening");
   };
 
   const handleState = () => {
@@ -107,6 +108,7 @@ function MainFeed(props) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
 
+  // need to create a let if to check if end is undefined
   const bigFetch = () => {
     fetchMore(
       {
