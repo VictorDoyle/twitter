@@ -52,7 +52,7 @@ function TweetShow(props) {
             <Row>
               <Card.Body>
                 <Card.Subtitle className="tweet-title mb-2 text-muted">
-                  {moment(createdDate).format("hA MMM D, YYYY")}
+                  {moment(createdDate).format("h:mm A MMM D, YYYY")}
                 </Card.Subtitle>
               </Card.Body>
             </Row>

@@ -105,7 +105,7 @@ function TweetCard(props) {
             <Col>
               <Card.Body>
                 <Card.Title className="username">
-                  {props.author.firstname}
+                  {props.author.firstname} {props.author.lastname}
                 </Card.Title>
                 <Card.Subtitle className="tweet-title mb-2 text-muted">
                   @{props.author.username}
