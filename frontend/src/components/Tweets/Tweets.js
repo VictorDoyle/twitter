@@ -54,6 +54,8 @@ function Tweets(props) {
 
   function handleClick() {
     handleDelete();
+
+    console.log(props);
   }
   return (
     <Card>
@@ -70,7 +72,9 @@ function Tweets(props) {
             <Card.Body>
               <Row>
                 <Col md={4} className="miscCard">
-                  <Card.Title className="username">Elon Musk</Card.Title>
+                  <Card.Title className="username">
+                    {props.author.firstname} {props.author.lastname}
+                  </Card.Title>
                 </Col>
                 <Col md={4} className="miscCard">
                   <Card.Subtitle className="tweet-title mb-2 text-muted">

@@ -89,16 +89,15 @@ function MainFeed(props) {
     if (loading === false && data) {
       console.log(data, "test");
       setTweets(data.allTweets);
-      console.log("tweets set");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, data]);
+  }, [loading, data, tweets]);
   if (loading) return "Loading...";
 
   const redirectToFeed = () => {
     const { history } = props;
-    if (history) history.go(0);
     console.log("this is happening");
+    if (history) history.go(0);
   };
 
   const handleState = () => {
