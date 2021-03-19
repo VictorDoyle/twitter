@@ -25,13 +25,15 @@ export default {
             },
           ],
         };
-
         // console.log(returned);
         return await db.tweet.findMany(opArgs);
       } catch (error) {
         throw new Error(error);
       }
     },
+    /**
+     * Get a tweet for pagination
+     *  */
     lastTweets: async (_, args) => {
       try {
         const allTweets = await db.tweet.findFirst({
@@ -44,6 +46,9 @@ export default {
         throw new Error(error);
       }
     },
+    /**
+     * Get A tweet
+     *  */
     getTweet: async (_, { tweetId }) => {
       try {
         const tweet = await db.tweet.findUnique({
@@ -61,34 +66,52 @@ export default {
     },
   },
   Mutation: {
+    /**
+     * Create A tweet
+     *  */
     async createTweet(_, { description }, context) {
       const user = checkAuth(context);
-      console.log(user.id);
       if (description.trim() === "") {
         throw new Error("Tweet description must not be empty");
       }
-
-      const newTweet = await db.tweet.create({
-        data: {
-          description: description,
-          authorId: user.id,
-          // username: user.username,
-          createdAt: new Date().toISOString(),
-        },
-      });
-      return newTweet;
-    },
-    async deleteTweet(_, { tweetId }, context) {
-      const user = checkAuth(context);
-      // auth for user to only be able to delete their tweets
       try {
-        const tweet = await db.tweet.delete({
-          where: {
-            id: Number(tweetId),
+        const newTweet = await db.tweet.create({
+          data: {
+            description: description,
+            authorId: user.id,
+            // username: user.username,
+            createdAt: new Date().toISOString(),
           },
         });
+        return newTweet;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    /**
+     * Delete A tweet
+     *  */
+    async deleteTweet(_, { tweetId }, context) {
+      const user = checkAuth(context);
+      try {
+        const tweet = await db.tweet.findUnique({
+          where: { id: Number(tweetId) },
+          include: { author: true },
+        });
+        console.log(tweet);
         if (user.id === tweet.authorId) {
-          return "Tweet deleted successfully";
+          const deletedTweet = await db.tweet.delete({
+            where: {
+              id: Number(tweetId),
+            },
+          });
+          //NOTE if we want to delete the comments also here is the logic have not tested
+          /* const deleteAttachedComments = await db.comment.deleteMany({
+            where: {
+              tweetId: tweetId,
+            },
+          }); */
+          return deletedTweet /* , deleteAttachedComments */;
         } else {
           throw new AuthenticationError("Action not allowed");
         }

@@ -1,10 +1,7 @@
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import NavBar from "../../components/NavBar/NavBar";
-
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
@@ -66,7 +63,7 @@ function MainFeed(props) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
+    [user]
   );
   const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
@@ -89,14 +86,19 @@ function MainFeed(props) {
     if (loading === false && data) {
       console.log(data, "test");
       setTweets(data.allTweets);
-      console.log("tweets set");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
-  if (loading) return "Loading...";
+  if (loading)
+    return (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
 
   const redirectToFeed = () => {
     const { history } = props;
+    console.log("this is happening");
     if (history) history.go(0);
   };
 
@@ -107,6 +109,7 @@ function MainFeed(props) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
 
+  // need to create a let if to check if end is undefined
   const bigFetch = () => {
     fetchMore(
       {
@@ -114,7 +117,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id),
+      setEnd(tweets[tweets.length - 1].id)
     );
   };
 

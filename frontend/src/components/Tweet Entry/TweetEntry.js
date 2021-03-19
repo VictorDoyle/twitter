@@ -27,12 +27,12 @@ function TweetEntry({ redirectToFeed }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("Tweet Created");
     await createTweet({
       variables: {
         createTweetDescription: description,
       },
     });
+    console.log("submithandler created tweet");
     // currently pulling in more information so this is what is needed for id
     // tweetModel.create({ description: description, authorId: user.user.id });
     redirectToFeed();

@@ -6,20 +6,56 @@ import {
   faHeart,
   faShareSquare,
 } from "@fortawesome/free-regular-svg-icons";
+import { useMutation, gql } from "@apollo/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Elips from "./Elips";
 import "./Tweets.css";
-import tweetModel from "../../models/tweet";
 
-function Tweets({ id, author, description }) {
-  function handleDelete() {
-    tweetModel.delete(id).then((data) => {
-      console.log(data, "Tweet Deleted ");
-    });
+import tweetModel from "../../models/tweet";
+import moment from "moment";
+
+const DELETE_TWEET = gql`
+  mutation DeleteTweetMutation($deleteTweetTweetId: ID!) {
+    deleteTweet(tweetId: $deleteTweetTweetId) {
+      description
+    }
   }
+`;
+
+function Tweets(props) {
+  // function handleDelete() {
+  //   tweetModel.delete(props.tweet.id).then((data) => {
+  //     console.log(data, "Tweet Deleted ");
+  //   }};
+
+  // import tweetModel from "../../models/tweet";
+
+  // function Tweets({ id, author, description }) {
+  const [deleteTweet, { loading, error }] = useMutation(DELETE_TWEET);
+
+  async function handleDelete() {
+    await deleteTweet({
+      variables: {
+        deleteTweetTweetId: props.id,
+      },
+    });
+    console.log(props.id, "Tweet Deleted ");
+
+    // tweetModel.delete(id).then((data) => {
+    //   console.log(data, "Tweet Deleted ");
+    // });
+  }
+
+  const created = moment.unix(props.createdAt / 1000);
+  const now = moment();
+
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>An error occurred</p>;
 
   function handleClick() {
     handleDelete();
+
+    console.log(props);
   }
   return (
     <Card>
@@ -36,33 +72,37 @@ function Tweets({ id, author, description }) {
             <Card.Body>
               <Row>
                 <Col md={4} className="miscCard">
-                  <Card.Title className="username">Elon Musk</Card.Title>
+                  <Card.Title className="username">
+                    {props.author.firstname} {props.author.lastname}
+                  </Card.Title>
                 </Col>
                 <Col md={4} className="miscCard">
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    {author.username}
+                    {props.author.username}
                   </Card.Subtitle>
                 </Col>
                 <Col md={2} className="miscCard">
                   <Card.Subtitle className="tweet-title mb-2 text-muted">
-                    7m
+                    {created.from(now)}
                   </Card.Subtitle>
                 </Col>
                 <Col md={2} className="miscCard">
                   {/* took out classname tweet-title  */}
                   <Card.Subtitle className="mb-2 text-muted elips">
-                    <Elips handleClick={handleClick} />
+                    <Elips handleClick={props.handleClick} />
                   </Card.Subtitle>
                 </Col>
                 <Col md={12}>
-                  <Card.Text className="text-left">{description}</Card.Text>
+                  <Card.Text className="text-left">
+                    {props.description}
+                  </Card.Text>
                 </Col>
               </Row>
             </Card.Body>
 
             <Row>
               <Col>
-                <Card.Link className="text-muted" href={"/tweets/" + id}>
+                <Card.Link className="text-muted" href={"/tweets/" + props.id}>
                   <FontAwesomeIcon
                     className="image-icon"
                     icon={faComment}
