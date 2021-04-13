@@ -1,10 +1,7 @@
 import { userState } from "../../recoil/atoms";
 import { useRecoilState } from "recoil";
 import NavBar from "../../components/NavBar/NavBar";
-
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 import TweetEntry from "../../components/Tweet Entry/TweetEntry";
 import TweetEntryBefore from "../../components/Tweet Entry/TweetEntryBefore";
 import WhatsHappening from "../../components/WhatsHappening/WhatsHappening";
@@ -42,15 +39,21 @@ const TWEETS_QUERY = gql`
   }
 `;
 
+const LASTTWEET = gql`
+  query Query {
+    lastTweets {
+      id
+    }
+  }
+`;
+
 function MainFeed(props) {
   const [user, setUser] = useRecoilState(userState);
-
   const [input, setInput] = useState(false);
   const [tweets, setTweets] = useState([]);
-  // const [limit, setLimit] = useState(10);
   const [take] = useState(10);
-  const [end, setEnd] = useState(54);
   const [skip] = useState(0);
+  const [end, setEnd] = useState(0);
 
   useEffect(
     function () {
@@ -60,8 +63,9 @@ function MainFeed(props) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user],
+    [user]
   );
+  const { data: dataT, loading: loadingT } = useQuery(LASTTWEET);
 
   const { loading, data, fetchMore } = useQuery(TWEETS_QUERY, {
     variables: {
@@ -72,40 +76,40 @@ function MainFeed(props) {
   });
 
   useEffect(() => {
+    if (loadingT === false && dataT) {
+      setEnd(Number(dataT.lastTweets.id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingT, dataT]);
+
+  useEffect(() => {
     if (loading === false && data) {
-      console.log(data);
+      console.log(data, "test");
       setTweets(data.allTweets);
-      console.log("tweets set");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data]);
-  if (loading) return "Loading...";
+  if (loading)
+    return (
+      <Spinner animation="border" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
 
-  //TODO refactor for authorID = user.id
-
-  /*   const submitHandler = (e) => {
-      e.preventDefault();
-      console.log("Mail Mother fucker");
-      // currently pulling in more information so this is what is needed for id
-      tweetModel.create({
-        description: description,
-        authorId: Number(user.id),
-      }); */
   const redirectToFeed = () => {
     const { history } = props;
+    console.log("this is happening");
     if (history) history.go(0);
   };
 
   const handleState = () => {
-    console.log("handlestate");
     setInput(true);
   };
   if (tweets.allTweets) {
     console.log(tweets.allTweets.length, "I'm tweets");
   }
-  console.log(data.allTweets.length, "hiiii");
-  // console.log(tweets[0].id, "hiiii");
-  console.log(end);
+
+  // need to create a let if to check if end is undefined
   const bigFetch = () => {
     fetchMore(
       {
@@ -113,7 +117,7 @@ function MainFeed(props) {
           allTweetsMyCursor: end - take,
         },
       },
-      setEnd(tweets[tweets.length - 1].id),
+      setEnd(tweets[tweets.length - 1].id)
     );
   };
 

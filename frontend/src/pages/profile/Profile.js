@@ -42,31 +42,35 @@ function Profile() {
 
   return (
     <div className="Feed" id="feed-page">
-      <Container>
-        <Row>
-          <Col>
-            <NavBar />
-          </Col>
-          <Col md={6}>
-            {/* profile header*/}
-            <Header />
+      {user ? (
+        <Container>
+          <Row>
+            <Col>
+              <NavBar />
+            </Col>
+            <Col md={6}>
+              {/* profile header*/}
+              <Header user={user} />
 
-            {/* profile subheader nav */}
-            <FeedNav tweets={tweets} />
-            {/* profile feed */}
-            {/*  <Feed tweets = {tweets} user= { user }/>
-             */}
-          </Col>
-          <Col>
-            {/* SECTION: media box */}
-            <ProfileMedia />
-            {/* Recommended Follows */}
-            <Recommendations />
-            {/* What's Happening Section */}
-            <Happening />
-          </Col>
-        </Row>
-      </Container>
+              {/* profile subheader nav */}
+              <FeedNav tweets={tweets} />
+              {/* profile feed */}
+              {/*  <Feed tweets = {tweets} user= { user }/>
+               */}
+            </Col>
+            <Col>
+              {/* SECTION: media box */}
+              <ProfileMedia />
+              {/* Recommended Follows */}
+              <Recommendations />
+              {/* What's Happening Section */}
+              <Happening />
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

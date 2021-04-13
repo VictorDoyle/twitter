@@ -11,6 +11,7 @@ const typeDefs = gql`
     comments: [Comment]!
     likes: [Like]!
     likeCount: Int!
+    totalCount: Int
   }
   type User {
     id: ID!
@@ -31,7 +32,7 @@ const typeDefs = gql`
   }
   type Message {
     id: ID!
-    user: String!
+    user: User!
     description: String
     createdAt: String
   }
@@ -47,22 +48,38 @@ const typeDefs = gql`
     author: String!
     tweet: Tweet
   }
+
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
   # Top level
   type Query {
     allUsers: [User!]!
     allTweets(take: Int, skip: Int, myCursor: Int): [Tweet!]!
+    lastTweets: Tweet
     getTweet(tweetId: ID!): Tweet
     messages: [Message!]!
+    uploads: [File]
   }
   type Mutation {
     # Create a new User
     signupUser(signupInput: SignupInput): User!
     # login a user
     signinUser(email: String!, password: String!): User!
+    # Update user
+    updateUser(
+      username: String
+      firstname: String
+      email: String
+      bio: String
+    ): User
     # create a new tweet
     createTweet(description: String!): Tweet!
     # delete a tweet
-    deleteTweet(tweetId: ID!): String!
+    deleteTweet(tweetId: ID!): Tweet!
     # create a messages
     # createMessage(description: String, user: String!): Message!
     # create a comment
@@ -71,8 +88,9 @@ const typeDefs = gql`
     deleteComment(tweetId: ID!, commentId: ID!): Tweet!
     # like a tweetpo  m
     likePost(tweetId: ID!): Tweet!
+    #Upload
+    singleUpload(file: Upload!): File!
   }
-
   input SignupInput {
     email: String!
     firstname: String!

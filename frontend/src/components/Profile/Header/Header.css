@@ -21,6 +21,23 @@
     border-color: rgba(29,161,242,1.00);
 }
 
+.submitButtonForm {
+    background-color: rgba(29,161,242,1.00);
+    border-color: rgba(29,161,242,1.00);
+    color:rgb(223, 235, 242);
+    border-radius: 500px;
+    font-weight: bold;
+    text-decoration: none;
+    float:right !important;
+    margin-left: auto;
+}
+
+.submitButtonForm:hover {
+    background-color:rgb(18, 139, 215);
+    color: rgb(223, 235, 242);
+    border-color: rgba(29,161,242,1.00);
+}
+
 .editProfileLink {
     float: right !important;
     margin-left: auto;
@@ -34,4 +51,18 @@
 
 .followLinks b {
     color: black;
+}
+
+
+.closeSettingsModal {
+    background-color: white !important;
+    border-color: white !important;
+    color:  #1DA1F2 ;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.closeSettingsModal:hover {
+    background-color: rgba(18, 139, 215, 0.5) !important;
+    border-radius: 115px/50px;;
 }

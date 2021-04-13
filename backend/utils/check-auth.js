@@ -8,16 +8,17 @@ const checkAuth = (context) => {
   // context = { ... headers }
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
+    console.log("auth Header", authHeader);
     // Bearer ....
     const token = authHeader.split(" ")[1];
+    // const token = authHeader.replace("Bearer ", "");
     // needed regex because the token was not removing last quote
     // const unQ = token.replace(/["]+/g, "");
-    console.log(token);
     if (token) {
       try {
         const user = jwt.verify(token, process.env.JWT_SECRET);
         // const user = await db.user.findUnique({ where: checkedToken.id });
-        console.log(user);
+        // console.log(user);
         return user;
       } catch (err) {
         throw new AuthenticationError("Invalid/Expired token");

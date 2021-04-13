@@ -21,18 +21,18 @@ const CREATE_TWEET = gql`
   }
 `;
 
-function TweetEntry({ user, history, redirectToFeed }) {
+function TweetEntry({ redirectToFeed }) {
   const [description, setDescription] = useState("");
   const [createTweet, { loading, error }] = useMutation(CREATE_TWEET);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("Tweet Created");
     await createTweet({
       variables: {
         createTweetDescription: description,
       },
     });
+    console.log("submithandler created tweet");
     // currently pulling in more information so this is what is needed for id
     // tweetModel.create({ description: description, authorId: user.user.id });
     redirectToFeed();

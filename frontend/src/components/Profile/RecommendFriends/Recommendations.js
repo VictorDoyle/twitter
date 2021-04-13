@@ -17,7 +17,6 @@ function Recommendations() {
 
   useEffect(function () {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = () => {

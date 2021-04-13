@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MessagesContainer from "../../components/messages/MessagesContainer";
 import MessageCard from "../../components/messages/components/MessageCard";
 import MessagesChat from "../../components/messages/components/MessagesChat";
@@ -24,7 +24,7 @@ import "./MessagePage.css";
 
 const MessagePage = () => {
   const [user, setUser] = useRecoilState(userState);
-  const [setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   // this page will need auth to pervent errors
   useEffect(() => {
     if (!user) {

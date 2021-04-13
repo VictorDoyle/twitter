@@ -1,15 +1,14 @@
 /* base */
+// import react, { useEffect, useState, useReducer } from "react";
 import "./Feed.css";
 import RecommendationLoader from "../Loaders/RecommendationLoader";
 import TweetLikeCard from "../TweetCard/TweetLikeCard";
 
 function FeedLikes(props) {
-  console.log("props of feedlikes", props);
-
-  let authoredLikes = props.likes.map((like, index) => {
+  let authoredLikes = props.likes.map((like, i) => {
     return (
       <>
-        <TweetLikeCard {...like} key={like.id} />
+        <TweetLikeCard {...like} key={i + 1} />
       </>
     );
   });

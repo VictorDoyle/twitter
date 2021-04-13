@@ -1,10 +1,8 @@
 import React from "react";
 import Tweets from "../../components/Tweets/Tweets";
 import InfiniteScroll from "react-infinite-scroll-component";
-
 const Infinite = ({ tweets, onLoadMore }) => {
   console.log(tweets);
-
   const Mapper = () => (
     <>
       {tweets.map((tweet, i) => (
@@ -12,7 +10,6 @@ const Infinite = ({ tweets, onLoadMore }) => {
       ))}
     </>
   );
-
   return (
     <>
       <div className="container" style={{ padding: 0 }}>
@@ -41,5 +38,4 @@ const Infinite = ({ tweets, onLoadMore }) => {
     </>
   );
 };
-
 export default Infinite;

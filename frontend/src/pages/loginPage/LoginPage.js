@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
 import Login from "../../components/loginPage/Login";
 // import AuthModel from "../../models/auth";
@@ -28,23 +28,18 @@ const LoginPage = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { loading, error, data }] = useMutation(SigninMutation);
+  // console.log(dataU);
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("you've been Clicked");
     await login({
       variables: {
         signinUserEmail: email,
         signinUserPassword: password,
       },
     });
-    if (!loading && data) {
-      const { signinUser } = data;
-      //FIXME having issues with auth on token
-      localStorage.setItem("uid", JSON.stringify(`Bearer ${signinUser.token}`));
-      localStorage.setItem("userinfo", JSON.stringify(signinUser));
-      setUser(signinUser);
-      history.push("/feed");
-    }
+
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
 
@@ -61,6 +56,18 @@ const LoginPage = ({ history }) => {
     //   }
     // });
   };
+
+  useEffect(() => {
+    if (!loading && data) {
+      const { signinUser } = data;
+      localStorage.setItem("uid", `Bearer ${signinUser.token}`);
+      localStorage.setItem("userinfo", JSON.stringify(signinUser));
+      setUser(signinUser);
+      history.push("/feed");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
     <Login
       submitHandler={submitHandler}

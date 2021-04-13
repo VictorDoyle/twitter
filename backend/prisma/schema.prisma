@@ -25,6 +25,7 @@ model User {
   tweets      Tweet[]
   Comment     Comment[]
   Like        Like[]
+  messages    Message[]
   friends     Friend[]
 }
 
@@ -37,18 +38,18 @@ model Tweet {
   author      User      @relation(fields: [authorId], references: [id])
   authorId    Int
   // data relations with external models
-  comments    Comment[] @relation("tweetHasComments")
+  comments    Comment[]
   likes       Like[]
 }
 
 model Comment {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  // updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt
   content   String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
-  tweet     Tweet    @relation("tweetHasComments", fields: [tweetId], references: [id])
+  tweet     Tweet    @relation(fields: [tweetId], references: [id])
   tweetId   Int
 }
 
@@ -67,13 +68,17 @@ model Like {
 model Message {
   id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
-  user        String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  friend      Friend   @relation(fields: [userId], references: [id])
+  friendId    Int
   description String
 
 }
 
 model Friend {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  id      Int       @id @default(autoincrement())
+  user    User      @relation(fields: [userId], references: [id])
+  userId  Int
+  Message Message[]
 }
